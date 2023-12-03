@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Trebuchet extends AocSolution<Long>
+public abstract class Trebuchet extends AocSolution<Long>
 {
     public Trebuchet(Iterable<String> resources)
     {
@@ -33,6 +33,7 @@ public class Trebuchet extends AocSolution<Long>
 
     private long getCalibrationNumber(String line)
     {
+        line = format(line);
         StringBuilder sbConfigurationNumber = new StringBuilder();
         for (int i=0; i<line.length(); i++) {
             char ch = line.charAt(i);
@@ -51,4 +52,6 @@ public class Trebuchet extends AocSolution<Long>
         }
         return Long.parseLong(sbConfigurationNumber.toString());
     }
+
+    protected abstract String format(String line);
 }

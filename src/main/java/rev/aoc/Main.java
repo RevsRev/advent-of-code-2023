@@ -1,13 +1,15 @@
 package rev.aoc;
 
-import rev.aoc.days.one.Trebuchet;
+import rev.aoc.days.one.TrebuchetPartOne;
+import rev.aoc.days.one.TrebuchetPartTwo;
 
 import java.util.List;
 
 public class Main
 {
     public static final void main(String[] args) {
-        trySolve(new Trebuchet(List.of("1.1-trebuchet")));
+        trySolve(new TrebuchetPartOne(List.of("1.1-trebuchet")));
+        trySolve(new TrebuchetPartTwo(List.of("1.1-trebuchet")));
     }
 
     private static void trySolve(AocSolution sol) {
