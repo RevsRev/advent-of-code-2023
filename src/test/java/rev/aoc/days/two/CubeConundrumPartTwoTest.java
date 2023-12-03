@@ -16,6 +16,6 @@ public class CubeConundrumPartTwoTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new CubeConundrumPartOne(List.of("2.2-cube-conundrum-test"));
+        return new CubeConundrumPartTwo(List.of("2.2-cube-conundrum-test"));
     }
 }

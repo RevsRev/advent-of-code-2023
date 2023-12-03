@@ -13,6 +13,16 @@ public class CubeConundrumPartTwo extends CubeConundrum
     @Override
     protected long getIncrementingAmount(Map<Integer, List<Handful>> gameHandfulMap, int gameNumber)
     {
-        return 0;
+        long minRed = 0;
+        long minGreen = 0;
+        long minBlue = 0;
+        List<Handful> handfuls = gameHandfulMap.get(gameNumber);
+        for (int i=0; i<handfuls.size(); i++) {
+            Handful handful = handfuls.get(i);
+            minRed = Math.max(minRed, handful.red);
+            minGreen = Math.max(minGreen, handful.green);
+            minBlue = Math.max(minBlue, handful.blue);
+        }
+        return minRed * minGreen * minBlue;
     }
 }
