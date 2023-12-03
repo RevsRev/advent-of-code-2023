@@ -2,6 +2,7 @@ package rev.aoc;
 
 import rev.aoc.days.one.TrebuchetPartOne;
 import rev.aoc.days.one.TrebuchetPartTwo;
+import rev.aoc.days.three.GearRatios;
 import rev.aoc.days.two.CubeConundrumPartOne;
 import rev.aoc.days.two.CubeConundrumPartTwo;
 
@@ -14,6 +15,7 @@ public class Main
         trySolve(new TrebuchetPartTwo(List.of("1.1-trebuchet")));
         trySolve(new CubeConundrumPartOne(List.of("2.1-cube-conundrum")));
         trySolve(new CubeConundrumPartTwo(List.of("2.1-cube-conundrum")));
+        trySolve(new GearRatios(List.of("3.1-gear-ratios")));
     }
 
     private static void trySolve(AocSolution sol) {
