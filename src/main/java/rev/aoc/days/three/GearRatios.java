@@ -1,9 +1,10 @@
 package rev.aoc.days.three;
 
+import org.apache.commons.lang3.tuple.Pair;
 import rev.aoc.AocSolution;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 public class GearRatios extends AocSolution<Long>
 {
@@ -19,17 +20,76 @@ public class GearRatios extends AocSolution<Long>
         int height = chars.length;
         int width = chars[0].length;
 
-        long partNumbersSum = 0;
-
+        //map of (i,j) coordinate of left most digit to a pair (number, numDigits)
+        Map<Pair<Integer, Integer>, Pair<Integer,Integer>> numbersMap = new HashMap<>();
         for (int i=0; i<height; i++) {
             for (int j=0; j<width; j++) {
                 char c = chars[i][j];
-                //TODO - implement
+                if (Character.isDigit(c)) {
+                    addToNumbersMap(numbersMap, chars, height, width, i,j);
+                }
             }
         }
 
+        long partNumbersSum = 0;
+        //iterate through our numbers map and check if they should be included in the sum
+        Iterator<Pair<Integer, Integer>> it = numbersMap.keySet().iterator();
+        while (it.hasNext()) {
+            Pair<Integer,Integer> coordinate = it.next();
+            Pair<Integer,Integer> numAndLength = numbersMap.get(coordinate);
+            if (checkNumber(chars, height, width, coordinate,numAndLength.getRight())) {
+                partNumbersSum += numAndLength.getLeft();
+            }
+        }
         return partNumbersSum;
     }
+
+    private boolean checkNumber(char[][] chars, int height, int width, Pair<Integer,Integer> coordinate, int length) {
+
+        int row = coordinate.getLeft();
+        int numColStart = coordinate.getRight();
+        int numColEnd = numColStart + length - 1;
+
+        int iStart = Math.max(0, row-1);
+        int iEnd = Math.min(height-1, row+1);
+        int jStart = Math.max(0, numColStart-1);
+        int jEnd = Math.min(width-1, numColEnd+1);
+
+        for (int i=iStart; i<=iEnd; i++) {
+            for (int j=jStart; j<=jEnd; j++) {
+                if (isSpecial(chars[i][j])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isSpecial(char c) {
+        if (c == '.') {
+            return false;
+        }
+        return !Character.isDigit(c);
+    }
+
+    private void addToNumbersMap(Map<Pair<Integer, Integer>, Pair<Integer,Integer>> numbersMap, char[][] chars, int height, int width, int i, int j)
+    {
+        int l = j;
+        int r = j;
+        while (l>0 && Character.isDigit(chars[i][l-1])) {
+            l--;
+        }
+        while (r<width-1 && Character.isDigit(chars[i][r+1])) {
+            r++;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int k = l; k<=r; k++) {
+            sb.append(chars[i][k]);
+        }
+        numbersMap.put(Pair.of(i,l), Pair.of(Integer.parseInt(sb.toString()), r-l+1));
+    }
+
 
     private char[][] loadResourceToCharArray() throws IOException
     {
