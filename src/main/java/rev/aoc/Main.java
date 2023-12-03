@@ -12,7 +12,8 @@ public class Main
 
     private static void trySolve(AocSolution sol) {
         try {
-            sol.solve();
+            Object result = sol.solve();
+            System.out.println(String.format("%s:\t\t%s", sol.getClass(), result));
         } catch (Exception e) {
             System.out.println(e);
         }
