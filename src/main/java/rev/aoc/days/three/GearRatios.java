@@ -6,7 +6,7 @@ import rev.aoc.AocSolution;
 import java.io.IOException;
 import java.util.*;
 
-public class GearRatios extends AocSolution<Long>
+public abstract class GearRatios extends AocSolution<Long>
 {
     public GearRatios(Iterable<String> resources)
     {
@@ -37,40 +37,14 @@ public class GearRatios extends AocSolution<Long>
         while (it.hasNext()) {
             Pair<Integer,Integer> coordinate = it.next();
             Pair<Integer,Integer> numAndLength = numbersMap.get(coordinate);
-            if (checkNumber(chars, height, width, coordinate,numAndLength.getRight())) {
+            if (checkNumber(chars, height, width, coordinate, numAndLength.getRight())) {
                 partNumbersSum += numAndLength.getLeft();
             }
         }
         return partNumbersSum;
     }
 
-    private boolean checkNumber(char[][] chars, int height, int width, Pair<Integer,Integer> coordinate, int length) {
-
-        int row = coordinate.getLeft();
-        int numColStart = coordinate.getRight();
-        int numColEnd = numColStart + length - 1;
-
-        int iStart = Math.max(0, row-1);
-        int iEnd = Math.min(height-1, row+1);
-        int jStart = Math.max(0, numColStart-1);
-        int jEnd = Math.min(width-1, numColEnd+1);
-
-        for (int i=iStart; i<=iEnd; i++) {
-            for (int j=jStart; j<=jEnd; j++) {
-                if (isSpecial(chars[i][j])) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isSpecial(char c) {
-        if (c == '.') {
-            return false;
-        }
-        return !Character.isDigit(c);
-    }
+    protected abstract boolean checkNumber(char[][] chars, int height, int width, Pair<Integer,Integer> coordinate, int length);
 
     private void addToNumbersMap(Map<Pair<Integer, Integer>, Pair<Integer,Integer>> numbersMap, char[][] chars, int height, int width, int i, int j)
     {

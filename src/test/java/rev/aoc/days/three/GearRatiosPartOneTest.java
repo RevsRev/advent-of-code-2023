@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class GearRatiosTest extends AocTest<Long>
+public class GearRatiosPartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class GearRatiosTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new GearRatios(List.of("3.1-gear-ratios-test"));
+        return new GearRatiosPartOne(List.of("3.1-gear-ratios-test"));
     }
 }
