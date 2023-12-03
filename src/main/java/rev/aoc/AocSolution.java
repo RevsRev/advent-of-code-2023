@@ -3,25 +3,38 @@ package rev.aoc;
 import java.io.*;
 import java.util.*;
 
-public abstract class AocSolution
+public abstract class AocSolution<R>
 {
     private static final String AOC_RESOURCES_PATH = "/aoc";
 
-    public abstract void solve() throws Exception;
+    private final Iterable<String> resources;
 
-    public abstract List<String> getResources();
+    public AocSolution(Iterable<String> resources) {
+        this.resources = resources;
+    }
+
+    public final R solve() throws Exception {
+        try {
+            return solveImpl();
+        } catch (Exception e) {
+            System.out.println(String.format("Could not solve aoc problem ", getClass().getName()));
+            throw e;
+        }
+    }
+
+    protected abstract R solveImpl() throws Exception;
 
     public Map<String,List<String>> loadResources() throws IOException
     {
-        Map<String,List<String>> resources = new HashMap<>();
-        Iterator<String> it = getResources().iterator();
+        Map<String,List<String>> retval = new HashMap<>();
+        Iterator<String> it = resources.iterator();
         while (it.hasNext()) {
             String fileName = it.next();
             String resourcePath = String.format("%s/%s", AOC_RESOURCES_PATH, fileName);
             List<String> lines = readLines(resourcePath);
-            resources.put(fileName, lines);
+            retval.put(fileName, lines);
         }
-        return resources;
+        return retval;
     }
 
     private List<String> readLines(String resourcePath) throws IOException
