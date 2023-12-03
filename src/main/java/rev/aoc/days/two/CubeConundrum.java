@@ -4,11 +4,8 @@ import rev.aoc.AocSolution;
 
 import java.util.*;
 
-public class CubeConundrum extends AocSolution<Long>
+public abstract class CubeConundrum extends AocSolution<Long>
 {
-    private static final int NUM_REDS = 12;
-    private static final int NUM_GREENS = 13;
-    private static final int NUM_BLUES = 14;
 
     public CubeConundrum(Iterable<String> resources)
     {
@@ -28,29 +25,12 @@ public class CubeConundrum extends AocSolution<Long>
         long result = 0;
         while (itGameNumbers.hasNext()) {
             int gameNumber = itGameNumbers.next();
-            List<Handful> handfuls = gameHandfulMap.get(gameNumber);
-            if (checkHandfuls(handfuls)) {
-                result += gameNumber;
-            }
+            result += getIncrementingAmount(gameHandfulMap, gameNumber);
         }
         return result;
     }
 
-    private boolean checkHandfuls(List<Handful> handfuls) {
-        for (int i=0; i<handfuls.size(); i++) {
-            Handful handful = handfuls.get(i);
-            if (handful.red > NUM_REDS) {
-                return false;
-            }
-            if (handful.blue > NUM_BLUES) {
-                return false;
-            }
-            if (handful.green > NUM_GREENS) {
-                return false;
-            }
-        }
-        return true;
-    }
+    protected abstract long getIncrementingAmount(Map<Integer, List<Handful>> gameHandfulMap, int gameNumber);
 
     Map<Integer,List<Handful>> parseToGameMap(List<String> lines) {
         Map<Integer,List<Handful>> retval = new HashMap<>();
