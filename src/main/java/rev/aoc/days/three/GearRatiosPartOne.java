@@ -2,6 +2,9 @@ package rev.aoc.days.three;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Iterator;
+import java.util.Map;
+
 public class GearRatiosPartOne extends GearRatios
 {
     public GearRatiosPartOne(Iterable<String> resources)
@@ -10,7 +13,23 @@ public class GearRatiosPartOne extends GearRatios
     }
 
     @Override
-    protected boolean checkNumber(char[][] chars, int height, int width, Pair<Integer, Integer> coordinate, int length)
+    protected long solveProblem(char[][] chars, int height, int width, Map<Pair<Integer, Integer>, Pair<Integer, Integer>> numbersMap)
+    {
+        long partNumbersSum = 0;
+        //iterate through our numbers map and check if they should be included in the sum
+        Iterator<Pair<Integer, Integer>> it = numbersMap.keySet().iterator();
+        while (it.hasNext()) {
+            Pair<Integer,Integer> coordinate = it.next();
+            Pair<Integer,Integer> numAndLength = numbersMap.get(coordinate);
+            if (checkNumber(chars, height, width, coordinate, numAndLength.getRight())) {
+                partNumbersSum += numAndLength.getLeft();
+            }
+        }
+        return partNumbersSum;
+    }
+
+
+    private boolean checkNumber(char[][] chars, int height, int width, Pair<Integer, Integer> coordinate, int length)
     {
         int row = coordinate.getLeft();
         int numColStart = coordinate.getRight();

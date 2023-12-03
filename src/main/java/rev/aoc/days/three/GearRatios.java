@@ -31,20 +31,10 @@ public abstract class GearRatios extends AocSolution<Long>
             }
         }
 
-        long partNumbersSum = 0;
-        //iterate through our numbers map and check if they should be included in the sum
-        Iterator<Pair<Integer, Integer>> it = numbersMap.keySet().iterator();
-        while (it.hasNext()) {
-            Pair<Integer,Integer> coordinate = it.next();
-            Pair<Integer,Integer> numAndLength = numbersMap.get(coordinate);
-            if (checkNumber(chars, height, width, coordinate, numAndLength.getRight())) {
-                partNumbersSum += numAndLength.getLeft();
-            }
-        }
-        return partNumbersSum;
+        return solveProblem(chars, height, width, numbersMap);
     }
 
-    protected abstract boolean checkNumber(char[][] chars, int height, int width, Pair<Integer,Integer> coordinate, int length);
+    protected abstract long solveProblem(char[][] chars, int height, int width, Map<Pair<Integer, Integer>, Pair<Integer, Integer>> numbersMap);
 
     private void addToNumbersMap(Map<Pair<Integer, Integer>, Pair<Integer,Integer>> numbersMap, char[][] chars, int height, int width, int i, int j)
     {

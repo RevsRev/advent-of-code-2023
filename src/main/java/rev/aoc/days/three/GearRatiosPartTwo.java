@@ -2,6 +2,8 @@ package rev.aoc.days.three;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Map;
+
 public class GearRatiosPartTwo extends GearRatios
 {
     public GearRatiosPartTwo(Iterable<String> resources)
@@ -10,8 +12,10 @@ public class GearRatiosPartTwo extends GearRatios
     }
 
     @Override
-    protected boolean checkNumber(char[][] chars, int height, int width, Pair<Integer, Integer> coordinate, int length)
+    protected long solveProblem(char[][] chars, int height, int width, Map<Pair<Integer, Integer>, Pair<Integer, Integer>> numbersMap)
     {
-        return false;
+        return 0;
     }
+
+
 }
