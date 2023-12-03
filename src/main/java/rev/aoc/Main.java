@@ -4,6 +4,7 @@ import rev.aoc.days.one.TrebuchetPartOne;
 import rev.aoc.days.one.TrebuchetPartTwo;
 import rev.aoc.days.two.CubeConundrum;
 import rev.aoc.days.two.CubeConundrumPartOne;
+import rev.aoc.days.two.CubeConundrumPartTwo;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Main
         trySolve(new TrebuchetPartOne(List.of("1.1-trebuchet")));
         trySolve(new TrebuchetPartTwo(List.of("1.1-trebuchet")));
         trySolve(new CubeConundrumPartOne(List.of("2.1-cube-conundrum")));
+        trySolve(new CubeConundrumPartTwo(List.of("2.1-cube-conundrum")));
     }
 
     private static void trySolve(AocSolution sol) {
