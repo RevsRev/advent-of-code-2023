@@ -24,6 +24,15 @@ public abstract class AocSolution<R>
 
     protected abstract R solveImpl() throws Exception;
 
+    public List<String> getOneAndOnlyResourceLines() throws IOException
+    {
+        Map<String,List<String>> resources = loadResources();
+
+        Iterator<String> iterator = resources.keySet().iterator();
+        String oneAndOnlyFile = iterator.next();
+        return resources.get(oneAndOnlyFile);
+    }
+
     public Map<String,List<String>> loadResources() throws IOException
     {
         Map<String,List<String>> retval = new HashMap<>();
