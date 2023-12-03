@@ -2,6 +2,7 @@ package rev.aoc.days.one;
 
 import rev.aoc.AocSolution;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,38 @@ public class Trebuchet extends AocSolution<Long>
     protected Long solveImpl() throws Exception
     {
         Map<String,List<String>> resources = loadResources();
-        return (long)0; //todo - implement
+
+        Iterator<String> iterator = resources.keySet().iterator();
+        String trebFile = iterator.next();
+        List<String> trebLines = resources.get(trebFile);
+
+        long calibrationSum = 0;
+        for (int i=0; i<trebLines.size(); i++) {
+            String line = trebLines.get(i);
+            calibrationSum += getCalibrationNumber(line);
+
+        }
+        return calibrationSum;
+    }
+
+    private long getCalibrationNumber(String line)
+    {
+        StringBuilder sbConfigurationNumber = new StringBuilder();
+        for (int i=0; i<line.length(); i++) {
+            char ch = line.charAt(i);
+            if (Character.isDigit(ch)) {
+                sbConfigurationNumber.append(ch);
+                break;
+            }
+        }
+
+        for (int i=line.length()-1; i>=0; i--) {
+            char ch = line.charAt(i);
+            if (Character.isDigit(ch)) {
+                sbConfigurationNumber.append(ch);
+                break;
+            }
+        }
+        return Long.parseLong(sbConfigurationNumber.toString());
     }
 }
