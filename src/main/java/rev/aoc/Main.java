@@ -2,7 +2,6 @@ package rev.aoc;
 
 import rev.aoc.days.one.TrebuchetPartOne;
 import rev.aoc.days.one.TrebuchetPartTwo;
-import rev.aoc.days.two.CubeConundrum;
 import rev.aoc.days.two.CubeConundrumPartOne;
 import rev.aoc.days.two.CubeConundrumPartTwo;
 
