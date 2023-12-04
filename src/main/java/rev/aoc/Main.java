@@ -2,6 +2,7 @@ package rev.aoc;
 
 import rev.aoc.days.four.AocScratchCard;
 import rev.aoc.days.four.AocScratchCardPartOne;
+import rev.aoc.days.four.AocScratchCardPartTwo;
 import rev.aoc.days.four.ScratchCard;
 import rev.aoc.days.one.TrebuchetPartOne;
 import rev.aoc.days.one.TrebuchetPartTwo;
@@ -23,6 +24,7 @@ public class Main
         trySolve(new GearRatiosPartOne(List.of("3.1-gear-ratios")));
         trySolve(new GearRatiosPartTwo(List.of("3.1-gear-ratios")));
         trySolve(new AocScratchCardPartOne(List.of("4.1-scratch-cards")));
+        trySolve(new AocScratchCardPartTwo(List.of("4.1-scratch-cards")));
     }
 
     private static void trySolve(AocSolution sol) {
