@@ -22,18 +22,23 @@ public class ScratchCard
     }
 
     public int getScore() {
-        int count = 0;
-        Iterator<Integer> itNumbers = numbers.iterator();
-        while (itNumbers.hasNext()) {
-            int number = itNumbers.next();
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
+        int count = getNumbersThatWin().size();
         if (count == 0) {
             return count;
         }
         return IntMath.pow(2, count-1);
+    }
+
+    public Set<Integer> getNumbersThatWin() {
+        Set<Integer> retval = new HashSet<>();
+        Iterator<Integer> itNumbers = numbers.iterator();
+        while (itNumbers.hasNext()) {
+            int number = itNumbers.next();
+            if (winningNumbers.contains(number)) {
+                retval.add(number);
+            }
+        }
+        return retval;
     }
 
     public static final ScratchCard fromGameLine(String line) {
