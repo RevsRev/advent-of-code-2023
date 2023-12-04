@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class AocScratchCardTest extends AocTest<Long>
+public class AocScratchCardPartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class AocScratchCardTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new AocScratchCard(List.of("4.1-scratch-card-test"));
+        return new AocScratchCardPartOne(List.of("4.1-scratch-card-test"));
     }
 }

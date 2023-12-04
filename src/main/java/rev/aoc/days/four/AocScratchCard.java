@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class AocScratchCard extends AocSolution<Long>
+public abstract class AocScratchCard extends AocSolution<Long>
 {
 
     public AocScratchCard(Iterable<String> resources)
@@ -21,15 +21,10 @@ public class AocScratchCard extends AocSolution<Long>
         List<String> lines = getOneAndOnlyResourceLines();
         Map<Integer, ScratchCard> scratchCards = loadScratchCards(lines);
 
-        Iterator<Integer> itGameIds = scratchCards.keySet().iterator();
-        long score = 0;
-        while (itGameIds.hasNext()) {
-            int gameId = itGameIds.next();
-            ScratchCard sc = scratchCards.get(gameId);
-            score += sc.getScore();
-        }
-        return score;
+        return solve(scratchCards);
     }
+
+    protected abstract long solve(Map<Integer, ScratchCard> scratchCards);
 
     private Map<Integer, ScratchCard> loadScratchCards(List<String> lines)
     {

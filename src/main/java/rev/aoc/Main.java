@@ -1,6 +1,7 @@
 package rev.aoc;
 
 import rev.aoc.days.four.AocScratchCard;
+import rev.aoc.days.four.AocScratchCardPartOne;
 import rev.aoc.days.four.ScratchCard;
 import rev.aoc.days.one.TrebuchetPartOne;
 import rev.aoc.days.one.TrebuchetPartTwo;
@@ -21,7 +22,7 @@ public class Main
         trySolve(new CubeConundrumPartTwo(List.of("2.1-cube-conundrum")));
         trySolve(new GearRatiosPartOne(List.of("3.1-gear-ratios")));
         trySolve(new GearRatiosPartTwo(List.of("3.1-gear-ratios")));
-        trySolve(new AocScratchCard(List.of("4.1-scratch-cards")));
+        trySolve(new AocScratchCardPartOne(List.of("4.1-scratch-cards")));
     }
 
     private static void trySolve(AocSolution sol) {
