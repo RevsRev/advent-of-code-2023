@@ -38,7 +38,7 @@ public class ScratchCard
 
     public static final ScratchCard fromGameLine(String line) {
         String[] gameNumbersSplit = line.split(":");
-        int id = Integer.parseInt(gameNumbersSplit[0].replaceAll("Card ", ""));
+        int id = Integer.parseInt(gameNumbersSplit[0].replaceAll("Card ", "").trim());
         String[] numbersWinnersSplit = gameNumbersSplit[1].split("\\|");
         String allNumbers = numbersWinnersSplit[0].trim();
         String allWinners = numbersWinnersSplit[1].trim();
@@ -53,7 +53,7 @@ public class ScratchCard
     private static Set<Integer> putAllInSet(String[] nums) {
         Set<Integer> retval = new HashSet<>();
         for (int i=0; i<nums.length; i++) {
-            retval.add(Integer.parseInt(nums[i]));
+            retval.add(Integer.parseInt(nums[i].trim()));
         }
         return retval;
     }
