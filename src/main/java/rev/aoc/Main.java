@@ -8,6 +8,7 @@ import rev.aoc.days.d3.GearRatiosPartOne;
 import rev.aoc.days.d3.GearRatiosPartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
+import rev.aoc.days.d5.SeedAlmanac;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Main
         trySolve(new GearRatiosPartTwo(List.of("3.1-gear-ratios")));
         trySolve(new AocScratchCardPartOne(List.of("4.1-scratch-cards")));
         trySolve(new AocScratchCardPartTwo(List.of("4.1-scratch-cards")));
+        trySolve(new SeedAlmanac(List.of("5.1-seed-almanac")));
     }
 
     private static void trySolve(AocSolution sol) {
