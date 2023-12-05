@@ -7,7 +7,7 @@ import rev.aoc.AocSolution;
 
 import java.util.*;
 
-public class SeedAlmanac extends AocSolution<Long>
+public class SeedAlmanacPartOne extends AocSolution<Long>
 {
     private final Set<Long> seeds = new HashSet<>();
     private final RangeMap<Long,Long> seedToSoil =  TreeRangeMap.create();
@@ -33,7 +33,7 @@ public class SeedAlmanac extends AocSolution<Long>
         return ordering;
     }
 
-    public SeedAlmanac(Iterable<String> resources)
+    public SeedAlmanacPartOne(Iterable<String> resources)
     {
         super(resources);
     }
