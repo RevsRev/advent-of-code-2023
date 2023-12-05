@@ -1,21 +1,21 @@
-package rev.aoc.days.three;
+package rev.aoc.days.d2;
 
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class GearRatiosPartTwoTest extends AocTest<Long>
+public class CubeConundrumPartTwoTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return (long)467835;
+        return (long)2286;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new GearRatiosPartTwo(List.of("3.2-gear-ratios-test"));
+        return new CubeConundrumPartTwo(List.of("2.2-cube-conundrum-test"));
     }
 }

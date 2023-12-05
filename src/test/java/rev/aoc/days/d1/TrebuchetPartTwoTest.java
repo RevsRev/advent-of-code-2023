@@ -1,22 +1,22 @@
-package rev.aoc.days.one;
+package rev.aoc.days.d1;
 
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class TrebuchetPartOneTest extends AocTest<Long>
+public class TrebuchetPartTwoTest extends AocTest<Long>
 {
 
     @Override
     protected Long getExpected()
     {
-        return (long)142;
+        return (long)281;
     }
 
     @Override
     protected AocSolution getSolution()
     {
-        return new TrebuchetPartOne(List.of("1.1-trebuchet-test"));
+        return new TrebuchetPartTwo(List.of("1.2-trebuchet-test"));
     }
 }

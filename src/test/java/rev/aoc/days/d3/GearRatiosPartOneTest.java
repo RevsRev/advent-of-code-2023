@@ -1,21 +1,21 @@
-package rev.aoc.days.four;
+package rev.aoc.days.d3;
 
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class AocScratchCardPartOneTest extends AocTest<Long>
+public class GearRatiosPartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return (long)13;
+        return (long)4361;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new AocScratchCardPartOne(List.of("4.1-scratch-card-test"));
+        return new GearRatiosPartOne(List.of("3.1-gear-ratios-test"));
     }
 }

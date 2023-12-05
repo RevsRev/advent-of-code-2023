@@ -1,4 +1,4 @@
-package rev.aoc.days.two;
+package rev.aoc.days.d2;
 
 import java.security.InvalidParameterException;
 

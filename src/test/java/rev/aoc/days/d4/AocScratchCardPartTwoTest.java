@@ -1,4 +1,4 @@
-package rev.aoc.days.four;
+package rev.aoc.days.d4;
 
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;

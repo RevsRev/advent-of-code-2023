@@ -1,16 +1,13 @@
 package rev.aoc;
 
-import rev.aoc.days.four.AocScratchCard;
-import rev.aoc.days.four.AocScratchCardPartOne;
-import rev.aoc.days.four.AocScratchCardPartTwo;
-import rev.aoc.days.four.ScratchCard;
-import rev.aoc.days.one.TrebuchetPartOne;
-import rev.aoc.days.one.TrebuchetPartTwo;
-import rev.aoc.days.three.GearRatios;
-import rev.aoc.days.three.GearRatiosPartOne;
-import rev.aoc.days.three.GearRatiosPartTwo;
-import rev.aoc.days.two.CubeConundrumPartOne;
-import rev.aoc.days.two.CubeConundrumPartTwo;
+import rev.aoc.days.d4.AocScratchCardPartOne;
+import rev.aoc.days.d4.AocScratchCardPartTwo;
+import rev.aoc.days.d1.TrebuchetPartOne;
+import rev.aoc.days.d1.TrebuchetPartTwo;
+import rev.aoc.days.d3.GearRatiosPartOne;
+import rev.aoc.days.d3.GearRatiosPartTwo;
+import rev.aoc.days.d2.CubeConundrumPartOne;
+import rev.aoc.days.d2.CubeConundrumPartTwo;
 
 import java.util.List;
 

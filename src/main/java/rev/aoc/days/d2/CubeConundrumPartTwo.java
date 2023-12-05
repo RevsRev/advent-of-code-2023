@@ -1,4 +1,4 @@
-package rev.aoc.days.two;
+package rev.aoc.days.d2;
 
 import java.util.List;
 import java.util.Map;

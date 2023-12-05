@@ -1,7 +1,6 @@
-package rev.aoc.days.four;
+package rev.aoc.days.d4;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 

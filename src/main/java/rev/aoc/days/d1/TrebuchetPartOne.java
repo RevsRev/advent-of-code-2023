@@ -1,4 +1,4 @@
-package rev.aoc.days.one;
+package rev.aoc.days.d1;
 
 public class TrebuchetPartOne extends Trebuchet
 {

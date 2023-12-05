@@ -1,4 +1,4 @@
-package rev.aoc.days.three;
+package rev.aoc.days.d3;
 
 import org.apache.commons.lang3.tuple.Pair;
 

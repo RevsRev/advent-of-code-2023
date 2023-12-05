@@ -1,21 +1,21 @@
-package rev.aoc.days.two;
+package rev.aoc.days.d4;
 
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class CubeConundrumPartTwoTest extends AocTest<Long>
+public class AocScratchCardPartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return (long)2286;
+        return (long)13;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new CubeConundrumPartTwo(List.of("2.2-cube-conundrum-test"));
+        return new AocScratchCardPartOne(List.of("4.1-scratch-card-test"));
     }
 }
