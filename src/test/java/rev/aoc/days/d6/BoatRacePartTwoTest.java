@@ -10,7 +10,7 @@ public class BoatRacePartTwoTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long) 288;
+        return (long) 71503;
     }
 
     @Override

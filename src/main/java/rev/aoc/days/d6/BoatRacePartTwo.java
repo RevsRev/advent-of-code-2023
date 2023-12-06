@@ -12,6 +12,12 @@ public class BoatRacePartTwo extends BoatRace
     @Override
     protected Pair<long[], long[]> aggregate(String[] times, String[] distances)
     {
-        return null;
+        long[] time = new long[1];
+        long[] distance = new long[1];
+
+        time[0] = Long.parseLong(String.join("", times));
+        distance[0] = Long.parseLong(String.join("", distances));
+
+        return Pair.of(time, distance);
     }
 }
