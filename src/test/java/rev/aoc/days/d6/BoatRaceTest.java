@@ -1,21 +1,21 @@
-package rev.aoc.days.d5;
+package rev.aoc.days.d6;
 
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class SeedAlmanacPartTwoTest extends AocTest<Long>
+public class BoatRaceTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return (long)46;
+        return (long) 288;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new SeedAlmanacPartTwo(List.of("5.2-seed-almanac-test"));
+        return new BoatRace(List.of("6.1-boat-race-test"));
     }
 }

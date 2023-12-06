@@ -3,13 +3,15 @@ package rev.aoc.days.d5;
 import com.google.common.collect.Range;
 import com.google.common.collect.RangeMap;
 import com.google.common.collect.TreeRangeMap;
+import lombok.Getter;
 import rev.aoc.AocSolution;
 
 import java.util.*;
 
 public class SeedAlmanacPartOne extends AocSolution<Long>
 {
-    private final Set<Long> seeds = new HashSet<>();
+    @Getter
+    private final List<Long> seeds = new ArrayList<>();
     private final RangeMap<Long,Long> seedToSoil =  TreeRangeMap.create();
     private final RangeMap<Long,Long> soilToFertilizer =  TreeRangeMap.create();
     private final RangeMap<Long,Long> fertilizerToWater =  TreeRangeMap.create();
@@ -44,6 +46,11 @@ public class SeedAlmanacPartOne extends AocSolution<Long>
         List<String> lines = getOneAndOnlyResourceLines();
         parseMaps(lines);
 
+        return solveSeeds();
+    }
+
+    public long solveSeeds()
+    {
         Iterator<Long> seedsIt = seeds.iterator();
         long lowestLocation = Long.MAX_VALUE;
         while (seedsIt.hasNext()) {
@@ -54,7 +61,7 @@ public class SeedAlmanacPartOne extends AocSolution<Long>
         return lowestLocation;
     }
 
-    private Long getLocation(Long seed)
+    public Long getLocation(Long seed)
     {
         long key = seed;
         Iterator<RangeMap<Long,Long>> itMaps = mapsOrder.iterator();

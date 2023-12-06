@@ -1,10 +1,10 @@
-package rev.aoc.days.d5;
+package rev.aoc.days.d6;
 
 import rev.aoc.AocSolution;
 
-public class SeedAlmanacPartTwoAlt extends AocSolution<Long>
+public class BoatRace extends AocSolution<Long>
 {
-    public SeedAlmanacPartTwoAlt(Iterable<String> resources)
+    public BoatRace(Iterable<String> resources)
     {
         super(resources);
     }
