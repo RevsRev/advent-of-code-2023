@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class SeedAlmanacPartTwoTest extends AocTest<Long>
+public class SeedAlmanacPartTwoAltTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class SeedAlmanacPartTwoTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new SeedAlmanacPartTwo(List.of("5.2-seed-almanac-test"));
+        return new SeedAlmanacPartTwoAlt(List.of("5.2-seed-almanac-test"));
     }
 }
