@@ -12,6 +12,7 @@ import rev.aoc.days.d5.SeedAlmanacPartOne;
 import rev.aoc.days.d5.SeedAlmanacPartTwo;
 import rev.aoc.days.d6.BoatRace;
 import rev.aoc.days.d6.BoatRacePartOne;
+import rev.aoc.days.d6.BoatRacePartTwo;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class Main
         trySolve(new SeedAlmanacPartOne(List.of("5.1-seed-almanac")));
         //trySolve(new SeedAlmanacPartTwo(List.of("5.1-seed-almanac")));
         trySolve(new BoatRacePartOne(List.of("6.1-boat-race")));
+        trySolve(new BoatRacePartTwo(List.of("6.1-boat-race")));
     }
 
     private static void trySolve(AocSolution sol) {
