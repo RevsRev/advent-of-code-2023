@@ -5,7 +5,7 @@ import rev.aoc.AocSolution;
 
 import java.util.List;
 
-public class BoatRace extends AocSolution<Long>
+public abstract class BoatRace extends AocSolution<Long>
 {
     public BoatRace(Iterable<String> resources)
     {
@@ -50,13 +50,8 @@ public class BoatRace extends AocSolution<Long>
         String[] times = lines.get(0).replace("Time:","").trim().split("\\s+");
         String[] distances = lines.get(1).replace("Distance:", "").trim().split("\\s+");
 
-        long[] lTimes = new long[times.length];
-        long[] lDistances = new long[distances.length];
-
-        for (int i=0; i<lTimes.length; i++) {
-            lTimes[i] = Long.parseLong(times[i]);
-            lDistances[i] = Long.parseLong(distances[i]);
-        }
-        return Pair.of(lTimes, lDistances);
+        return aggregate(times, distances);
     }
+
+    protected abstract Pair<long[], long[]> aggregate(String[] times, String[] distances);
 }

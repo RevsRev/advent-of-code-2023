@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class BoatRaceTest extends AocTest<Long>
+public class BoatRacePartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class BoatRaceTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new BoatRace(List.of("6.1-boat-race-test"));
+        return new BoatRacePartOne(List.of("6.1-boat-race-test"));
     }
 }
