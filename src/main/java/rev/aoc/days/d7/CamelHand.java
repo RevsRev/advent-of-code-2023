@@ -1,22 +1,19 @@
 package rev.aoc.days.d7;
 
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-public class CamelHand
+public abstract class CamelHand
 {
-    private final int JUNK = 0;
-    private final int PAIR = 1;
-    private final int TWO_PAIR = 2;
-    private final int THREE_OF_A_KIND=3;
-    private final int FULL_HOUSE = 4;
-    private final int FOUR_OF_A_KIND = 5;
-    private final int FIVE_OF_A_KIND = 6;
+    protected final int JUNK = 0;
+    protected final int PAIR = 1;
+    protected final int TWO_PAIR = 2;
+    protected final int THREE_OF_A_KIND=3;
+    protected final int FULL_HOUSE = 4;
+    protected final int FOUR_OF_A_KIND = 5;
+    protected final int FIVE_OF_A_KIND = 6;
 
 
-    private final long[] cards;
+    protected final long[] cards;
 
     public CamelHand(long[] cards) {
         this.cards = cards;
@@ -32,60 +29,26 @@ public class CamelHand
         int factor = 1;
         int ranking = 0;
         for (int i=cards.length-1; i>=0; i--) {
-            ranking += factor * cards[i];
+            ranking += factor * score(cards[i]);
             factor *= base;
         }
         return type * factor + ranking;
     }
 
-    public int getType() {
-        Map<Long,Integer> counts = new HashMap<>();
-        for (int i=0; i<cards.length; i++) {
-            counts.compute(cards[i], (k,v) -> v==null?1:v+1);
-        }
+    protected abstract long score(long card);
 
-        boolean threeOfAKind = false;
-        int numPairs = 0;
-        Iterator<Long> itKeys = counts.keySet().iterator();
-        while (itKeys.hasNext()) {
-            long card = itKeys.next();
-            if (counts.get(card) == 5) {
-                return FIVE_OF_A_KIND;
-            }
-            if (counts.get(card) == 4) {
-                return FOUR_OF_A_KIND;
-            }
-            if (counts.get(card) == 3) {
-                threeOfAKind = true;
-            }
-            if (counts.get(card) == 2) {
-                numPairs += 1;
-            }
-        }
-
-        if (threeOfAKind && numPairs == 1) {
-            return FULL_HOUSE;
-        }
-        if (threeOfAKind) {
-            return THREE_OF_A_KIND;
-        }
-        if (numPairs == 2) {
-            return TWO_PAIR;
-        }
-        if (numPairs == 1) {
-            return PAIR;
-        }
-        return JUNK;
-    }
-
-    public static CamelHand fromStrHand(String strHand) {
+    protected abstract int getType();
+    public static CamelHand fromStrHand(String strHand, boolean jokersAsWildcards) {
         long[] hand = new long[strHand.length()];
         for (int i=0; i<strHand.length(); i++) {
             char c = strHand.charAt(i);
             long value = toValue(c);
             hand[i] = value;
         }
-        return new CamelHand(hand);
+        if (jokersAsWildcards) {
+            return new CamelHandJokersWildcard(hand);
+        }
+        return new CamelHandJokersNormal(hand);
     }
 
     private static long toValue(char c)

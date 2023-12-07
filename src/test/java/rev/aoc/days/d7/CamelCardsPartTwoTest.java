@@ -16,6 +16,6 @@ public class CamelCardsPartTwoTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new CamelCards(List.of("7.1-camel-cards-test"), true);
+        return new CamelCards(List.of("7.2-camel-cards-test"), true);
     }
 }

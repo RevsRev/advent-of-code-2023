@@ -39,7 +39,7 @@ public class CamelCards extends AocSolution<Long>
         Iterator<String> it = lines.iterator();
         while (it.hasNext()) {
             String[] line = it.next().trim().split("\\s+");
-            CamelHand hand = CamelHand.fromStrHand(line[0]);
+            CamelHand hand = CamelHand.fromStrHand(line[0], jokersAsWildCards);
             long bet = Long.parseLong(line[1]);
             games.add(new CamelGame(bet, hand));
         }
