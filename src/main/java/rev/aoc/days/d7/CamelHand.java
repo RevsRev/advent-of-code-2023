@@ -13,6 +13,7 @@ public class CamelHand
     private final int THREE_OF_A_KIND=3;
     private final int FULL_HOUSE = 4;
     private final int FOUR_OF_A_KIND = 5;
+    private final int FIVE_OF_A_KIND = 6;
 
 
     private final long[] cards;
@@ -40,7 +41,7 @@ public class CamelHand
     public int getType() {
         Map<Long,Integer> counts = new HashMap<>();
         for (int i=0; i<cards.length; i++) {
-            counts.compute(cards[i], (k,v) -> v==null?0:v+1);
+            counts.compute(cards[i], (k,v) -> v==null?1:v+1);
         }
 
         boolean threeOfAKind = false;
@@ -48,6 +49,9 @@ public class CamelHand
         Iterator<Long> itKeys = counts.keySet().iterator();
         while (itKeys.hasNext()) {
             long card = itKeys.next();
+            if (counts.get(card) == 5) {
+                return FIVE_OF_A_KIND;
+            }
             if (counts.get(card) == 4) {
                 return FOUR_OF_A_KIND;
             }
