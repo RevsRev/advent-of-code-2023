@@ -5,17 +5,17 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class CamelCardsPartOneTest extends AocTest<Long>
+public class CamelCardsPartTwoTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return (long)6440;
+        return (long)5905;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new CamelCards(List.of("7.1-camel-cards-test"), false);
+        return new CamelCards(List.of("7.1-camel-cards-test"), true);
     }
 }

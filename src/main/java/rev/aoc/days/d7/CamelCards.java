@@ -9,9 +9,12 @@ import java.util.List;
 
 public class CamelCards extends AocSolution<Long>
 {
-    public CamelCards(Iterable<String> resources)
+    private final boolean jokersAsWildCards;
+
+    public CamelCards(Iterable<String> resources, boolean jokersAsWildCards)
     {
         super(resources);
+        this.jokersAsWildCards = jokersAsWildCards;
     }
 
     @Override
