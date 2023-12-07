@@ -31,6 +31,7 @@ public class Main
         trySolve(new BoatRacePartOne(List.of("6.1-boat-race")));
         trySolve(new BoatRacePartTwo(List.of("6.1-boat-race")));
         trySolve(new CamelCards(List.of("7.1-camel-cards"), false));
+        trySolve(new CamelCards(List.of("7.1-camel-cards"), true));
     }
 
     private static void trySolve(AocSolution sol) {

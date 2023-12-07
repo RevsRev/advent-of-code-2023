@@ -58,14 +58,11 @@ public class CamelHandJokersWildcard extends CamelHand
 
         if (threeOfAKind && numPairs == 1) {
             state = FULL_HOUSE;
-        }
-        if (threeOfAKind) {
+        } else if (threeOfAKind) {
             state = THREE_OF_A_KIND;
-        }
-        if (numPairs == 2) {
+        } else if (numPairs == 2) {
             state = TWO_PAIR;
-        }
-        if (numPairs == 1) {
+        } else if (numPairs == 1) {
             state = PAIR;
         }
 
