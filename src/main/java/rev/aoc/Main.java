@@ -12,6 +12,7 @@ import rev.aoc.days.d5.SeedAlmanacPartOne;
 import rev.aoc.days.d6.BoatRacePartOne;
 import rev.aoc.days.d6.BoatRacePartTwo;
 import rev.aoc.days.d7.CamelCards;
+import rev.aoc.days.d8.HauntedWastelandPartOne;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class Main
         trySolve(new BoatRacePartTwo(List.of("6.1-boat-race")));
         trySolve(new CamelCards(List.of("7.1-camel-cards"), false));
         trySolve(new CamelCards(List.of("7.1-camel-cards"), true));
+        trySolve(new HauntedWastelandPartOne(List.of("8.2-haunted-wasteland")));
     }
 
     private static void trySolve(AocSolution sol) {
