@@ -5,8 +5,9 @@ import rev.aoc.AocSolution;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Function;
 
-public class HauntedWasteland extends AocSolution<Long>
+public abstract class HauntedWasteland extends AocSolution<Long>
 {
     public HauntedWasteland(Iterable<String> resources)
     {
@@ -20,8 +21,11 @@ public class HauntedWasteland extends AocSolution<Long>
         Pair<char[], Graph> stepsAndGraph = parse(lines);
         char[] steps = stepsAndGraph.getLeft();
         Graph g = stepsAndGraph.getRight();
-        return g.traverse(steps, g.getNodeForName("AAA"), g.getNodeForName("ZZZ"));
+        return g.traverse(steps, getStartPredicate(), getEndPredicate());
     }
+
+    protected abstract Function<String, Boolean> getStartPredicate();
+    protected abstract Function<String, Boolean> getEndPredicate();
 
     private Pair<char[], Graph> parse(List<String> lines)
     {
