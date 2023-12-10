@@ -1,5 +1,6 @@
 package rev.aoc.math.num_theory;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -36,10 +37,6 @@ public class NumberTheory
      *  For k an integer.
      */
     public static Optional<long[]> solveDiophantine(long a, long b, long c) {
-        if (Math.abs(a) < Math.abs(b)) {
-            return solveDiophantine(b,a,c);
-        }
-
         boolean aNeg = a<0;
         boolean bNeg = b<0;
         Optional<long[]> result = solveDiophantinePositive(Math.abs(a), Math.abs(b), c);
@@ -63,7 +60,17 @@ public class NumberTheory
      */
     private static Optional<long[]> solveDiophantinePositive(long a, long b, long c) {
         if (a<b) {
-            return solveDiophantinePositive(b,a,c);
+            Optional<long[]> result = solveDiophantinePositive(b,a,c);
+            if (result.isEmpty()) {
+                return result;
+            }
+            long[] res = result.get();
+            long[] swappedRes = new long[4];
+            swappedRes[0] = res[1];
+            swappedRes[1] = res[0];
+            swappedRes[2] = res[3];
+            swappedRes[3] = res[2];
+            return Optional.of(swappedRes);
         }
 
         List<long[]> euclidSteps = Euclid.euclidsAlgorithm(a,b);
@@ -120,7 +127,41 @@ public class NumberTheory
      * @return
      */
     public static Optional<long[]> solveChineseRemainders(Map<Long,Long> congruences) {
-        //TODO - Implement
-        return null;
+
+
+        Iterator<Long> itMods = congruences.keySet().iterator();
+        if (!itMods.hasNext()) {
+            return Optional.empty();
+        }
+
+        long firstMod = itMods.next();
+        long[] solution = new long[2];
+        solution[0] = congruences.get(firstMod);
+        solution[1] = firstMod;
+
+        while (itMods.hasNext()) {
+            long thisValue = solution[0];
+            long thisMod = solution[1];
+
+            long nextMod = itMods.next();
+            long nextValue = congruences.get(nextMod);
+
+            long[] diophantineParams = new long[]{thisMod, -nextMod, nextValue - thisValue};
+            Optional<long[]> result = solveDiophantine(diophantineParams[0], diophantineParams[1], diophantineParams[2]);
+            if (result.isEmpty()) {
+                return Optional.empty();
+            }
+            long sol = thisValue + result.get()[0]*thisMod;
+            long increment = thisMod * nextMod;
+            while (sol < 0) {
+                sol += increment;
+            }
+            while (sol > increment) {
+                sol -= increment;
+            }
+            solution[0] = sol;
+            solution[1] = increment;
+        }
+        return Optional.of(solution);
     }
 }
