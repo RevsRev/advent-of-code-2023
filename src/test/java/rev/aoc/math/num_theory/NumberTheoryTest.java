@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class NumberTheoryTest
 {
@@ -41,6 +40,9 @@ public class NumberTheoryTest
     public static List<long[]> getDiophantineTestCases() {
         List<long[]> testCases = new ArrayList<>();
         testCases.add(new long[]{5,3,4,-4,8,3,-5});
+        testCases.add(new long[]{3,5,4,-4,8,3,-5});
+        testCases.add(new long[]{5,-3,4,-4,-8,3,-5});
+        testCases.add(new long[]{-3,5,4,-4,-8,3,-5});
         return testCases;
     }
 }
