@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,23 +14,23 @@ public class EuclidTest
 
     @ParameterizedTest
     @MethodSource("getEuclidTestCases")
-    public void testEuclid(Pair<long[], List<long[]>> testCase) {
-        long[] input = testCase.getLeft();
-        List<long[]> steps = testCase.getRight();
-        List<long[]> expectedSteps = Euclid.euclidsAlgorithm(input[0], input[1]);
+    public void testEuclid(Pair<BigInteger[], List<BigInteger[]>> testCase) {
+        BigInteger[] input = testCase.getLeft();
+        List<BigInteger[]> steps = testCase.getRight();
+        List<BigInteger[]> expectedSteps = Euclid.euclidsAlgorithm(input[0], input[1]);
         for (int i=0; i<steps.size(); i++) {
             Assertions.assertArrayEquals(expectedSteps.get(i), steps.get(i));
         }
     }
 
-    public static List<Pair<long[],List<long[]>>>  getEuclidTestCases() {
-        List<Pair<long[],List<long[]>>> testCases = new ArrayList<>();
+    public static List<Pair<BigInteger[],List<BigInteger[]>>>  getEuclidTestCases() {
+        List<Pair<BigInteger[],List<BigInteger[]>>> testCases = new ArrayList<>();
 
-        long[] input = new long[]{5,3};
-        List<long[]> steps = new ArrayList<>();
-        steps.add(new long[]{5,3,1,2});
-        steps.add(new long[]{3,2,1,1});
-        steps.add(new long[]{2,1,2,0});
+        BigInteger[] input = new BigInteger[]{BigInteger.valueOf(5),BigInteger.valueOf(3)};
+        List<BigInteger[]> steps = new ArrayList<>();
+        steps.add(new BigInteger[]{BigInteger.valueOf(5),BigInteger.valueOf(3),BigInteger.valueOf(1),BigInteger.valueOf(2)});
+        steps.add(new BigInteger[]{BigInteger.valueOf(3),BigInteger.valueOf(2),BigInteger.valueOf(1),BigInteger.valueOf(1)});
+        steps.add(new BigInteger[]{BigInteger.valueOf(2),BigInteger.valueOf(1),BigInteger.valueOf(2),BigInteger.valueOf(0)});
 
         testCases.add(Pair.of(input, steps));
 

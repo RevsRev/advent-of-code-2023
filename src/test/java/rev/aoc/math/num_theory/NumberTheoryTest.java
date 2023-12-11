@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigInteger;
 import java.util.*;
 
 public class NumberTheoryTest
@@ -12,57 +13,65 @@ public class NumberTheoryTest
 
     @ParameterizedTest
     @MethodSource("getGcdTestCases")
-    public void testGcd(long[] testCase) {
-        Assertions.assertEquals(NumberTheory.gcd(testCase[0], testCase[1]), testCase[2]);
+    public void testGcd(List<BigInteger> testCase) {
+        Assertions.assertEquals(NumberTheory.gcd(testCase.get(0), testCase.get(1)), testCase.get(2));
     }
 
     @ParameterizedTest
     @MethodSource("getDiophantineTestCases")
-    public void testDiophantine(long[] testCase) {
-        long[] result = NumberTheory.solveDiophantine(testCase[0], testCase[1], testCase[2]).get();
-        long[] expected = Arrays.copyOfRange(testCase, 3, 7);
+    public void testDiophantine(List<BigInteger> testCase) {
+        BigInteger[] result = NumberTheory.solveDiophantine(testCase.get(0), testCase.get(1), testCase.get(2)).get();
+        BigInteger[] expected = testCase.subList(3, 7).toArray(new BigInteger[4]);
         Assertions.assertArrayEquals(expected, result);
     }
 
     @ParameterizedTest
     @MethodSource("getChineseRemaindersTestCases")
-    public void testChineseRemainders(Pair<Map<Long,Long>,long[]> testCase) {
-        Optional<long[]> result = NumberTheory.solveChineseRemainders(testCase.getLeft());
+    public void testChineseRemainders(Pair<Map<BigInteger,BigInteger>,BigInteger[]> testCase) {
+        Optional<BigInteger[]> result = NumberTheory.solveChineseRemainders(testCase.getLeft());
         Assertions.assertArrayEquals(testCase.getRight(), result.get());
     }
 
-    public static List<long[]> getGcdTestCases()
+    public static List<List<BigInteger>> getGcdTestCases()
     {
-        List<long[]> testCases = new ArrayList<>();
-        testCases.add(new long[]{1,1,1});
-        testCases.add(new long[]{1,6,1});
-        testCases.add(new long[]{6,12,6});
-        testCases.add(new long[]{6,9,3});
-        testCases.add(new long[]{20,30,10});
-        testCases.add(new long[]{22,77,11});
+        List<List<BigInteger>> testCases = new ArrayList<>();
+        testCases.add(List.of(BigInteger.valueOf(1),BigInteger.valueOf(1),BigInteger.valueOf(1)));
+        testCases.add(List.of(BigInteger.valueOf(1),BigInteger.valueOf(6),BigInteger.valueOf(1)));
+        testCases.add(List.of(BigInteger.valueOf(6),BigInteger.valueOf(12),BigInteger.valueOf(6)));
+        testCases.add(List.of(BigInteger.valueOf(6),BigInteger.valueOf(9),BigInteger.valueOf(3)));
+        testCases.add(List.of(BigInteger.valueOf(20),BigInteger.valueOf(30),BigInteger.valueOf(10)));
+        testCases.add(List.of(BigInteger.valueOf(22),BigInteger.valueOf(77),BigInteger.valueOf(11)));
         return testCases;
     }
 
-    public static List<long[]> getDiophantineTestCases() {
-        List<long[]> testCases = new ArrayList<>();
-        testCases.add(new long[]{5,3,4,-4,8,3,-5});
-        testCases.add(new long[]{3,5,4,8,-4,-5,3});
-        testCases.add(new long[]{5,-3,4,-4,-8,3,-5});
-        testCases.add(new long[]{-3,5,4,-8,-4,-5,3});
+    public static List<List<BigInteger>> getDiophantineTestCases() {
+        List<List<BigInteger>> testCases = new ArrayList<>();
+        testCases.add(List.of(BigInteger.valueOf(5),BigInteger.valueOf(3),BigInteger.valueOf(4),BigInteger.valueOf(-4),BigInteger.valueOf(8),BigInteger.valueOf(3),BigInteger.valueOf(-5)));
+        testCases.add(List.of(BigInteger.valueOf(3),BigInteger.valueOf(5),BigInteger.valueOf(4),BigInteger.valueOf(8),BigInteger.valueOf(-4),BigInteger.valueOf(-5),BigInteger.valueOf(3)));
+        testCases.add(List.of(BigInteger.valueOf(5),BigInteger.valueOf(-3),BigInteger.valueOf(4),BigInteger.valueOf(-4),BigInteger.valueOf(-8),BigInteger.valueOf(3),BigInteger.valueOf(-5)));
+        testCases.add(List.of(BigInteger.valueOf(-3),BigInteger.valueOf(5),BigInteger.valueOf(4),BigInteger.valueOf(-8),BigInteger.valueOf(-4),BigInteger.valueOf(-5),BigInteger.valueOf(3)));
         return testCases;
     }
 
-    public static List<Pair<Map<Long,Long>,long[]>> getChineseRemaindersTestCases() {
-        List<Pair<Map<Long,Long>,long[]>> testCases = new ArrayList<>();
+    public static List<Pair<Map<BigInteger,BigInteger>,BigInteger[]>> getChineseRemaindersTestCases() {
+        List<Pair<Map<BigInteger,BigInteger>,BigInteger[]>> testCases = new ArrayList<>();
 
-        Map<Long,Long> congruences = new HashMap<>();
-        congruences.put(5l,2l);
-        congruences.put(7l,3l);
-        congruences.put(11l,10l);
-        long[] solution = new long[2];
-        solution[0] = 87;
-        solution[1] = 385;
+        Map<BigInteger,BigInteger> congruences = new HashMap<>();
+        congruences.put(BigInteger.valueOf(5),BigInteger.valueOf(2));
+        congruences.put(BigInteger.valueOf(7),BigInteger.valueOf(3));
+        congruences.put(BigInteger.valueOf(11),BigInteger.valueOf(10));
+        BigInteger[] solution = new BigInteger[2];
+        solution[0] = BigInteger.valueOf(87);
+        solution[1] = BigInteger.valueOf(385);
 
+        testCases.add(Pair.of(congruences, solution));
+
+        congruences = new HashMap<>();
+        solution = new BigInteger[2];
+        solution[0] = BigInteger.valueOf(262);
+        solution[1] = BigInteger.valueOf(18023);
+        congruences.put(BigInteger.valueOf(269), BigInteger.valueOf(262));
+        congruences.put(BigInteger.valueOf(67), BigInteger.valueOf(61));
         testCases.add(Pair.of(congruences, solution));
 
         return testCases;

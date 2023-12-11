@@ -1,5 +1,6 @@
 package rev.aoc.math.num_theory;
 
+import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -10,14 +11,14 @@ public class NumberTheory
     /**
      * Computes the gcd of longs a&b. If the input is invalid, then -1 is returned.
      */
-    public static long gcd(long a, long b) {
-        List<long[]> euclidSteps = Euclid.euclidsAlgorithm(a,b);
+    public static BigInteger gcd(BigInteger a, BigInteger b) {
+        List<BigInteger[]> euclidSteps = Euclid.euclidsAlgorithm(a,b);
         return gcd(euclidSteps);
     }
 
-    private static long gcd(List<long[]> euclidSteps) {
+    private static BigInteger gcd(List<BigInteger[]> euclidSteps) {
         if (euclidSteps.size() == 0) {
-            return -1;
+            return BigInteger.valueOf(-1);
         }
         return euclidSteps.get(euclidSteps.size()-1)[1];
     }
@@ -36,21 +37,21 @@ public class NumberTheory
      *
      *  For k an integer.
      */
-    public static Optional<long[]> solveDiophantine(long a, long b, long c) {
-        boolean aNeg = a<0;
-        boolean bNeg = b<0;
-        Optional<long[]> result = solveDiophantinePositive(Math.abs(a), Math.abs(b), c);
+    public static Optional<BigInteger[]> solveDiophantine(BigInteger a, BigInteger b, BigInteger c) {
+        boolean aNeg = a.compareTo(BigInteger.ZERO)<0;
+        boolean bNeg = b.compareTo(BigInteger.ZERO)<0;
+        Optional<BigInteger[]> result = solveDiophantinePositive(a.abs(), b.abs(), c);
 
         if (result.isEmpty() || (!aNeg && !bNeg)) {
             return result;
         }
 
-        long[] solution = result.get();
+        BigInteger[] solution = result.get();
         if (aNeg) {
-            solution[0] = -solution[0];
+            solution[0] = solution[0].multiply(BigInteger.valueOf(-1));
         }
         if (bNeg) {
-            solution[1] = -solution[1];
+            solution[1] = solution[1].multiply(BigInteger.valueOf(-1));
         }
         return Optional.of(solution);
     }
@@ -58,14 +59,14 @@ public class NumberTheory
     /**
      * Solves diophantine equation with a,b both positive
      */
-    private static Optional<long[]> solveDiophantinePositive(long a, long b, long c) {
-        if (a<b) {
-            Optional<long[]> result = solveDiophantinePositive(b,a,c);
+    private static Optional<BigInteger[]> solveDiophantinePositive(BigInteger a, BigInteger b, BigInteger c) {
+        if (a.compareTo(b)<0) {
+            Optional<BigInteger[]> result = solveDiophantinePositive(b,a,c);
             if (result.isEmpty()) {
                 return result;
             }
-            long[] res = result.get();
-            long[] swappedRes = new long[4];
+            BigInteger[] res = result.get();
+            BigInteger[] swappedRes = new BigInteger[4];
             swappedRes[0] = res[1];
             swappedRes[1] = res[0];
             swappedRes[2] = res[3];
@@ -73,46 +74,46 @@ public class NumberTheory
             return Optional.of(swappedRes);
         }
 
-        List<long[]> euclidSteps = Euclid.euclidsAlgorithm(a,b);
-        long gcdab = gcd(euclidSteps);
-        if (c % gcdab != 0) {
+        List<BigInteger[]> euclidSteps = Euclid.euclidsAlgorithm(a,b);
+        BigInteger gcdab = gcd(euclidSteps);
+        if (c.mod(gcdab).compareTo(BigInteger.ZERO) != 0) {
             return Optional.empty();
         }
 
-        long factor = c/gcdab;
+        BigInteger factor = c.divide(gcdab);
 
         //case a = kb for some k, gcd(a,b) = b
         if (euclidSteps.size() == 1) {
-            long x = 0;
-            long y = a/b * factor;
-            long xInc = factor;
-            long yInc = a/b * factor;
-            return Optional.of(new long[]{a,b,xInc,yInc});
+            BigInteger x = BigInteger.ZERO;
+            BigInteger y = (a.divide(b)).multiply(factor);
+            BigInteger xInc = factor;
+            BigInteger yInc = (a.divide(b)).multiply(factor);
+            return Optional.of(new BigInteger[]{a,b,xInc,yInc});
         }
 
-        long[] steps = euclidSteps.get(euclidSteps.size()-2);
+        BigInteger[] steps = euclidSteps.get(euclidSteps.size()-2);
 
         // a_{k-1} = b_{k} - q_{k-2}a_{k}
         // b_{k-1} = a_{k}
 
         // Initially, a_{n} = -q_{n-1}, b_n = 1
-        long ak = -steps[2];
-        long bk = 1;
+        BigInteger ak = steps[2].multiply(BigInteger.valueOf(-1));
+        BigInteger bk = BigInteger.ONE;
 
         for (int i=euclidSteps.size()-3; i>=0; i--) {
-            long[] step = euclidSteps.get(i);
-            long akk = ak;
-            ak = bk - step[2]*ak;
+            BigInteger[] step = euclidSteps.get(i);
+            BigInteger akk = ak.multiply(BigInteger.ONE);
+            ak = bk.subtract(step[2].multiply(ak));
             bk = akk;
         }
 
         //principal solution is final values ak & bk : d = ak*a + bk*b
-        long x = bk * factor;
-        long y = ak * factor;
-        long xInc = b/gcdab;
-        long yInc = -a/gcdab;
+        BigInteger x = bk.multiply(factor);
+        BigInteger y = ak.multiply(factor);
+        BigInteger xInc = b.divide(gcdab);
+        BigInteger yInc = (a.multiply(BigInteger.valueOf(-1))).divide(gcdab);
 
-        return Optional.of(new long[]{x,y,xInc,yInc});
+        return Optional.of(new BigInteger[]{x,y,xInc,yInc});
     }
 
     /**
@@ -126,38 +127,38 @@ public class NumberTheory
      * @param congruences - Map of mod value to remainder (i.e. b1 --> a1, b2 --> a2, ..., bN --> aN)
      * @return
      */
-    public static Optional<long[]> solveChineseRemainders(Map<Long,Long> congruences) {
+    public static Optional<BigInteger[]> solveChineseRemainders(Map<BigInteger,BigInteger> congruences) {
 
 
-        Iterator<Long> itMods = congruences.keySet().iterator();
+        Iterator<BigInteger> itMods = congruences.keySet().iterator();
         if (!itMods.hasNext()) {
             return Optional.empty();
         }
 
-        long firstMod = itMods.next();
-        long[] solution = new long[2];
+        BigInteger firstMod = itMods.next();
+        BigInteger[] solution = new BigInteger[2];
         solution[0] = congruences.get(firstMod);
         solution[1] = firstMod;
 
         while (itMods.hasNext()) {
-            long thisValue = solution[0];
-            long thisMod = solution[1];
+            BigInteger thisValue = solution[0];
+            BigInteger thisMod = solution[1];
 
-            long nextMod = itMods.next();
-            long nextValue = congruences.get(nextMod);
+            BigInteger nextMod = itMods.next();
+            BigInteger nextValue = congruences.get(nextMod);
 
-            long[] diophantineParams = new long[]{thisMod, -nextMod, nextValue - thisValue};
-            Optional<long[]> result = solveDiophantine(diophantineParams[0], diophantineParams[1], diophantineParams[2]);
+            BigInteger[] diophantineParams = new BigInteger[]{thisMod, nextMod.multiply(BigInteger.valueOf(-1)), nextValue.subtract(thisValue)};
+            Optional<BigInteger[]> result = solveDiophantine(diophantineParams[0], diophantineParams[1], diophantineParams[2]);
             if (result.isEmpty()) {
                 return Optional.empty();
             }
-            long sol = thisValue + result.get()[0]*thisMod;
-            long increment = thisMod * nextMod;
-            while (sol < 0) {
-                sol += increment;
+            BigInteger sol = thisValue.add(result.get()[0].multiply(thisMod));
+            BigInteger increment = thisMod.multiply(nextMod);
+            if (sol.compareTo(increment) > 0) {
+                sol = sol.mod(increment);
             }
-            while (sol > increment) {
-                sol -= increment;
+            while (sol.compareTo(BigInteger.ZERO) < 0) {
+                sol = sol.add(increment);
             }
             solution[0] = sol;
             solution[1] = increment;
