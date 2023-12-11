@@ -16,6 +16,6 @@ public class MirageMaintenanceTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new MirageMaintenance(List.of("9.1-mirage-maintenance"));
+        return new MirageMaintenance(List.of("9.1-mirage-maintenance-test"));
     }
 }
