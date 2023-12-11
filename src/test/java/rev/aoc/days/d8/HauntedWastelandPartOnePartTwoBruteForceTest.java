@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class HauntedWastelandPartOnePartTwoTest extends AocTest<Long>
+public class HauntedWastelandPartOnePartTwoBruteForceTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class HauntedWastelandPartOnePartTwoTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new HauntedWastelandPartTwo(List.of("8.2-haunted-wasteland-test"));
+        return new HauntedWastelandPartTwoBruteForce(List.of("8.1-haunted-wasteland-test"));
     }
 }

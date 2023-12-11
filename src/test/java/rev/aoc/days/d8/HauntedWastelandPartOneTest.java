@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class HauntedWastelandPartOnePartOneTest extends AocTest<Long>
+public class HauntedWastelandPartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()

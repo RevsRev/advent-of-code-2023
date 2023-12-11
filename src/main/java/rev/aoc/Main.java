@@ -1,18 +1,19 @@
 package rev.aoc;
 
-import rev.aoc.days.d4.AocScratchCardPartOne;
-import rev.aoc.days.d4.AocScratchCardPartTwo;
 import rev.aoc.days.d1.TrebuchetPartOne;
 import rev.aoc.days.d1.TrebuchetPartTwo;
-import rev.aoc.days.d3.GearRatiosPartOne;
-import rev.aoc.days.d3.GearRatiosPartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
+import rev.aoc.days.d3.GearRatiosPartOne;
+import rev.aoc.days.d3.GearRatiosPartTwo;
+import rev.aoc.days.d4.AocScratchCardPartOne;
+import rev.aoc.days.d4.AocScratchCardPartTwo;
 import rev.aoc.days.d5.SeedAlmanacPartOne;
 import rev.aoc.days.d6.BoatRacePartOne;
 import rev.aoc.days.d6.BoatRacePartTwo;
 import rev.aoc.days.d7.CamelCards;
 import rev.aoc.days.d8.HauntedWastelandPartOne;
+import rev.aoc.days.d8.HauntedWastelandPartTwo;
 
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class Main
         trySolve(new BoatRacePartTwo(List.of("6.1-boat-race")));
         trySolve(new CamelCards(List.of("7.1-camel-cards"), false));
         trySolve(new CamelCards(List.of("7.1-camel-cards"), true));
-        trySolve(new HauntedWastelandPartOne(List.of("8.2-haunted-wasteland")));
+        trySolve(new HauntedWastelandPartOne(List.of("8.1-haunted-wasteland")));
+        trySolve(new HauntedWastelandPartTwo(List.of("8.1-haunted-wasteland")));
     }
 
     private static void trySolve(AocSolution sol) {
