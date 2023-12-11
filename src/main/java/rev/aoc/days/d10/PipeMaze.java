@@ -8,10 +8,10 @@ import java.util.*;
 
 public abstract class PipeMaze extends AocSolution<Long>
 {
-    private static final Vec2 NORTH = new Vec2(0,-1); //opposite to what you would think because arrays indexed from top to bottom
-    private static final Vec2 EAST = new Vec2(1,0);
-    private static final Vec2 SOUTH = new Vec2(0,1);
-    private static final Vec2 WEST = new Vec2(-1,0);
+    protected static final Vec2 NORTH = new Vec2(0,-1); //opposite to what you would think because arrays indexed from top to bottom
+    protected static final Vec2 EAST = new Vec2(1,0);
+    protected static final Vec2 SOUTH = new Vec2(0,1);
+    protected static final Vec2 WEST = new Vec2(-1,0);
 
     private static final Map<Character, Pair<Vec2, Vec2>> DIRECTIONS_MAP = createDirectionsMap();
 
