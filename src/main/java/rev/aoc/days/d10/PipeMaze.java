@@ -4,10 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import rev.aoc.AocSolution;
 import rev.aoc.math.vec.Vec2;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PipeMaze extends AocSolution<Long>
 {
@@ -43,10 +40,10 @@ public class PipeMaze extends AocSolution<Long>
         char[][] mazeMap = parse(lines);
         Vec2 start = findStart(mazeMap);
 
-        return findLoopAndGetLength(mazeMap, start);
+        return (long)(findLoop(mazeMap, start).size() + 1)/2;
     }
 
-    private Long findLoopAndGetLength(char[][] mazeMap, Vec2 start)
+    private List<Vec2> findLoop(char[][] mazeMap, Vec2 start)
     {
         int height = mazeMap.length;
         int width = mazeMap[0].length;
@@ -54,6 +51,7 @@ public class PipeMaze extends AocSolution<Long>
 
         Iterator<Character> dirIt = DIRECTIONS_MAP.keySet().iterator();
         while (dirIt.hasNext()) {
+            List<Vec2> loop = new ArrayList<>();
             long length = 0;
             char startChar = dirIt.next();
             char dirChar = startChar;
@@ -61,6 +59,7 @@ public class PipeMaze extends AocSolution<Long>
             Vec2 position = new Vec2(start);
             Vec2 orientation = startDirections.getLeft();
             do {
+                loop.add(position);
                 position = position.add(orientation);
                 length++;
                 if (position.x <0 || position.x >= width || position.y<0 || position.y >= height) {
@@ -71,7 +70,7 @@ public class PipeMaze extends AocSolution<Long>
                     if (orientation == null) {
                         break;
                     }
-                    return (length+1)/2;
+                    return loop;
                 }
 
                 dirChar = mazeMap[(int)position.y][(int)position.x];
@@ -81,7 +80,7 @@ public class PipeMaze extends AocSolution<Long>
                 }
             } while (length < maxLength && !position.equals(start));
         }
-        return 0l;
+        return new ArrayList<>();
     }
 
     private Vec2 getNextOrientation(Vec2 incoming, char dirChar)
