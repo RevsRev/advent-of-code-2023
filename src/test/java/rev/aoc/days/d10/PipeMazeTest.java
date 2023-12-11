@@ -10,7 +10,7 @@ public class PipeMazeTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return 4l;
+        return 8l;
     }
 
     @Override
