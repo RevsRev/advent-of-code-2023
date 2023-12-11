@@ -15,6 +15,7 @@ import rev.aoc.days.d7.CamelCards;
 import rev.aoc.days.d8.HauntedWastelandPartOne;
 import rev.aoc.days.d8.HauntedWastelandPartTwo;
 import rev.aoc.days.d9.MirageMaintenance;
+import rev.aoc.days.d9.MirageMaintenancePartOne;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class Main
         trySolve(new CamelCards(List.of("7.1-camel-cards"), true));
         trySolve(new HauntedWastelandPartOne(List.of("8.1-haunted-wasteland")));
         trySolve(new HauntedWastelandPartTwo(List.of("8.1-haunted-wasteland")));
-        trySolve(new MirageMaintenance(List.of("9.1-mirage-maintenance")));
+        trySolve(new MirageMaintenancePartOne(List.of("9.1-mirage-maintenance")));
     }
 
     private static void trySolve(AocSolution sol) {

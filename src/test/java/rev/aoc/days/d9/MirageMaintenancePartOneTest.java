@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class MirageMaintenanceTest extends AocTest<Long>
+public class MirageMaintenancePartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class MirageMaintenanceTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new MirageMaintenance(List.of("9.1-mirage-maintenance-test"));
+        return new MirageMaintenancePartOne(List.of("9.1-mirage-maintenance-test"));
     }
 }

@@ -5,7 +5,7 @@ import rev.aoc.AocSolution;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MirageMaintenance extends AocSolution<Long>
+public abstract class MirageMaintenance extends AocSolution<Long>
 {
     public MirageMaintenance(Iterable<String> resources)
     {
@@ -20,33 +20,14 @@ public class MirageMaintenance extends AocSolution<Long>
 
         long result = 0;
         for (int i=0; i<sequences.size(); i++) {
-            result += getNextTerm(sequences.get(i));
+            result = incrementResult(sequences.get(i), result);
         }
         return result;
     }
 
-    private long getNextTerm(long[] sequence)
-    {
-        List<long[]> sequenceWithGaps = new ArrayList<>();
-        sequenceWithGaps.add(sequence);
-        while (!isConstantSequence(sequenceWithGaps.get(sequenceWithGaps.size()-1))) {
-            long[] gaps = sequenceWithGaps.get(sequenceWithGaps.size()-1);
-            long[] nextGaps = new long[gaps.length-1];
-            for (int i=0; i<gaps.length-1; i++) {
-                nextGaps[i] = gaps[i+1]-gaps[i];
-            }
-            sequenceWithGaps.add(nextGaps);
-        }
+    protected abstract long incrementResult(long[] sequence, long result);
 
-        long result = 0;
-        for (int i=sequenceWithGaps.size()-1; i>=0; i--) {
-            long[] lastGaps = sequenceWithGaps.get(i);
-            result += lastGaps[lastGaps.length-1];
-        }
-        return result;
-    }
-
-    private boolean isConstantSequence(long[] sequence)
+    protected boolean isConstantSequence(long[] sequence)
     {
         long first = sequence[0];
         for (int i=1; i<sequence.length; i++) {
