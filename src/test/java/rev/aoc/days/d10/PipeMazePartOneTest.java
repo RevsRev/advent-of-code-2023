@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class PipeMazeTest extends AocTest<Long>
+public class PipeMazePartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class PipeMazeTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new PipeMaze(List.of("10.1-pipe-maze-test"));
+        return new PipeMazePartOne(List.of("10.1-pipe-maze-test"));
     }
 }

@@ -3,6 +3,7 @@ package rev.aoc;
 import rev.aoc.days.d1.TrebuchetPartOne;
 import rev.aoc.days.d1.TrebuchetPartTwo;
 import rev.aoc.days.d10.PipeMaze;
+import rev.aoc.days.d10.PipeMazePartOne;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -42,7 +43,7 @@ public class Main
         trySolve(new HauntedWastelandPartTwo(List.of("8.1-haunted-wasteland")));
         trySolve(new MirageMaintenancePartOne(List.of("9.1-mirage-maintenance")));
         trySolve(new MirageMaintenancePartTwo(List.of("9.1-mirage-maintenance")));
-        trySolve(new PipeMaze(List.of("10.1-pipe-maze")));
+        trySolve(new PipeMazePartOne(List.of("10.1-pipe-maze")));
     }
 
     private static void trySolve(AocSolution sol) {

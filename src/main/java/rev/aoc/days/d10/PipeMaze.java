@@ -6,7 +6,7 @@ import rev.aoc.math.vec.Vec2;
 
 import java.util.*;
 
-public class PipeMaze extends AocSolution<Long>
+public abstract class PipeMaze extends AocSolution<Long>
 {
     private static final Vec2 NORTH = new Vec2(0,-1); //opposite to what you would think because arrays indexed from top to bottom
     private static final Vec2 EAST = new Vec2(1,0);
@@ -40,8 +40,11 @@ public class PipeMaze extends AocSolution<Long>
         char[][] mazeMap = parse(lines);
         Vec2 start = findStart(mazeMap);
 
-        return (long)(findLoop(mazeMap, start).size() + 1)/2;
+        List<Vec2> loop = findLoop(mazeMap, start);
+        return solveProblemForLoop(mazeMap, loop);
     }
+
+    public abstract long solveProblemForLoop(char[][] mazeMap, List<Vec2> loop);
 
     private List<Vec2> findLoop(char[][] mazeMap, Vec2 start)
     {
