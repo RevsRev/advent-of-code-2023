@@ -10,7 +10,7 @@ public class MirageMaintenancePartTwoTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return -2l;
+        return 2l;
     }
 
     @Override
