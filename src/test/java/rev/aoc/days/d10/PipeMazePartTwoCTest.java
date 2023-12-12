@@ -5,17 +5,17 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class PipeMazePartTwoTest extends AocTest<Long>
+public class PipeMazePartTwoCTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return 10l;
+        return 8l;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new PipeMazePartTwo(List.of("10.2-pipe-maze-test"));
+        return new PipeMazePartTwo(List.of("10.2.C-pipe-maze-test"));
     }
 }

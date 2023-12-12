@@ -4,6 +4,7 @@ import rev.aoc.days.d1.TrebuchetPartOne;
 import rev.aoc.days.d1.TrebuchetPartTwo;
 import rev.aoc.days.d10.PipeMaze;
 import rev.aoc.days.d10.PipeMazePartOne;
+import rev.aoc.days.d10.PipeMazePartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -44,6 +45,7 @@ public class Main
         trySolve(new MirageMaintenancePartOne(List.of("9.1-mirage-maintenance")));
         trySolve(new MirageMaintenancePartTwo(List.of("9.1-mirage-maintenance")));
         trySolve(new PipeMazePartOne(List.of("10.1-pipe-maze")));
+        trySolve(new PipeMazePartTwo(List.of("10.1-pipe-maze")));
     }
 
     private static void trySolve(AocSolution sol) {
