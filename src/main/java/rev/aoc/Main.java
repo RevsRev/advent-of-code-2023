@@ -47,7 +47,8 @@ public class Main
         trySolve(new MirageMaintenancePartTwo(List.of("9.1-mirage-maintenance")));
         trySolve(new PipeMazePartOne(List.of("10.1-pipe-maze")));
         trySolve(new PipeMazePartTwo(List.of("10.1-pipe-maze")));
-        trySolve(new CosmicExpansion(List.of("11.1-cosmic-expansion")));
+        trySolve(new CosmicExpansion(List.of("11.1-cosmic-expansion"), 2l));
+        trySolve(new CosmicExpansion(List.of("11.1-cosmic-expansion"), 1000000l));
     }
 
     private static void trySolve(AocSolution sol) {

@@ -7,9 +7,11 @@ import java.util.*;
 
 public class CosmicExpansion extends AocSolution<Long>
 {
-    public CosmicExpansion(Iterable<String> resources)
+    private final long expansionRate;
+    public CosmicExpansion(Iterable<String> resources, long expansionRate)
     {
         super(resources);
+        this.expansionRate = expansionRate;
     }
 
     @Override
@@ -49,12 +51,8 @@ public class CosmicExpansion extends AocSolution<Long>
         int timesToExpandX = getTimesToExpand(expansionCols, x);
         int timesToExpandY = getTimesToExpand(expansionRows, y);
 
-        return new Vec2(galaxy.x + timesToExpandX*getExpansionRate(), galaxy.y + timesToExpandY*getExpansionRate());
-    }
-
-    private int getExpansionRate()
-    {
-        return 1;
+        long expansionFactor = expansionRate-1;
+        return new Vec2(galaxy.x + timesToExpandX* expansionFactor, galaxy.y + timesToExpandY* expansionFactor);
     }
 
     private int getTimesToExpand(List<Integer> expansionRows, int x)
