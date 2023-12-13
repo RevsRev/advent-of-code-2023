@@ -18,11 +18,52 @@ public class CosmicExpansion extends AocSolution<Long>
         List<String> lines = getOneAndOnlyResourceLines();
         char[][] space = parse(lines);
 
-        char[][] expanded = expand(space);
+        List<Integer> expansionCols = new ArrayList(getExpansionCols(space));
+        List<Integer> expansionRows = new ArrayList<>(getExpansionRows(space));
 
-        Set<Vec2> galaxyPositions = getGalaxyPositions(expanded);
+        Collections.sort(expansionRows);
+        Collections.sort(expansionCols);
+
+        Set<Vec2> galaxyPositions = getGalaxyPositions(space);
+        galaxyPositions = expand(galaxyPositions, expansionRows, expansionCols);
 
         return getSumOfShortestPairwiseDistances(galaxyPositions);
+    }
+
+    private Set<Vec2> expand(Set<Vec2> galaxyPositions, List<Integer> expansionRows, List<Integer> expansionCols)
+    {
+        Set<Vec2> result = new HashSet<>();
+        Iterator<Vec2> itGalaxies = galaxyPositions.iterator();
+        while (itGalaxies.hasNext()) {
+            Vec2 galaxy = itGalaxies.next();
+            result.add(expandGalaxy(galaxy, expansionRows, expansionCols));
+        }
+        return result;
+    }
+
+    private Vec2 expandGalaxy(Vec2 galaxy, List<Integer> expansionRows, List<Integer> expansionCols)
+    {
+        int x = (int)galaxy.x;
+        int y = (int)galaxy.y;
+
+        int timesToExpandX = getTimesToExpand(expansionCols, x);
+        int timesToExpandY = getTimesToExpand(expansionRows, y);
+
+        return new Vec2(galaxy.x + timesToExpandX*getExpansionRate(), galaxy.y + timesToExpandY*getExpansionRate());
+    }
+
+    private int getExpansionRate()
+    {
+        return 1;
+    }
+
+    private int getTimesToExpand(List<Integer> expansionRows, int x)
+    {
+        int index = Collections.binarySearch(expansionRows, x);
+        if (index < 0) {
+            index = -index - 1; //insertionPoint;
+        }
+        return index+1;
     }
 
     private long getSumOfShortestPairwiseDistances(Set<Vec2> galaxyPositions)
@@ -69,52 +110,6 @@ public class CosmicExpansion extends AocSolution<Long>
             }
         }
         return galaxies;
-    }
-
-    private char[][] expand(char[][] space)
-    {
-        Set<Integer> expansionCols = getExpansionCols(space);
-        Set<Integer> expansionRows = getExpansionRows(space);
-        return expand(space, expansionCols, expansionRows);
-    }
-
-    private char[][] expand(char[][] space, Set<Integer> expansionCols, Set<Integer> expansionRows)
-    {
-        int height = space.length;
-        int width = space[0].length;
-        int expandedHeight = height + expansionRows.size();
-        int expandedWidth = width + expansionCols.size();
-        char[][] expanded = new char[expandedHeight][expandedWidth];
-
-        int iOffset = 0;
-        for (int i=0; i<height; i++) {
-            if (expansionRows.contains(i)) {
-                char[] expandedRow = expanded[i+iOffset];
-                char[] galaxyRow = space[i];
-                expandRow(expansionCols, width, expandedRow, galaxyRow);
-                iOffset++;
-                expanded[i+iOffset] = Arrays.copyOf(expanded[i+iOffset-1], expandedWidth);
-            } else {
-                char[] expandedRow = expanded[i+iOffset];
-                char[] galaxyRow = space[i];
-                expandRow(expansionCols, width, expandedRow, galaxyRow);
-            }
-        }
-        return expanded;
-    }
-
-    private void expandRow(Set<Integer> expansionCols, int width, char[] expandedRow, char[] spaceRow)
-    {
-        int jOffset = 0;
-        for (int j = 0; j< width; j++) {
-            if (expansionCols.contains(j)) {
-                expandedRow[j+jOffset] = spaceRow[j];
-                jOffset++;
-                expandedRow[j+jOffset] = spaceRow[j];
-            } else {
-                expandedRow[j+jOffset] = spaceRow[j];
-            }
-        }
     }
 
     private Set<Integer> getExpansionRows(char[][] space)
