@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HotSprings extends AocSolution<Long>
+public abstract class HotSprings extends AocSolution<Long>
 {
     public HotSprings(Iterable<String> resources)
     {
@@ -167,8 +167,12 @@ public class HotSprings extends AocSolution<Long>
             for (int j=0; j<brokenCountsStr.length; j++) {
                 brokenCounts[j] = Integer.parseInt(brokenCountsStr[j]);
             }
-            rowSchematics.add(Pair.of(rowSchematic[0].toCharArray(), brokenCounts));
+            Pair<char[], int[]> springsAndBrokenCounts = toSchematic(rowSchematic, brokenCounts);
+            rowSchematics.add(springsAndBrokenCounts);
         }
         return rowSchematics;
     }
+
+    protected abstract Pair<char[], int[]> toSchematic(String[] rowSchematic, int[] brokenCounts);
+
 }
