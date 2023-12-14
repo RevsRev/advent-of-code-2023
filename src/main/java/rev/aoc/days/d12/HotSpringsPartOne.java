@@ -10,9 +10,8 @@ public class HotSpringsPartOne extends HotSprings
     }
 
     @Override
-    protected Pair<char[], int[]> toSchematic(String[] rowSchematic, int[] brokenCounts)
+    protected Pair<char[], int[]> toSchematic(char[] rowSchematic, int[] brokenCounts)
     {
-        Pair<char[], int[]> springsAndBrokenCounts = Pair.of(rowSchematic[0].toCharArray(), brokenCounts);
-        return springsAndBrokenCounts;
+        return Pair.of(rowSchematic, brokenCounts);
     }
 }

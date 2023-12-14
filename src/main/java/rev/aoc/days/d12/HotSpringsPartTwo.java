@@ -10,9 +10,26 @@ public class HotSpringsPartTwo extends HotSprings
     }
 
     @Override
-    protected Pair<char[], int[]> toSchematic(String[] rowSchematic, int[] brokenCounts)
+    protected Pair<char[], int[]> toSchematic(char[] rowSchematic, int[] brokenCounts)
     {
-        Pair<char[], int[]> springsAndBrokenCounts = Pair.of(rowSchematic[0].toCharArray(), brokenCounts);
+        int copies = 5;
+        char[] unfoldedRowSchematic = new char[rowSchematic.length* copies + copies-1];
+        int[] unfoldedBrokenCounts = new int[brokenCounts.length* copies];
+
+        for (int i = 0; i< copies; i++) {
+            for (int j=0; j<rowSchematic.length; j++) {
+                unfoldedRowSchematic[i*rowSchematic.length + j + i] = rowSchematic[j];
+            }
+            if (i>0) {
+                unfoldedRowSchematic[i*rowSchematic.length + i-1] = '?';
+            }
+
+            for (int j=0; j<brokenCounts.length; j++) {
+                unfoldedBrokenCounts[i* brokenCounts.length+j] = brokenCounts[j];
+            }
+        }
+
+        Pair<char[], int[]> springsAndBrokenCounts = Pair.of(unfoldedRowSchematic, unfoldedBrokenCounts);
         return springsAndBrokenCounts;
     }
 }

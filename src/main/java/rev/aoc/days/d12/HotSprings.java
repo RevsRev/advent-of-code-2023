@@ -22,6 +22,7 @@ public abstract class HotSprings extends AocSolution<Long>
 
         long totalPossibleArrangements = 0;
         for (int i=0; i<rowSchematics.size(); i++) {
+            System.out.println(String.format("%s/%s", i, rowSchematics.size()));
             totalPossibleArrangements += getNumPossibleArrangements(rowSchematics.get(i));
         }
         return totalPossibleArrangements;
@@ -167,12 +168,12 @@ public abstract class HotSprings extends AocSolution<Long>
             for (int j=0; j<brokenCountsStr.length; j++) {
                 brokenCounts[j] = Integer.parseInt(brokenCountsStr[j]);
             }
-            Pair<char[], int[]> springsAndBrokenCounts = toSchematic(rowSchematic, brokenCounts);
+            Pair<char[], int[]> springsAndBrokenCounts = toSchematic(rowSchematic[0].toCharArray(), brokenCounts);
             rowSchematics.add(springsAndBrokenCounts);
         }
         return rowSchematics;
     }
 
-    protected abstract Pair<char[], int[]> toSchematic(String[] rowSchematic, int[] brokenCounts);
+    protected abstract Pair<char[], int[]> toSchematic(char[] rowSchematic, int[] brokenCounts);
 
 }
