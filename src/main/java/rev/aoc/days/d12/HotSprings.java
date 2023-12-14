@@ -89,8 +89,8 @@ public class HotSprings extends AocSolution<Long>
 
         int start = 0;
         if (springs.length > 0 && springs[0] == '#') {
-            start = brokenCounts[0];
-            if (start>=springs.length) {
+            start = start + brokenCounts[0];
+            if (start>springs.length) {
                 return null;
             }
             for (int j=0; j<start; j++) {
@@ -99,9 +99,9 @@ public class HotSprings extends AocSolution<Long>
                 }
             }
 
-            if (start<springs.length-1) {
+            if (start<springs.length) {
                 start++;
-                if (springs[start] == '#') {
+                if (springs[start-1] == '#') {
                     return null;
                 }
             }
@@ -118,10 +118,10 @@ public class HotSprings extends AocSolution<Long>
             return Pair.of(springs,brokenCounts);
         }
 
-        int end = springs.length;
+        int end = springs.length ;
         if (springs.length > 0 && springs[springs.length-1] == '#') {
             int brokenLength = brokenCounts[brokenCounts.length - 1];
-            end -= brokenLength;
+            end = end - brokenLength;
             if (end<0) {
                 return null;
             }
