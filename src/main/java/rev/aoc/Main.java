@@ -8,6 +8,8 @@ import rev.aoc.days.d10.PipeMazePartTwo;
 import rev.aoc.days.d11.CosmicExpansion;
 import rev.aoc.days.d12.HotSprings;
 import rev.aoc.days.d12.HotSpringsPartOne;
+import rev.aoc.days.d12.HotSpringsPartTwo;
+import rev.aoc.days.d12.naive.HotSpringsBruteForce;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -51,7 +53,9 @@ public class Main
         trySolve(new PipeMazePartTwo(List.of("10.1-pipe-maze")));
         trySolve(new CosmicExpansion(List.of("11.1-cosmic-expansion"), 2l));
         trySolve(new CosmicExpansion(List.of("11.1-cosmic-expansion"), 1000000l));
+        //trySolve(new HotSpringsBruteForce(List.of("12.1-hot-springs")));
         trySolve(new HotSpringsPartOne(List.of("12.1-hot-springs")));
+        trySolve(new HotSpringsPartTwo(List.of("12.1-hot-springs")));
     }
 
     private static void trySolve(AocSolution sol) {

@@ -33,7 +33,11 @@ public abstract class AocSolution<R>
         return resources.get(oneAndOnlyFile);
     }
 
-    public Map<String,List<String>> loadResources() throws IOException
+    public Map<String,List<String>> loadResources() throws IOException {
+        return loadResources(resources);
+    }
+
+    public static Map<String,List<String>> loadResources(Iterable<String> resources) throws IOException
     {
         Map<String,List<String>> retval = new HashMap<>();
         Iterator<String> it = resources.iterator();
@@ -46,13 +50,13 @@ public abstract class AocSolution<R>
         return retval;
     }
 
-    private List<String> readLines(String resourcePath) throws IOException
+    private static List<String> readLines(String resourcePath) throws IOException
     {
         List<String> lines = new ArrayList<>();
 
         InputStream is = null;
         try {
-            is = getClass().getResourceAsStream(resourcePath);
+            is = AocSolution.class.getResourceAsStream(resourcePath);
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader r = new BufferedReader(isr);
             String line = r.readLine();

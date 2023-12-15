@@ -22,143 +22,115 @@ public abstract class HotSprings extends AocSolution<Long>
 
         long totalPossibleArrangements = 0;
         for (int i=0; i<rowSchematics.size(); i++) {
-            System.out.println(String.format("%s/%s", i, rowSchematics.size()));
             totalPossibleArrangements += getNumPossibleArrangements(rowSchematics.get(i));
         }
         return totalPossibleArrangements;
     }
 
-    private long getNumPossibleArrangements(Pair<char[], int[]> rowSchematic)
-    {
-        rowSchematic = trim(rowSchematic);
+    public static long getNumPossibleArrangements(Pair<char[], int[]> rowSchematic) {
+        char[] chars = rowSchematic.getLeft();
+        int[] lengths = rowSchematic.getRight();
 
-        if (rowSchematic == null) {
+        long[][] dp_table = new long[chars.length][lengths.length];
+
+        for (int i=0; i<chars.length; i++) {
+            for (int j=0; j< lengths.length; j++) {
+                dp_table[i][j] = -1;
+            }
+        }
+
+        return getNumPossibleArrangements(chars,lengths,dp_table, chars.length-1, lengths.length-1);
+    }
+
+    private static long getNumPossibleArrangements(char[] chars, int[] lengths, long[][] dp_table, int charIndex ,int lengthIndex)
+    {
+        //we have exhausted the char array
+        if (charIndex < 0) {
+            if (lengthIndex < 0) {
+                return 1;
+            }
             return 0;
         }
 
-        //After trimming, the row schematic springs will start and end with ? (or be empty)
-        char[] springs = rowSchematic.getLeft();
-        int[] brokenLengths = rowSchematic.getRight();
-
-        if (springs.length == 0) {
-            return brokenLengths.length == 0 ? 1 : 0; //if we still have some broken lengths at this point then the solution is invalid
-        }
-
-        long numPossibleArrangements = 0;
-        if (springs.length == 1) {
-            springs[0] = '.';
-            numPossibleArrangements += getNumPossibleArrangements(Pair.of(springs,brokenLengths));
-            springs[0] = '#';
-            numPossibleArrangements += getNumPossibleArrangements(Pair.of(springs,brokenLengths));
-            return numPossibleArrangements;
-        }
-
-        char[] vals = new char[]{'.', '#'};
-        for (int i=0; i<vals.length; i++) {
-            for (int j=0; j<vals.length; j++) {
-                springs[0] = vals[i];
-                springs[springs.length-1] = vals[j];
-                numPossibleArrangements += getNumPossibleArrangements(Pair.of(springs,brokenLengths));
+        //we have exhausted our lengths
+        if (lengthIndex < 0) {
+            long value = 1;
+            for (int i=0; i<=charIndex; i++) {
+                if (chars[i] == '#') {
+                    value = 0;
+                    break;
+                }
             }
+            return value;
         }
-        return numPossibleArrangements;
+
+        if (dp_table[charIndex][lengthIndex] != -1) {
+            return dp_table[charIndex][lengthIndex];
+        }
+
+        if (charIndex == 0) {
+            long length = lengths[lengthIndex];
+            if (lengthIndex >0 || length > 1) {
+                dp_table[charIndex][lengthIndex] = 0;
+                return dp_table[charIndex][lengthIndex];
+            }
+            char c = chars[charIndex];
+            if (c == '#' || c == '?') {
+                dp_table[charIndex][lengthIndex] = 1;
+            } else {
+                dp_table[charIndex][lengthIndex] = 0;
+            }
+            return dp_table[charIndex][lengthIndex];
+        }
+
+        char c = chars[charIndex];
+
+        if (c == '.') {
+            long value = dealWithPeriod(chars, lengths, dp_table, charIndex, lengthIndex);
+            dp_table[charIndex][lengthIndex] = value;
+            return value;
+        }
+
+        if (c == '#') {
+            long value = dealWithHashTag(chars, lengths, dp_table, charIndex, lengthIndex);
+            dp_table[charIndex][lengthIndex] = value;
+            return value;
+        }
+
+        long periodValue = dealWithPeriod(chars,lengths,dp_table,charIndex,lengthIndex);
+        long hashValue = dealWithHashTag(chars,lengths,dp_table,charIndex,lengthIndex);
+        long sum = periodValue + hashValue;
+        dp_table[charIndex][lengthIndex] = sum;
+        return sum;
     }
 
-    public Pair<char[],int[]> trim(Pair<char[], int[]> rowSchematic)
+    private static long dealWithPeriod(char[] chars, int[] lengths, long[][] dp_table, int charIndex, int lengthIndex)
     {
-        int springsSize;
-        do {
-            springsSize = rowSchematic.getLeft().length;
-            char[] springs = trimOperationalSprings(rowSchematic.getLeft());
-            int[] brokenCounts = rowSchematic.getRight();
-
-            rowSchematic = trimBrokenSprings(springs, brokenCounts);
-        } while (rowSchematic != null && springsSize > rowSchematic.getLeft().length);
-        return rowSchematic;
+        return getNumPossibleArrangements(chars, lengths, dp_table, charIndex - 1, lengthIndex);
     }
 
-    private Pair<char[],int[]> trimBrokenSprings(char[] springs, int[] brokenCounts)
+    private static Long dealWithHashTag(char[] chars, int[] lengths, long[][] dp_table, int charIndex, int lengthIndex)
     {
-        if (brokenCounts.length == 0) {
-            for (int i=0; i<springs.length; i++) {
-                if (springs[i] == '#') {
-                    return null;
-                }
+        int start = charIndex - lengths[lengthIndex] + 1; //TODO prefix chars with a full stop?
+        if (start<0) {
+            return 0l;
+        }
+        for (int i = start; i<= charIndex; i++) {
+            if (chars[i] == '.') {
+                return 0l;
             }
-            return Pair.of(springs,brokenCounts);
+        }
+        if (start>0) {
+            start--;
+            if (chars[start] == '#') {
+                return 0l;
+            }
         }
 
-        int start = 0;
-        if (springs.length > 0 && springs[0] == '#') {
-            start = start + brokenCounts[0];
-            if (start>springs.length) {
-                return null;
-            }
-            for (int j=0; j<start; j++) {
-                if (springs[j] == '.') {
-                    return null; //This is an invalid solution
-                }
-            }
-
-            if (start<springs.length) {
-                start++;
-                if (springs[start-1] == '#') {
-                    return null;
-                }
-            }
-            brokenCounts = Arrays.copyOfRange(brokenCounts,1,brokenCounts.length);
-        }
-        springs = Arrays.copyOfRange(springs,start,springs.length);
-
-        if (brokenCounts.length == 0) {
-            for (int i=0; i<springs.length; i++) {
-                if (springs[i] == '#') {
-                    return null;
-                }
-            }
-            return Pair.of(springs,brokenCounts);
-        }
-
-        int end = springs.length ;
-        if (springs.length > 0 && springs[springs.length-1] == '#') {
-            int brokenLength = brokenCounts[brokenCounts.length - 1];
-            end = end - brokenLength;
-            if (end<0) {
-                return null;
-            }
-            for (int j=springs.length-1; j>=end; j--) {
-                if (springs[j] == '.') {
-                    return null; //This is an invalid solution
-                }
-            }
-            if (end>0) {
-                end--;
-                if (springs[end] == '#') {
-                    return null;
-                }
-            }
-            brokenCounts = Arrays.copyOfRange(brokenCounts, 0, brokenCounts.length-1);
-        }
-        springs = Arrays.copyOfRange(springs,0,end);
-        return Pair.of(springs, brokenCounts);
+        return getNumPossibleArrangements(chars, lengths, dp_table, start-1, lengthIndex -1);
     }
 
-    private char[] trimOperationalSprings(char[] springs)
-    {
-        int start = 0;
-        while (start<springs.length && springs[start] == '.') {
-            start++;
-        }
-        springs = Arrays.copyOfRange(springs, start, springs.length);
-
-        int end = springs.length;
-        while (end>0 && springs[end-1] == '.') {
-            end--;
-        }
-        return Arrays.copyOfRange(springs, 0, end);
-    }
-
-    private List<Pair<char[], int[]>> parse(List<String> lines)
+    public List<Pair<char[], int[]>> parse(List<String> lines)
     {
         List<Pair<char[],int[]>> rowSchematics = new ArrayList<>();
         for (int i=0; i<lines.size(); i++) {
