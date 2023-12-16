@@ -9,10 +9,9 @@ import rev.aoc.days.d12.HotSpringsPartOne;
 import rev.aoc.days.d12.HotSpringsPartTwo;
 import rev.aoc.days.d13.PointOfIncidencePartOne;
 import rev.aoc.days.d13.PointOfIncidencePartTwo;
-import rev.aoc.days.d14.ReflectorDish;
 import rev.aoc.days.d14.ReflectorDishPartOne;
 import rev.aoc.days.d14.ReflectorDishPartTwo;
-import rev.aoc.days.d15.LensLibrary;
+import rev.aoc.days.d15.LensLibraryPartOne;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -62,7 +61,7 @@ public class Main
         trySolve(new PointOfIncidencePartTwo(List.of("13.1-point-of-incidence")));
         trySolve(new ReflectorDishPartOne(List.of("14.1-reflector-dish")));
         trySolve(new ReflectorDishPartTwo(List.of("14.1-reflector-dish")));
-        trySolve(new LensLibrary(List.of("15.1-lens-library")));
+        trySolve(new LensLibraryPartOne(List.of("15.1-lens-library")));
     }
 
     private static void trySolve(AocSolution sol) {

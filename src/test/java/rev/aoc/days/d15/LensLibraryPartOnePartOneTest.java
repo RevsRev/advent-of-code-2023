@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class LensLibraryPartOneTest extends AocTest<Long>
+public class LensLibraryPartOnePartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class LensLibraryPartOneTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new LensLibrary(List.of("15.1-lens-library-test"));
+        return new LensLibraryPartOne(List.of("15.1-lens-library-test"));
     }
 }

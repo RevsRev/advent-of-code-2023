@@ -4,9 +4,9 @@ import rev.aoc.AocSolution;
 
 import java.util.List;
 
-public class LensLibrary extends AocSolution<Long>
+public class LensLibraryPartOne extends AocSolution<Long>
 {
-    public LensLibrary(Iterable<String> resources)
+    public LensLibraryPartOne(Iterable<String> resources)
     {
         super(resources);
     }
@@ -20,12 +20,15 @@ public class LensLibrary extends AocSolution<Long>
         long hashTotal = 0;
         int len = inputs.length;
         for (int i=0; i<len; i++) {
-            hashTotal+=calHash(inputs[i]);
+            hashTotal+=calcHash(inputs[i]);
         }
         return hashTotal;
     }
 
-    private long calHash(char[] input)
+    public static long calcHash(String input) {
+        return calcHash(input.toCharArray());
+    }
+    public static long calcHash(char[] input)
     {
         long val = 0;
         int hashMultiplier = 17;
