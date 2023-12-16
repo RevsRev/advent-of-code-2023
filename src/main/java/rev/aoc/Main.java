@@ -8,6 +8,7 @@ import rev.aoc.days.d11.CosmicExpansion;
 import rev.aoc.days.d12.HotSpringsPartOne;
 import rev.aoc.days.d12.HotSpringsPartTwo;
 import rev.aoc.days.d13.PointOfIncidencePartOne;
+import rev.aoc.days.d13.PointOfIncidencePartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -54,6 +55,7 @@ public class Main
         trySolve(new HotSpringsPartOne(List.of("12.1-hot-springs")));
         trySolve(new HotSpringsPartTwo(List.of("12.1-hot-springs")));
         trySolve(new PointOfIncidencePartOne(List.of("13.1-point-of-incidence")));
+        trySolve(new PointOfIncidencePartTwo(List.of("13.1-point-of-incidence")));
     }
 
     private static void trySolve(AocSolution sol) {
