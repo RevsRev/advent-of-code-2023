@@ -16,6 +16,6 @@ public class ReflectorDishTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new ReflectorDish(List.of("14.1-reflector-dish"));
+        return new ReflectorDish(List.of("14.1-reflector-dish-test"));
     }
 }
