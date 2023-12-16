@@ -5,17 +5,17 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class ReflectorDishTest extends AocTest<Long>
+public class ReflectorDishPartTwoTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return 136l;
+        return 64l;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new ReflectorDish(List.of("14.1-reflector-dish-test"));
+        return new ReflectorDishPartTwo(List.of("14.1-reflector-dish-test"));
     }
 }
