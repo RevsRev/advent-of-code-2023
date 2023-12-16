@@ -8,9 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PointOfIncidence extends AocSolution<Long>
+public class PointOfIncidencePartOne extends AocSolution<Long>
 {
-    public PointOfIncidence(Iterable<String> resources)
+    public PointOfIncidencePartOne(Iterable<String> resources)
     {
         super(resources);
     }
@@ -41,7 +41,7 @@ public class PointOfIncidence extends AocSolution<Long>
         return 100 * (rowOfReflection+1);
     }
 
-    private int getReflectionIndex(char[][] m)
+    protected int getReflectionIndex(char[][] m)
     {
         int height = m.length;
         int width = m[0].length;
@@ -63,7 +63,7 @@ public class PointOfIncidence extends AocSolution<Long>
         return reflectionIndices.iterator().next();
     }
 
-    private Set<Integer> getReflectionIndices(char[] arr)
+    protected Set<Integer> getReflectionIndices(char[] arr)
     {
         int[][] palindromeTable = getPalindromeTable(arr);
         Set<Integer> result = new HashSet<>();
@@ -139,9 +139,13 @@ public class PointOfIncidence extends AocSolution<Long>
             } else {
                 int width = line.length();
                 int height=0;
-                while (!line.equals("")) {
+                while (!line.equals("") && lineIndex+height<lines.size()) {
                     height++;
-                    line=lines.get(height);
+                    if (lineIndex+height >= lines.size()) {
+                        break;
+                    } else {
+                        line=lines.get(lineIndex+height);
+                    }
                 }
                 char[][] mirror = new char[height][width];
                 char[][] mirrorTranspose = new char[width][height];

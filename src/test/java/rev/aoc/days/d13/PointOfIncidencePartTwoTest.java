@@ -5,17 +5,17 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class PointOfIncidenceTest extends AocTest<Long>
+public class PointOfIncidencePartTwoTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
     {
-        return 405l;
+        return 400l;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new PointOfIncidence(List.of("13.1-point-of-incidence-test"));
+        return new PointOfIncidencePartTwo(List.of("13.1-point-of-incidence-test"));
     }
 }

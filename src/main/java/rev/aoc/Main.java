@@ -2,14 +2,12 @@ package rev.aoc;
 
 import rev.aoc.days.d1.TrebuchetPartOne;
 import rev.aoc.days.d1.TrebuchetPartTwo;
-import rev.aoc.days.d10.PipeMaze;
 import rev.aoc.days.d10.PipeMazePartOne;
 import rev.aoc.days.d10.PipeMazePartTwo;
 import rev.aoc.days.d11.CosmicExpansion;
-import rev.aoc.days.d12.HotSprings;
 import rev.aoc.days.d12.HotSpringsPartOne;
 import rev.aoc.days.d12.HotSpringsPartTwo;
-import rev.aoc.days.d12.naive.HotSpringsBruteForce;
+import rev.aoc.days.d13.PointOfIncidencePartOne;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -22,7 +20,6 @@ import rev.aoc.days.d6.BoatRacePartTwo;
 import rev.aoc.days.d7.CamelCards;
 import rev.aoc.days.d8.HauntedWastelandPartOne;
 import rev.aoc.days.d8.HauntedWastelandPartTwo;
-import rev.aoc.days.d9.MirageMaintenance;
 import rev.aoc.days.d9.MirageMaintenancePartOne;
 import rev.aoc.days.d9.MirageMaintenancePartTwo;
 
@@ -56,6 +53,7 @@ public class Main
         //trySolve(new HotSpringsBruteForce(List.of("12.1-hot-springs")));
         trySolve(new HotSpringsPartOne(List.of("12.1-hot-springs")));
         trySolve(new HotSpringsPartTwo(List.of("12.1-hot-springs")));
+        trySolve(new PointOfIncidencePartOne(List.of("13.1-point-of-incidence")));
     }
 
     private static void trySolve(AocSolution sol) {
