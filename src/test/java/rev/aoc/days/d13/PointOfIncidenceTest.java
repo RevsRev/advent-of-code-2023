@@ -2,7 +2,6 @@ package rev.aoc.days.d13;
 
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
-import rev.aoc.days.d11.d13.PointOfIncidence;
 
 import java.util.List;
 

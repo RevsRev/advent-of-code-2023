@@ -1,4 +1,4 @@
-package rev.aoc.days.d11.d13;
+package rev.aoc.days.d13;
 
 import rev.aoc.AocSolution;
 
