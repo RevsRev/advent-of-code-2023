@@ -15,6 +15,7 @@ import rev.aoc.days.d15.LensLibraryPartOne;
 import rev.aoc.days.d15.LensLibraryPartTwo;
 import rev.aoc.days.d16.FloorLava;
 import rev.aoc.days.d16.FloorLavaPartOne;
+import rev.aoc.days.d16.FloorLavaPartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -67,6 +68,7 @@ public class Main
         trySolve(new LensLibraryPartOne(List.of("15.1-lens-library")));
         trySolve(new LensLibraryPartTwo(List.of("15.1-lens-library")));
         trySolve(new FloorLavaPartOne(List.of("16.1-floor-lava")));
+        trySolve(new FloorLavaPartTwo(List.of("16.1-floor-lava")));
     }
 
     private static void trySolve(AocSolution sol) {
