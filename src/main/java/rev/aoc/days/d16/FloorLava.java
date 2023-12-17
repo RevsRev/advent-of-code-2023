@@ -6,7 +6,7 @@ import rev.aoc.math.vec.Vec2;
 
 import java.util.*;
 
-public class FloorLava extends AocSolution<Long>
+public abstract class FloorLava extends AocSolution<Long>
 {
     public static final Vec2 UP = new Vec2(0,-1); //top of array is y=0, increasing coordinates as we go down.
     public static final Vec2 DOWN = new Vec2(0,1);
@@ -24,10 +24,14 @@ public class FloorLava extends AocSolution<Long>
         List<String> lines = getOneAndOnlyResourceLines();
         char[][] mirrorContraption = parse(lines);
 
-        int height = mirrorContraption.length;
-        int width = mirrorContraption[0].length;
+        return solveProblem(mirrorContraption);
+    }
 
-        Set<Pair<Vec2,Vec2>> branches = new HashSet<>(List.of(Pair.of(new Vec2(0,0), RIGHT)));
+    protected abstract long solveProblem(char[][] mirrorContraption);
+
+    protected long getEnergy(char[][] mirrorContraption, int height, int width, Vec2 start, Vec2 startDir)
+    {
+        Set<Pair<Vec2,Vec2>> branches = new HashSet<>(List.of(Pair.of(start, startDir)));
         Set<Pair<Vec2,Vec2>> considered = new HashSet<>();
 
         while (!branches.isEmpty()) {
@@ -47,7 +51,7 @@ public class FloorLava extends AocSolution<Long>
                 while (itNext.hasNext()) {
                     Vec2 nextDir = itNext.next();
                     Vec2 nCoord = coord.add(nextDir);
-                    if (!(nCoord.x<0 || nCoord.x>=width || nCoord.y<0 || nCoord.y>=height)) {
+                    if (!(nCoord.x<0 || nCoord.x>= width || nCoord.y<0 || nCoord.y>= height)) {
                         nextBranches.add(Pair.of(nCoord,nextDir));
                     }
                 }
@@ -55,9 +59,7 @@ public class FloorLava extends AocSolution<Long>
             branches = nextBranches;
         }
 
-        //print(mirrorContraption, considered);
-
-        return (long)getEnergisedCoordinates(considered).size();
+        return (long) getEnergisedCoordinates(considered).size();
     }
 
     private void print(char[][] mirrorContraption, Set<Pair<Vec2, Vec2>> considered)

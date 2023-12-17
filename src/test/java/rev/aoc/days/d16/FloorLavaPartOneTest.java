@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class FloorLavaTest extends AocTest<Long>
+public class FloorLavaPartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class FloorLavaTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new FloorLava(List.of("16.1-floor-lava-test"));
+        return new FloorLavaPartOne(List.of("16.1-floor-lava-test"));
     }
 }
