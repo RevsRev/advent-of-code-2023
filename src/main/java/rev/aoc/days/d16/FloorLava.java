@@ -3,12 +3,8 @@ package rev.aoc.days.d16;
 import org.apache.commons.lang3.tuple.Pair;
 import rev.aoc.AocSolution;
 import rev.aoc.math.vec.Vec2;
-import rev.aoc.util.TreeNode;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FloorLava extends AocSolution<Long>
 {
@@ -31,73 +27,68 @@ public class FloorLava extends AocSolution<Long>
         int height = mirrorContraption.length;
         int width = mirrorContraption[0].length;
 
-        Set<TreeNode<Pair<Vec2,Vec2>>> branches = getInitialBranches(mirrorContraption);
-        Set<TreeNode<Pair<Vec2,Vec2>>> leaves = new HashSet<>();
+        Set<Pair<Vec2,Vec2>> branches = new HashSet<>(List.of(Pair.of(new Vec2(0,0), RIGHT)));
+        Set<Pair<Vec2,Vec2>> considered = new HashSet<>();
 
         while (!branches.isEmpty()) {
-            Set<TreeNode<Pair<Vec2,Vec2>>> nextBranches = new HashSet<>();
-            Iterator<TreeNode<Pair<Vec2,Vec2>>> it = branches.iterator();
+            Set<Pair<Vec2,Vec2>> nextBranches = new HashSet<>();
+            Iterator<Pair<Vec2,Vec2>> it = branches.iterator();
             while (it.hasNext()) {
-                TreeNode<Pair<Vec2,Vec2>> node = it.next();
-                Vec2 coord = node.getData().getLeft();
-                Vec2 direction = node.getData().getRight();
+                Pair<Vec2,Vec2> head = it.next();
+                if (considered.contains(head)) {
+                    continue;
+                }
+                considered.add(head);
+
+                Vec2 coord = head.getLeft();
+                Vec2 direction = head.getRight();
                 Set<Vec2> nextDirections = getOutputForInput(mirrorContraption[(int)coord.y][(int)coord.x], direction);
                 Iterator<Vec2> itNext = nextDirections.iterator();
-                boolean continuedBranch = false;
                 while (itNext.hasNext()) {
                     Vec2 nextDir = itNext.next();
                     Vec2 nCoord = coord.add(nextDir);
-                    if (!(nCoord.x<0 || nCoord.x>=width || nCoord.y<0 || nCoord.y>=height) && !node.branchContains(Pair.of(nCoord,nextDir))) {
-                        nextBranches.add(node.addChild(Pair.of(nCoord,nextDir)));
-                        continuedBranch = true;
+                    if (!(nCoord.x<0 || nCoord.x>=width || nCoord.y<0 || nCoord.y>=height)) {
+                        nextBranches.add(Pair.of(nCoord,nextDir));
                     }
-                }
-                if (!continuedBranch) {
-                    leaves.add(node);
                 }
             }
             branches = nextBranches;
         }
 
-        return (long)calculateEnergy(leaves);
+        //print(mirrorContraption, considered);
+
+        return (long)getEnergisedCoordinates(considered).size();
     }
 
-    private int calculateEnergy(Set<TreeNode<Pair<Vec2, Vec2>>> leaves)
+    private void print(char[][] mirrorContraption, Set<Pair<Vec2, Vec2>> considered)
     {
-        Set<Vec2> energisedNodes = new HashSet<>();
-        Iterator<TreeNode<Pair<Vec2,Vec2>>> it = leaves.iterator();
-        while (it.hasNext()) {
-            TreeNode<Pair<Vec2,Vec2>> leaf = it.next();
-            Set<Vec2> nodesOnBranch = getCoordsOnBranch(leaf);
-            energisedNodes.addAll(nodesOnBranch);
-
+        Vec2[] dirs = new Vec2[]{UP,DOWN,LEFT,RIGHT};
+        int height = mirrorContraption.length;
+        int width = mirrorContraption[0].length;
+        for (int i=0; i<height; i++) {
+            char[] row = new char[width];
+            for (int j=0; j<width; j++) {
+                long count = 0;
+                for (int k=0; k<dirs.length; k++) {
+                    if (considered.contains(Pair.of(new Vec2(j,i), dirs[k]))) {
+                        count++;
+                    }
+                }
+                row[j] = count > 0 ? '#' : '.';
+            }
+            System.out.println(Arrays.toString(row).replace("]","").replace("[", "").replace(",","").replace(" ", ""));
         }
-        return energisedNodes.size();
     }
 
-    private Set<Vec2> getCoordsOnBranch(TreeNode<Pair<Vec2, Vec2>> leaf)
+    private Set<Vec2> getEnergisedCoordinates(Set<Pair<Vec2, Vec2>> considered)
     {
         Set<Vec2> nodeCoords = new HashSet<>();
 
-        Set<Pair<Vec2,Vec2>> nodeData = leaf.getAllDataOnBranch();
-        Iterator<Pair<Vec2,Vec2>> it = nodeData.iterator();
+        Iterator<Pair<Vec2,Vec2>> it = considered.iterator();
         while (it.hasNext()) {
             nodeCoords.add(it.next().getLeft());
         }
         return nodeCoords;
-    }
-
-    private Set<TreeNode<Pair<Vec2,Vec2>>> getInitialBranches(char[][] mirrorContraption)
-    {
-        char startChar = mirrorContraption[0][0];
-        Set<Vec2> initialDirections = getOutputForInput(startChar, RIGHT);
-
-        Set<TreeNode<Pair<Vec2,Vec2>>> branches = new HashSet<>();
-        Iterator<Vec2> it = initialDirections.iterator();
-        while (it.hasNext()) {
-            branches.add(new TreeNode<>(null, Pair.of(new Vec2(0,0), it.next())));
-        }
-        return branches;
     }
 
     private Set<Vec2> getOutputForInput(char c, Vec2 input)
