@@ -1,9 +1,5 @@
 package rev.aoc.days.d17;
 
-import org.jgrapht.graph.DefaultWeightedEdge;
-import org.jgrapht.graph.SimpleDirectedWeightedGraph;
-import rev.aoc.math.vec.Vec4;
-
 public class ClumsyCruciblePartOne extends ClumsyCrucible
 {
     public ClumsyCruciblePartOne(Iterable<String> resources)

@@ -15,13 +15,15 @@ public class PointOfIncidencePartTwo extends PointOfIncidencePartOne
         int height = m.length;
         int width = m[0].length;
 
-        Map<Integer,Set<Integer>> reflectionIndices = new HashMap<>();
+        Map<Integer, Set<Integer>> reflectionIndices = new HashMap<>();
 
-        for (int i=0; i<height; i++) {
+        for (int i = 0; i < height; i++)
+        {
             char[] row = m[i];
             Set<Integer> newReflectionIndices = getReflectionIndices(m[i]);
             Iterator<Integer> it = newReflectionIndices.iterator();
-            while (it.hasNext()) {
+            while (it.hasNext())
+            {
                 int index = it.next();
                 reflectionIndices.computeIfAbsent(index, k -> new HashSet<>()).add(i);
             }
@@ -30,17 +32,21 @@ public class PointOfIncidencePartTwo extends PointOfIncidencePartOne
         Set<Integer> smudgeCandidates = getSmudgeCandidates(height, reflectionIndices);
 
         Iterator<Integer> itSmudgeCandidates = smudgeCandidates.iterator();
-        while (itSmudgeCandidates.hasNext()) {
+        while (itSmudgeCandidates.hasNext())
+        {
             int reflectIndex = itSmudgeCandidates.next();
             Set<Integer> rowsWithReflection = reflectionIndices.get(reflectIndex);
             int smudgeRow = 0;
-            while (smudgeRow < height) {
-                if (!rowsWithReflection.contains(smudgeRow)) {
+            while (smudgeRow < height)
+            {
+                if (!rowsWithReflection.contains(smudgeRow))
+                {
                     break;
                 }
                 smudgeRow++;
             }
-            if (canSmudge(reflectIndex, m[smudgeRow])) {
+            if (canSmudge(reflectIndex, m[smudgeRow]))
+            {
                 return reflectIndex;
             }
         }
@@ -51,9 +57,11 @@ public class PointOfIncidencePartTwo extends PointOfIncidencePartOne
     {
         int asymCount = 0;
         int start = reflectIndex;
-        int end = reflectIndex+1;
-        while (start>=0 && end<m.length) {
-            if (m[start] != m[end]) {
+        int end = reflectIndex + 1;
+        while (start >= 0 && end < m.length)
+        {
+            if (m[start] != m[end])
+            {
                 asymCount++;
             }
             start--;
@@ -66,9 +74,11 @@ public class PointOfIncidencePartTwo extends PointOfIncidencePartOne
     {
         Set<Integer> smudgeCandidates = new HashSet<>();
         Iterator<Integer> itRefIndex = reflectionIndices.keySet().iterator();
-        while (itRefIndex.hasNext()) {
+        while (itRefIndex.hasNext())
+        {
             int refIndex = itRefIndex.next();
-            if (reflectionIndices.get(refIndex).size() == height -1) {
+            if (reflectionIndices.get(refIndex).size() == height - 1)
+            {
                 smudgeCandidates.add(refIndex);
             }
         }

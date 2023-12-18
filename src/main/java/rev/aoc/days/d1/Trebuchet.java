@@ -16,14 +16,15 @@ public abstract class Trebuchet extends AocSolution<Long>
     @Override
     protected Long solveImpl() throws Exception
     {
-        Map<String,List<String>> resources = loadResources();
+        Map<String, List<String>> resources = loadResources();
 
         Iterator<String> iterator = resources.keySet().iterator();
         String trebFile = iterator.next();
         List<String> trebLines = resources.get(trebFile);
 
         long calibrationSum = 0;
-        for (int i=0; i<trebLines.size(); i++) {
+        for (int i = 0; i < trebLines.size(); i++)
+        {
             String line = trebLines.get(i);
             calibrationSum += getCalibrationNumber(line);
 
@@ -35,17 +36,21 @@ public abstract class Trebuchet extends AocSolution<Long>
     {
         line = format(line);
         StringBuilder sbConfigurationNumber = new StringBuilder();
-        for (int i=0; i<line.length(); i++) {
+        for (int i = 0; i < line.length(); i++)
+        {
             char ch = line.charAt(i);
-            if (Character.isDigit(ch)) {
+            if (Character.isDigit(ch))
+            {
                 sbConfigurationNumber.append(ch);
                 break;
             }
         }
 
-        for (int i=line.length()-1; i>=0; i--) {
+        for (int i = line.length() - 1; i >= 0; i--)
+        {
             char ch = line.charAt(i);
-            if (Character.isDigit(ch)) {
+            if (Character.isDigit(ch))
+            {
                 sbConfigurationNumber.append(ch);
                 break;
             }

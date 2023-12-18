@@ -15,7 +15,8 @@ public class BoatRacePartOne extends BoatRace
         long[] lTimes = new long[times.length];
         long[] lDistances = new long[distances.length];
 
-        for (int i=0; i<lTimes.length; i++) {
+        for (int i = 0; i < lTimes.length; i++)
+        {
             lTimes[i] = Long.parseLong(times[i]);
             lDistances[i] = Long.parseLong(distances[i]);
         }

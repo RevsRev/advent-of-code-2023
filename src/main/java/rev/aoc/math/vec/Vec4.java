@@ -9,7 +9,8 @@ public class Vec4
     public long y;
     public long z;
 
-    public Vec4(long w, long x, long y, long z) {
+    public Vec4(long w, long x, long y, long z)
+    {
         this.w = w;
         this.x = x;
         this.y = y;

@@ -26,8 +26,9 @@ public class CamelCards extends AocSolution<Long>
         Collections.sort(games, CamelGame.comparator());
 
         long totalWinnings = 0;
-        for (int i=0; i<games.size(); i++) {
-            totalWinnings += games.get(i).getScore(i+1);
+        for (int i = 0; i < games.size(); i++)
+        {
+            totalWinnings += games.get(i).getScore(i + 1);
         }
         return totalWinnings;
     }
@@ -37,7 +38,8 @@ public class CamelCards extends AocSolution<Long>
         List<CamelGame> games = new ArrayList<>();
 
         Iterator<String> it = lines.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             String[] line = it.next().trim().split("\\s+");
             CamelHand hand = CamelHand.fromStrHand(line[0], jokersAsWildCards);
             long bet = Long.parseLong(line[1]);

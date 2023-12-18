@@ -18,22 +18,28 @@ public class CubeConundrumPartOne extends CubeConundrum
     protected long getIncrementingAmount(Map<Integer, List<Handful>> gameHandfulMap, int gameNumber)
     {
         List<Handful> handfuls = gameHandfulMap.get(gameNumber);
-        if (checkHandfuls(handfuls)) {
+        if (checkHandfuls(handfuls))
+        {
             return gameNumber;
         }
         return 0;
     }
 
-    private boolean checkHandfuls(List<Handful> handfuls) {
-        for (int i=0; i<handfuls.size(); i++) {
+    private boolean checkHandfuls(List<Handful> handfuls)
+    {
+        for (int i = 0; i < handfuls.size(); i++)
+        {
             Handful handful = handfuls.get(i);
-            if (handful.red > NUM_REDS) {
+            if (handful.red > NUM_REDS)
+            {
                 return false;
             }
-            if (handful.blue > NUM_BLUES) {
+            if (handful.blue > NUM_BLUES)
+            {
                 return false;
             }
-            if (handful.green > NUM_GREENS) {
+            if (handful.green > NUM_GREENS)
+            {
                 return false;
             }
         }

@@ -29,13 +29,15 @@ public abstract class HauntedWasteland extends AocSolution<Long>
     }
 
     protected abstract Function<String, Boolean> getStartPredicate();
+
     protected abstract Function<String, Boolean> getEndPredicate();
 
     public static Pair<char[], Graph> parse(List<String> lines)
     {
         Graph graph = new Graph(new HashMap<>());
         char[] steps = lines.get(0).toCharArray();
-        for (int i=2; i<lines.size(); i++) {
+        for (int i = 2; i < lines.size(); i++)
+        {
             String line = lines.get(i);
             String[] nameAndConnections = line.split("=");
             String name = nameAndConnections[0].trim();
@@ -44,27 +46,35 @@ public abstract class HauntedWasteland extends AocSolution<Long>
             String rightName = leftAndRight[1].trim();
             graph.addNode(name, leftName, rightName);
         }
-        return Pair.of(steps,graph);
+        return Pair.of(steps, graph);
     }
 
-    public static <T> T[] atomize(T[] list) {
+    public static <T> T[] atomize(T[] list)
+    {
         int size = list.length;
-        for (int i=2; i<size; i++) {
-            if (size % i == 0) {
+        for (int i = 2; i < size; i++)
+        {
+            if (size % i == 0)
+            {
                 boolean repeatedList = true;
-                for (int j=0; j<i; j++) {
+                for (int j = 0; j < i; j++)
+                {
                     T firstThing = list[j];
-                    for (int k=1; k<size/i; k++) {
-                        if (list[k*i + j] != firstThing) {
-                            repeatedList=false;
+                    for (int k = 1; k < size / i; k++)
+                    {
+                        if (list[k * i + j] != firstThing)
+                        {
+                            repeatedList = false;
                             break;
                         }
                     }
-                    if (!repeatedList) {
+                    if (!repeatedList)
+                    {
                         break;
                     }
                 }
-                if (repeatedList) {
+                if (repeatedList)
+                {
                     return atomize(Arrays.copyOfRange(list, 0, i));
                 }
             }

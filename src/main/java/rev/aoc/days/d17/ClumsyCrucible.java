@@ -5,14 +5,13 @@ import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import rev.aoc.AocSolution;
-import rev.aoc.math.vec.Vec2;
 import rev.aoc.math.vec.Vec4;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class ClumsyCrucible extends AocSolution<Long>
 {
-    private static final Vec4 end = new Vec4(-1,-1,-1,-1);
+    private static final Vec4 end = new Vec4(-1, -1, -1, -1);
 
     public ClumsyCrucible(Iterable<String> resources)
     {
@@ -33,6 +32,7 @@ public abstract class ClumsyCrucible extends AocSolution<Long>
     }
 
     protected abstract int getMaximumRunLength();
+
     protected abstract int getMinimumRunLength();
 
     protected SimpleDirectedWeightedGraph<Vec4, DefaultWeightedEdge> toGraph(int[][] cityBlock)
@@ -45,58 +45,76 @@ public abstract class ClumsyCrucible extends AocSolution<Long>
         int max = getMaximumRunLength();
         int min = getMinimumRunLength();
 
-        for (int i = 0; i< height; i++) {
-            for (int j = 0; j< width; j++) {
-                for (int k=-max; k<=max; k++) {
-                    graph.addVertex(new Vec4(i,j,k,0));
-                    graph.addVertex(new Vec4(i,j,0,k));
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                for (int k = -max; k <= max; k++)
+                {
+                    graph.addVertex(new Vec4(i, j, k, 0));
+                    graph.addVertex(new Vec4(i, j, 0, k));
                 }
             }
         }
 
-        for (int i = 0; i< height; i++) {
-            for (int j = 0; j< width; j++) {
-                for (int k=-max; k<=max; k++) {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                for (int k = -max; k <= max; k++)
+                {
 
-                    if (i+1< height) {
-                        if (0<=k && k<=max-1) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,k,0), new Vec4(i+1,j,k+1,0));
-                            graph.setEdgeWeight(edge, cityBlock[i+1][j]);
+                    if (i + 1 < height)
+                    {
+                        if (0 <= k && k <= max - 1)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, k, 0), new Vec4(i + 1, j, k + 1, 0));
+                            graph.setEdgeWeight(edge, cityBlock[i + 1][j]);
                         }
-                        if (Math.abs(k) >= min) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,0,k), new Vec4(i+1,j,1,0));
-                            graph.setEdgeWeight(edge, cityBlock[i+1][j]);
+                        if (Math.abs(k) >= min)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, 0, k), new Vec4(i + 1, j, 1, 0));
+                            graph.setEdgeWeight(edge, cityBlock[i + 1][j]);
                         }
 
                     }
-                    if (j+1< width) {
-                        if (0<=k && k<=max-1) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,0,k), new Vec4(i,j+1,0,k+1));
-                            graph.setEdgeWeight(edge, cityBlock[i][j+1]);
+                    if (j + 1 < width)
+                    {
+                        if (0 <= k && k <= max - 1)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, 0, k), new Vec4(i, j + 1, 0, k + 1));
+                            graph.setEdgeWeight(edge, cityBlock[i][j + 1]);
                         }
-                        if (Math.abs(k) >= min) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,k,0), new Vec4(i,j+1,0,1));
-                            graph.setEdgeWeight(edge, cityBlock[i][j+1]);
-                        }
-                    }
-                    if (i-1>=0) {
-                        if (k<=0 && k>=-max+1) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,k,0), new Vec4(i-1,j,k-1,0));
-                            graph.setEdgeWeight(edge, cityBlock[i-1][j]);
-                        }
-                        if (Math.abs(k) >= min) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,0,k), new Vec4(i-1,j,-1,0));
-                            graph.setEdgeWeight(edge, cityBlock[i-1][j]);
+                        if (Math.abs(k) >= min)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, k, 0), new Vec4(i, j + 1, 0, 1));
+                            graph.setEdgeWeight(edge, cityBlock[i][j + 1]);
                         }
                     }
-                    if (j-1>=0) {
-                        if (k<=0 && k>=-max+1) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,0,k), new Vec4(i,j-1,0,k-1));
-                            graph.setEdgeWeight(edge, cityBlock[i][j-1]);
+                    if (i - 1 >= 0)
+                    {
+                        if (k <= 0 && k >= -max + 1)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, k, 0), new Vec4(i - 1, j, k - 1, 0));
+                            graph.setEdgeWeight(edge, cityBlock[i - 1][j]);
                         }
-                        if (Math.abs(k) >= min) {
-                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i,j,k,0), new Vec4(i,j-1,0,-1));
-                            graph.setEdgeWeight(edge, cityBlock[i][j-1]);
+                        if (Math.abs(k) >= min)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, 0, k), new Vec4(i - 1, j, -1, 0));
+                            graph.setEdgeWeight(edge, cityBlock[i - 1][j]);
+                        }
+                    }
+                    if (j - 1 >= 0)
+                    {
+                        if (k <= 0 && k >= -max + 1)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, 0, k), new Vec4(i, j - 1, 0, k - 1));
+                            graph.setEdgeWeight(edge, cityBlock[i][j - 1]);
+                        }
+                        if (Math.abs(k) >= min)
+                        {
+                            DefaultWeightedEdge edge = graph.addEdge(new Vec4(i, j, k, 0), new Vec4(i, j - 1, 0, -1));
+                            graph.setEdgeWeight(edge, cityBlock[i][j - 1]);
                         }
                     }
                 }
@@ -104,25 +122,30 @@ public abstract class ClumsyCrucible extends AocSolution<Long>
         }
 
         graph.addVertex(end);
-        for (int k=-max;k<=max;k++) {
-            if (k>-min && k<min) {
+        for (int k = -max; k <= max; k++)
+        {
+            if (k > -min && k < min)
+            {
                 continue;
             }
-            DefaultWeightedEdge edge = graph.addEdge(new Vec4(height-1,width-1,k,0), end);
+            DefaultWeightedEdge edge = graph.addEdge(new Vec4(height - 1, width - 1, k, 0), end);
             graph.setEdgeWeight(edge, 0);
-            edge = graph.addEdge(new Vec4(height-1,width-1,0,k), end);
+            edge = graph.addEdge(new Vec4(height - 1, width - 1, 0, k), end);
             graph.setEdgeWeight(edge, 0);
         }
 
         return graph;
     }
+
     private int[][] parse(List<String> lines)
     {
         int[][] cityBlock = new int[lines.size()][];
-        for (int i=0; i<lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++)
+        {
             String line = lines.get(i);
             cityBlock[i] = new int[line.length()];
-            for (int j=0; j<line.length(); j++) {
+            for (int j = 0; j < line.length(); j++)
+            {
                 cityBlock[i][j] = Integer.parseInt("" + line.charAt(j));
             }
         }

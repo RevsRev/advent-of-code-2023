@@ -21,27 +21,33 @@ public class ScratchCard
         this.winningNumbers = winningNumbers;
     }
 
-    public int getScore() {
+    public int getScore()
+    {
         int count = getNumbersThatWin().size();
-        if (count == 0) {
+        if (count == 0)
+        {
             return count;
         }
-        return IntMath.pow(2, count-1);
+        return IntMath.pow(2, count - 1);
     }
 
-    public Set<Integer> getNumbersThatWin() {
+    public Set<Integer> getNumbersThatWin()
+    {
         Set<Integer> retval = new HashSet<>();
         Iterator<Integer> itNumbers = numbers.iterator();
-        while (itNumbers.hasNext()) {
+        while (itNumbers.hasNext())
+        {
             int number = itNumbers.next();
-            if (winningNumbers.contains(number)) {
+            if (winningNumbers.contains(number))
+            {
                 retval.add(number);
             }
         }
         return retval;
     }
 
-    public static final ScratchCard fromGameLine(String line) {
+    public static final ScratchCard fromGameLine(String line)
+    {
         String[] gameNumbersSplit = line.split(":");
         int id = Integer.parseInt(gameNumbersSplit[0].replaceAll("Card ", "").trim());
         String[] numbersWinnersSplit = gameNumbersSplit[1].split("\\|");
@@ -55,9 +61,11 @@ public class ScratchCard
         return new ScratchCard(id, setNumbers, setWinners);
     }
 
-    private static Set<Integer> putAllInSet(String[] nums) {
+    private static Set<Integer> putAllInSet(String[] nums)
+    {
         Set<Integer> retval = new HashSet<>();
-        for (int i=0; i<nums.length; i++) {
+        for (int i = 0; i < nums.length; i++)
+        {
             retval.add(Integer.parseInt(nums[i].trim()));
         }
         return retval;

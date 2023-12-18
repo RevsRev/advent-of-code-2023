@@ -6,21 +6,24 @@ import com.google.common.collect.TreeRangeMap;
 import lombok.Getter;
 import rev.aoc.AocSolution;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class SeedAlmanacPartOne extends AocSolution<Long>
 {
     @Getter
     private final List<Long> seeds = new ArrayList<>();
-    private final RangeMap<Long,Long> seedToSoil =  TreeRangeMap.create();
-    private final RangeMap<Long,Long> soilToFertilizer =  TreeRangeMap.create();
-    private final RangeMap<Long,Long> fertilizerToWater =  TreeRangeMap.create();
-    private final RangeMap<Long,Long> waterToLight =  TreeRangeMap.create();
-    private final RangeMap<Long,Long> lightToTemp =  TreeRangeMap.create();
-    private final RangeMap<Long,Long> tempToHumidty =  TreeRangeMap.create();
-    private final RangeMap<Long,Long> humityToLocation =  TreeRangeMap.create();
+    private final RangeMap<Long, Long> seedToSoil = TreeRangeMap.create();
+    private final RangeMap<Long, Long> soilToFertilizer = TreeRangeMap.create();
+    private final RangeMap<Long, Long> fertilizerToWater = TreeRangeMap.create();
+    private final RangeMap<Long, Long> waterToLight = TreeRangeMap.create();
+    private final RangeMap<Long, Long> lightToTemp = TreeRangeMap.create();
+    private final RangeMap<Long, Long> tempToHumidty = TreeRangeMap.create();
+    private final RangeMap<Long, Long> humityToLocation = TreeRangeMap.create();
 
-    private final LinkedList<RangeMap<Long,Long>> mapsOrder = createMapsOrder();
+    private final LinkedList<RangeMap<Long, Long>> mapsOrder = createMapsOrder();
 
     private LinkedList<RangeMap<Long, Long>> createMapsOrder()
     {
@@ -53,7 +56,8 @@ public class SeedAlmanacPartOne extends AocSolution<Long>
     {
         Iterator<Long> seedsIt = seeds.iterator();
         long lowestLocation = Long.MAX_VALUE;
-        while (seedsIt.hasNext()) {
+        while (seedsIt.hasNext())
+        {
             Long seed = seedsIt.next();
             lowestLocation = Math.min(lowestLocation, getLocation(seed));
         }
@@ -64,11 +68,13 @@ public class SeedAlmanacPartOne extends AocSolution<Long>
     public Long getLocation(Long seed)
     {
         long key = seed;
-        Iterator<RangeMap<Long,Long>> itMaps = mapsOrder.iterator();
-        while (itMaps.hasNext()) {
-            RangeMap<Long,Long> map = itMaps.next();
+        Iterator<RangeMap<Long, Long>> itMaps = mapsOrder.iterator();
+        while (itMaps.hasNext())
+        {
+            RangeMap<Long, Long> map = itMaps.next();
             Long value = map.get(key);
-            if (value == null) {
+            if (value == null)
+            {
                 continue;
             }
             key = value + (key - map.getEntry(key).getKey().lowerEndpoint());
@@ -76,20 +82,25 @@ public class SeedAlmanacPartOne extends AocSolution<Long>
         return key;
     }
 
-    private final void parseMaps(List<String> lines) {
+    private final void parseMaps(List<String> lines)
+    {
         String[] strSeeds = lines.get(0).replaceAll("seeds:", "").trim().split("\\s+");
-        for (int i=0; i<strSeeds.length; i++) {
+        for (int i = 0; i < strSeeds.length; i++)
+        {
             seeds.add(Long.parseLong(strSeeds[i]));
         }
 
-        RangeMap<Long,Long> currentMap = null;
-        for (int i=1; i<lines.size(); i++) {
-            if (lines.get(i).trim().equals("")) {
+        RangeMap<Long, Long> currentMap = null;
+        for (int i = 1; i < lines.size(); i++)
+        {
+            if (lines.get(i).trim().equals(""))
+            {
                 continue; //empty line
             }
             String line = lines.get(i);
-            RangeMap<Long,Long> newMap = checkMap(line);
-            if (newMap != null) {
+            RangeMap<Long, Long> newMap = checkMap(line);
+            if (newMap != null)
+            {
                 currentMap = newMap;
                 continue;
             }
@@ -97,12 +108,14 @@ public class SeedAlmanacPartOne extends AocSolution<Long>
             Long nextMapIndex = Long.parseLong(vals[0]);
             Long thisMapIndex = Long.parseLong(vals[1]);
             Long range = Long.parseLong(vals[2]);
-            currentMap.put(Range.closed(thisMapIndex, thisMapIndex+range-1), nextMapIndex);
+            currentMap.put(Range.closed(thisMapIndex, thisMapIndex + range - 1), nextMapIndex);
         }
     }
 
-    private RangeMap<Long,Long> checkMap(String line) {
-        switch(line.trim()) {
+    private RangeMap<Long, Long> checkMap(String line)
+    {
+        switch (line.trim())
+        {
             case "seed-to-soil map:":
                 return seedToSoil;
             case "soil-to-fertilizer map:":

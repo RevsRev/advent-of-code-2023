@@ -24,45 +24,53 @@ public class HauntedWastelandPartTwo extends AocSolution<BigInteger>
         Graph g = stepsAndGraph.getRight();
         List<GraphNode> starts = g.getAllMatching(s -> s.endsWith("A"));
 
-        List<Pair<GraphNode, Pair<Long,Long>>> cycles = new ArrayList<>();
-        for (int i=0; i<starts.size(); i++) {
+        List<Pair<GraphNode, Pair<Long, Long>>> cycles = new ArrayList<>();
+        for (int i = 0; i < starts.size(); i++)
+        {
             cycles.add(g.extractCycle(steps, starts.get(i)));
         }
 
         //pick the cycle that starts at the highest value, all other cycles are then considered to start at this value.
-        Pair<GraphNode, Pair<Long,Long>> highestStartingCycle = cycles.get(0);
-        for (int i=1; i<cycles.size(); i++) {
-            Pair<GraphNode, Pair<Long,Long>> cycle = cycles.get(i);
-            if (cycle.getRight().getLeft() > highestStartingCycle.getRight().getLeft()) {
+        Pair<GraphNode, Pair<Long, Long>> highestStartingCycle = cycles.get(0);
+        for (int i = 1; i < cycles.size(); i++)
+        {
+            Pair<GraphNode, Pair<Long, Long>> cycle = cycles.get(i);
+            if (cycle.getRight().getLeft() > highestStartingCycle.getRight().getLeft())
+            {
                 highestStartingCycle = cycle;
             }
         }
 
         long cycleStart = highestStartingCycle.getRight().getLeft();
-        List<Pair<GraphNode,Pair<Long,Long>>> cyclesWithSameStart = new ArrayList<>();
-        for (int i=0; i<cycles.size(); i++) {
-            Pair<GraphNode, Pair<Long,Long>> cycle = cycles.get(i);
+        List<Pair<GraphNode, Pair<Long, Long>>> cyclesWithSameStart = new ArrayList<>();
+        for (int i = 0; i < cycles.size(); i++)
+        {
+            Pair<GraphNode, Pair<Long, Long>> cycle = cycles.get(i);
             long oldCycleStart = cycle.getRight().getLeft();
             GraphNode node = cycle.getLeft();
-            for (long j=oldCycleStart; j<cycleStart; j++) {
-                if (steps[(int)j%steps.length] == 'L') {
+            for (long j = oldCycleStart; j < cycleStart; j++)
+            {
+                if (steps[(int) j % steps.length] == 'L')
+                {
                     node = node.getLeft();
-                } else {
+                } else
+                {
                     node = node.getRight();
                 }
             }
-            Pair<Long,Long> cycleInfo = Pair.of(cycleStart, cycle.getRight().getRight());
+            Pair<Long, Long> cycleInfo = Pair.of(cycleStart, cycle.getRight().getRight());
             cyclesWithSameStart.add(Pair.of(node, cycleInfo));
         }
 
         cycles = cyclesWithSameStart;
-        Map<Long,Long> cycleLengthAndZOffset = new HashMap<>();
+        Map<Long, Long> cycleLengthAndZOffset = new HashMap<>();
         //For each cycle, determine the offset of the end element
-        for (int i=0; i<cycles.size(); i++) {
+        for (int i = 0; i < cycles.size(); i++)
+        {
             GraphNode start = cycles.get(i).getLeft();
             GraphNode node = start;
             long cycleLength = cycles.get(i).getRight().getRight();
-            for (long j=0; j<cycleLength; j++)
+            for (long j = 0; j < cycleLength; j++)
             {
                 if (node.getName().endsWith("Z"))
                 {
@@ -80,27 +88,32 @@ public class HauntedWastelandPartTwo extends AocSolution<BigInteger>
         }
 
         Iterator<Long> it = cycleLengthAndZOffset.keySet().iterator();
-        Map<BigInteger,BigInteger> chineseRemainderTheoremValues = new HashMap<>();
-        while (it.hasNext()) {
+        Map<BigInteger, BigInteger> chineseRemainderTheoremValues = new HashMap<>();
+        while (it.hasNext())
+        {
             long len = it.next();
             long zValue = cycleLengthAndZOffset.get(len);
-            Map<Long,Long> factors = Factors.factorise(len);
+            Map<Long, Long> factors = Factors.factorise(len);
 
             Iterator<Long> factorsIt = factors.keySet().iterator();
-            while (factorsIt.hasNext()) {
+            while (factorsIt.hasNext())
+            {
                 long prime = factorsIt.next();
                 long pow = factors.get(prime);
                 long primeToPow = 1;
-                for (int i=0; i<pow; i++) {
+                for (int i = 0; i < pow; i++)
+                {
                     primeToPow *= prime;
-                    if (chineseRemainderTheoremValues.containsKey(primeToPow)) {
-                        if (zValue%primeToPow != chineseRemainderTheoremValues.get(primeToPow).longValue()) {
+                    if (chineseRemainderTheoremValues.containsKey(primeToPow))
+                    {
+                        if (zValue % primeToPow != chineseRemainderTheoremValues.get(primeToPow).longValue())
+                        {
                             throw new RuntimeException("Can't be solved"); //TODO -Handle properly
                         }
                         chineseRemainderTheoremValues.remove(primeToPow);
                     }
                 }
-                chineseRemainderTheoremValues.put(BigInteger.valueOf(primeToPow), BigInteger.valueOf(zValue%primeToPow));
+                chineseRemainderTheoremValues.put(BigInteger.valueOf(primeToPow), BigInteger.valueOf(zValue % primeToPow));
             }
         }
 

@@ -23,7 +23,8 @@ public abstract class CubeConundrum extends AocSolution<Long>
 
         Iterator<Integer> itGameNumbers = gameHandfulMap.keySet().iterator();
         long result = 0;
-        while (itGameNumbers.hasNext()) {
+        while (itGameNumbers.hasNext())
+        {
             int gameNumber = itGameNumbers.next();
             result += getIncrementingAmount(gameHandfulMap, gameNumber);
         }
@@ -32,10 +33,12 @@ public abstract class CubeConundrum extends AocSolution<Long>
 
     protected abstract long getIncrementingAmount(Map<Integer, List<Handful>> gameHandfulMap, int gameNumber);
 
-    Map<Integer,List<Handful>> parseToGameMap(List<String> lines) {
-        Map<Integer,List<Handful>> retval = new HashMap<>();
+    Map<Integer, List<Handful>> parseToGameMap(List<String> lines)
+    {
+        Map<Integer, List<Handful>> retval = new HashMap<>();
         Iterator<String> itLines = lines.iterator();
-        while (itLines.hasNext()) {
+        while (itLines.hasNext())
+        {
             String line = itLines.next();
             parseFromLine(retval, line);
         }
@@ -50,7 +53,8 @@ public abstract class CubeConundrum extends AocSolution<Long>
 
         int gameNumber = Integer.parseInt(game.replaceFirst("Game ", ""));
         List<Handful> handfuls = new ArrayList<>();
-        for (int i=0; i<gameHandfuls.length; i++) {
+        for (int i = 0; i < gameHandfuls.length; i++)
+        {
             String gameHandful = gameHandfuls[i];
             String[] colors = gameHandful.split(",");
             handfuls.add(Handful.from(colors));

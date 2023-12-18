@@ -10,7 +10,7 @@ public class AocScratchCardPartOneTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long)13;
+        return (long) 13;
     }
 
     @Override

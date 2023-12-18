@@ -11,10 +11,12 @@ public class SeedAlmanacPartTwo extends SeedAlmanacPartOne
     public long solveSeeds()
     {
         long lowestLocation = Long.MAX_VALUE;
-        for (int i=0; i<getSeeds().size(); i+=2) {
+        for (int i = 0; i < getSeeds().size(); i += 2)
+        {
             long start = getSeeds().get(i);
-            long end = start - 1 + getSeeds().get(i+1);
-            for (long j=start; j<=end; j++) {
+            long end = start - 1 + getSeeds().get(i + 1);
+            for (long j = start; j <= end; j++)
+            {
                 lowestLocation = Math.min(lowestLocation, getLocation(j));
             }
         }

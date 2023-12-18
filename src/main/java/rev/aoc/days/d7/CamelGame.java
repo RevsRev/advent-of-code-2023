@@ -14,11 +14,13 @@ public class CamelGame
         this.hand = hand;
     }
 
-    public static Comparator<CamelGame> comparator() {
+    public static Comparator<CamelGame> comparator()
+    {
         return (o1, o2) -> CamelHand.comparator().compare(o1.hand, o2.hand);
     }
 
-    public long getScore(long ordinal) {
+    public long getScore(long ordinal)
+    {
         return ordinal * bet;
     }
 }

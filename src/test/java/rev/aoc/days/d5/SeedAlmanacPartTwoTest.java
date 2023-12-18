@@ -10,7 +10,7 @@ public class SeedAlmanacPartTwoTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long)46;
+        return (long) 46;
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class TrebuchetPartTwo extends Trebuchet
 {
-    private static final Map<String,String> NUMS_AS_WORDS = Map.of(
+    private static final Map<String, String> NUMS_AS_WORDS = Map.of(
             "one", "1",
             "two", "2",
             "three", "3",
@@ -17,16 +17,18 @@ public class TrebuchetPartTwo extends Trebuchet
             "eight", "8",
             "nine", "9");
 
-    private static final Map<String,String> NUMS_AS_WORDS_REVERSED = getNumsAsWordsReversed();
+    private static final Map<String, String> NUMS_AS_WORDS_REVERSED = getNumsAsWordsReversed();
 
-    private static final Map<String,String> getNumsAsWordsReversed() {
-        Map<String,String> retval = new HashMap<>();
+    private static final Map<String, String> getNumsAsWordsReversed()
+    {
+        Map<String, String> retval = new HashMap<>();
         Iterator<String> it = NUMS_AS_WORDS.keySet().iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             String word = it.next();
             String numeral = NUMS_AS_WORDS.get(word);
             String wordReversed = new StringBuilder().append(word).reverse().toString();
-            retval.put(wordReversed,numeral);
+            retval.put(wordReversed, numeral);
         }
         return retval;
     }
@@ -48,22 +50,26 @@ public class TrebuchetPartTwo extends Trebuchet
         return forwardLine + (new StringBuilder().append(backwardLine).reverse().toString());
     }
 
-    private String formatForwards(String line, Map<String,String> words)
+    private String formatForwards(String line, Map<String, String> words)
     {
         String earliestReplacement = "";
-        do {
+        do
+        {
             earliestReplacement = "";
             long earliestIndex = line.length();
             Iterator<String> it = words.keySet().iterator();
-            while (it.hasNext()) {
+            while (it.hasNext())
+            {
                 String word = it.next();
                 int index = line.indexOf(word);
-                if (index >=0 && index<earliestIndex) {
+                if (index >= 0 && index < earliestIndex)
+                {
                     earliestIndex = index;
                     earliestReplacement = word;
                 }
             }
-            if (!earliestReplacement.equals("")) {
+            if (!earliestReplacement.equals(""))
+            {
                 line = line.replaceFirst(earliestReplacement, words.get(earliestReplacement));
             }
         } while (!earliestReplacement.equals(""));

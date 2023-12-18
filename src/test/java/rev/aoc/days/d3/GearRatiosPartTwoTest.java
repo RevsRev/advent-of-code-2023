@@ -10,7 +10,7 @@ public class GearRatiosPartTwoTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long)467835;
+        return (long) 467835;
     }
 
     @Override

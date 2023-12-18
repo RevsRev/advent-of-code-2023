@@ -21,27 +21,32 @@ public class ReflectorDishPartTwo extends ReflectorDish
         Map<Integer, Integer> visitHashes = new HashMap<>();
 
         int iterations = 1000000000;
-        for (int i = 0; i< iterations; i++) {
+        for (int i = 0; i < iterations; i++)
+        {
             cycle(dish);
             int hash = hash(dish);
-            if (!visitHashes.containsKey(hash)) {
+            if (!visitHashes.containsKey(hash))
+            {
                 visitHashes.put(hash, i);
-            } else {
+            } else
+            {
                 int previousVisit = visitHashes.get(hash);
-                int cycleLength = i-previousVisit;
+                int cycleLength = i - previousVisit;
                 visitHashes = new HashMap<>(); // clear the map
-                i += ((iterations-i)/cycleLength)*cycleLength;
+                i += ((iterations - i) / cycleLength) * cycleLength;
             }
         }
 
         return calcLoad(dish);
     }
 
-    private int hash(char[][] dish) {
+    private int hash(char[][] dish)
+    {
         return Arrays.deepHashCode(dish);
     }
 
-    private void cycle(char[][] dish) {
+    private void cycle(char[][] dish)
+    {
         slide(dish, Direction.NORTH);
         slide(dish, Direction.WEST);
         slide(dish, Direction.SOUTH);

@@ -18,19 +18,22 @@ public class AocScratchCardPartTwo extends AocScratchCard
         int last = scratchCards.size();
 
         Map<Integer, Integer> cardsWon = new HashMap<>();
-        for (int i=first; i<=last; i++) {
-            cardsWon.put(i,1);
+        for (int i = first; i <= last; i++)
+        {
+            cardsWon.put(i, 1);
         }
 
         int totalCards = 0;
-        for (int i=first; i<=last; i++) {
+        for (int i = first; i <= last; i++)
+        {
             int numWon = cardsWon.get(i);
             totalCards += numWon;
             ScratchCard sc = scratchCards.get(i);
             Set<Integer> numbersThatWin = sc.getNumbersThatWin();
             int numWinners = numbersThatWin.size();
-            for (int j=i+1; j< i+1+numWinners; j++) {
-                cardsWon.compute(j, (k,v) -> v + numWon);
+            for (int j = i + 1; j < i + 1 + numWinners; j++)
+            {
+                cardsWon.compute(j, (k, v) -> v + numWon);
             }
         }
 

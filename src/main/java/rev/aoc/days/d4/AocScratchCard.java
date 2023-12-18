@@ -28,7 +28,8 @@ public abstract class AocScratchCard extends AocSolution<Long>
     private Map<Integer, ScratchCard> loadScratchCards(List<String> lines)
     {
         Map<Integer, ScratchCard> retval = new HashMap<>();
-        for (int i=0; i<lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++)
+        {
             ScratchCard sc = ScratchCard.fromGameLine(lines.get(i));
             retval.put(sc.getId(), sc);
         }

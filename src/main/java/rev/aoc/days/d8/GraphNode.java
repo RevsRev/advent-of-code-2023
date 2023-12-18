@@ -7,12 +7,15 @@ public class GraphNode
 {
     @Getter
     private final String name;
-    @Getter @Setter
+    @Getter
+    @Setter
     private GraphNode left;
-    @Getter @Setter
+    @Getter
+    @Setter
     private GraphNode right;
 
-    public GraphNode(String name) {
+    public GraphNode(String name)
+    {
         this.name = name;
     }
 }

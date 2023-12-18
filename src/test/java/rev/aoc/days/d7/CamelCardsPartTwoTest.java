@@ -10,7 +10,7 @@ public class CamelCardsPartTwoTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long)5905;
+        return (long) 5905;
     }
 
     @Override

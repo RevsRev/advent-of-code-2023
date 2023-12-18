@@ -19,7 +19,8 @@ public abstract class MirageMaintenance extends AocSolution<Long>
         List<long[]> sequences = parse(lines);
 
         long result = 0;
-        for (int i=0; i<sequences.size(); i++) {
+        for (int i = 0; i < sequences.size(); i++)
+        {
             result = incrementResult(sequences.get(i), result);
         }
         return result;
@@ -30,21 +31,26 @@ public abstract class MirageMaintenance extends AocSolution<Long>
     protected boolean isConstantSequence(long[] sequence)
     {
         long first = sequence[0];
-        for (int i=1; i<sequence.length; i++) {
-            if (sequence[i] != first) {
+        for (int i = 1; i < sequence.length; i++)
+        {
+            if (sequence[i] != first)
+            {
                 return false;
             }
         }
         return true;
     }
 
-    private List<long[]> parse(List<String> lines) {
+    private List<long[]> parse(List<String> lines)
+    {
         List<long[]> retval = new ArrayList<>();
-        for (int i=0; i<lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++)
+        {
             String line = lines.get(i);
             String[] numsStr = line.trim().split("\\s+");
             long[] sequence = new long[numsStr.length];
-            for (int j=0; j<sequence.length; j++) {
+            for (int j = 0; j < sequence.length; j++)
+            {
                 sequence[j] = Long.parseLong(numsStr[j]);
             }
             retval.add(sequence);

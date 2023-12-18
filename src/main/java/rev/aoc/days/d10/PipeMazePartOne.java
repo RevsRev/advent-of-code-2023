@@ -14,6 +14,6 @@ public class PipeMazePartOne extends PipeMaze
     @Override
     public long solveProblemForLoop(char[][] mazeMap, List<Vec2> loop)
     {
-        return (long)(loop.size() + 1)/2;
+        return (long) (loop.size() + 1) / 2;
     }
 }

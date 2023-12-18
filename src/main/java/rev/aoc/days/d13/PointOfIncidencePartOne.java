@@ -19,11 +19,12 @@ public class PointOfIncidencePartOne extends AocSolution<Long>
     protected Long solveImpl() throws Exception
     {
         List<String> lines = getOneAndOnlyResourceLines();
-        List<Pair<char[][],char[][]>> mirrors = parse(lines);
+        List<Pair<char[][], char[][]>> mirrors = parse(lines);
 
         long score = 0;
-        for (int i=0; i<mirrors.size(); i++) {
-            Pair<char[][],char[][]> mirror = mirrors.get(i);
+        for (int i = 0; i < mirrors.size(); i++)
+        {
+            Pair<char[][], char[][]> mirror = mirrors.get(i);
             char[][] m = mirror.getLeft();
             char[][] mTranspose = mirror.getRight();
             int colOfReflection = getReflectionIndex(m);
@@ -35,10 +36,11 @@ public class PointOfIncidencePartOne extends AocSolution<Long>
 
     private long getScore(int colOfReflection, int rowOfReflection)
     {
-        if (colOfReflection>=0) {
-            return colOfReflection+1;
+        if (colOfReflection >= 0)
+        {
+            return colOfReflection + 1;
         }
-        return 100 * (rowOfReflection+1);
+        return 100 * (rowOfReflection + 1);
     }
 
     protected int getReflectionIndex(char[][] m)
@@ -48,16 +50,19 @@ public class PointOfIncidencePartOne extends AocSolution<Long>
 
         Set<Integer> reflectionIndices = getReflectionIndices(m[0]);
 
-        for (int i=1; i<height; i++) {
+        for (int i = 1; i < height; i++)
+        {
             char[] row = m[i];
             Set<Integer> newReflectionIndices = getReflectionIndices(m[i]);
             reflectionIndices.retainAll(newReflectionIndices);
-            if (reflectionIndices.isEmpty()) {
+            if (reflectionIndices.isEmpty())
+            {
                 return -1;
             }
         }
 
-        if (reflectionIndices.size() > 1) {
+        if (reflectionIndices.size() > 1)
+        {
             throw new RuntimeException("Problem solution is ambiguous");
         }
         return reflectionIndices.iterator().next();
@@ -67,12 +72,15 @@ public class PointOfIncidencePartOne extends AocSolution<Long>
     {
         int[][] palindromeTable = getPalindromeTable(arr);
         Set<Integer> result = new HashSet<>();
-        for (int i=1; i<arr.length; i+=2) {
-            if (palindromeTable[0][i] == 1) {
-                result.add(i/2);
+        for (int i = 1; i < arr.length; i += 2)
+        {
+            if (palindromeTable[0][i] == 1)
+            {
+                result.add(i / 2);
             }
-            if (palindromeTable[arr.length-1-i][arr.length-1] == 1) {
-                result.add(arr.length-1-(i+1)/2);
+            if (palindromeTable[arr.length - 1 - i][arr.length - 1] == 1)
+            {
+                result.add(arr.length - 1 - (i + 1) / 2);
             }
         }
         return result;
@@ -83,19 +91,25 @@ public class PointOfIncidencePartOne extends AocSolution<Long>
         int len = arr.length;
         int[][] palindromeTable = new int[len][len];
 
-        for (int i=0; i<len; i++) {
-            for (int j=0; j<len; j++) {
-                if (i>j) {
-                    palindromeTable[i][j]=0;
-                } else {
+        for (int i = 0; i < len; i++)
+        {
+            for (int j = 0; j < len; j++)
+            {
+                if (i > j)
+                {
+                    palindromeTable[i][j] = 0;
+                } else
+                {
                     palindromeTable[i][j] = -1;
                 }
             }
         }
 
-        for (int i=0; i<len; i++) {
-            for (int j=i; j<len; j++) {
-                calcPalindrome(arr, palindromeTable, i,j);
+        for (int i = 0; i < len; i++)
+        {
+            for (int j = i; j < len; j++)
+            {
+                calcPalindrome(arr, palindromeTable, i, j);
             }
         }
 
@@ -104,61 +118,74 @@ public class PointOfIncidencePartOne extends AocSolution<Long>
 
     private int calcPalindrome(char[] arr, int[][] palindromeTable, int i, int j)
     {
-        if (palindromeTable[i][j] != -1) {
+        if (palindromeTable[i][j] != -1)
+        {
             return palindromeTable[i][j];
         }
 
-        if (i == j) {
+        if (i == j)
+        {
             palindromeTable[i][j] = 1;
             return 1;
         }
 
-        if (arr[i] != arr[j]) {
+        if (arr[i] != arr[j])
+        {
             palindromeTable[i][j] = 0;
             return 0;
         }
 
-        if (i+1 == j) {
-            palindromeTable[i][j]=1;
+        if (i + 1 == j)
+        {
+            palindromeTable[i][j] = 1;
             return 1;
         }
 
-        int val = calcPalindrome(arr, palindromeTable, i+1,j-1);
+        int val = calcPalindrome(arr, palindromeTable, i + 1, j - 1);
         palindromeTable[i][j] = val;
         return val;
     }
 
     private List<Pair<char[][], char[][]>> parse(List<String> lines)
     {
-        List<Pair<char[][],char[][]>> retval = new ArrayList<>();
+        List<Pair<char[][], char[][]>> retval = new ArrayList<>();
         int lineIndex = 0;
-        while (lineIndex<lines.size()) {
+        while (lineIndex < lines.size())
+        {
             String line = lines.get(lineIndex);
-            if (line.trim().equals("")) {
+            if (line.trim().equals(""))
+            {
                 lineIndex++;
-            } else {
+            } else
+            {
                 int width = line.length();
-                int height=0;
-                while (!line.equals("") && lineIndex+height<lines.size()) {
+                int height = 0;
+                while (!line.equals("") && lineIndex + height < lines.size())
+                {
                     height++;
-                    if (lineIndex+height >= lines.size()) {
+                    if (lineIndex + height >= lines.size())
+                    {
                         break;
-                    } else {
-                        line=lines.get(lineIndex+height);
+                    } else
+                    {
+                        line = lines.get(lineIndex + height);
                     }
                 }
                 char[][] mirror = new char[height][width];
                 char[][] mirrorTranspose = new char[width][height];
-                for (int i=0; i<height;i++) {
-                    mirror[i] = lines.get(lineIndex+i).toCharArray();
+                for (int i = 0; i < height; i++)
+                {
+                    mirror[i] = lines.get(lineIndex + i).toCharArray();
                 }
-                for (int i=0; i<height; i++) {
-                    for (int j=0; j<width; j++) {
-                        mirrorTranspose[j][i]=mirror[i][j];
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        mirrorTranspose[j][i] = mirror[i][j];
                     }
                 }
                 retval.add(Pair.of(mirror, mirrorTranspose));
-                lineIndex+=height;
+                lineIndex += height;
             }
         }
         return retval;

@@ -13,10 +13,8 @@ import rev.aoc.days.d14.ReflectorDishPartOne;
 import rev.aoc.days.d14.ReflectorDishPartTwo;
 import rev.aoc.days.d15.LensLibraryPartOne;
 import rev.aoc.days.d15.LensLibraryPartTwo;
-import rev.aoc.days.d16.FloorLava;
 import rev.aoc.days.d16.FloorLavaPartOne;
 import rev.aoc.days.d16.FloorLavaPartTwo;
-import rev.aoc.days.d17.ClumsyCrucible;
 import rev.aoc.days.d17.ClumsyCruciblePartOne;
 import rev.aoc.days.d17.ClumsyCruciblePartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
@@ -38,7 +36,8 @@ import java.util.List;
 
 public class Main
 {
-    public static final void main(String[] args) {
+    public static final void main(String[] args)
+    {
         trySolve(new TrebuchetPartOne(List.of("1.1-trebuchet")));
         trySolve(new TrebuchetPartTwo(List.of("1.1-trebuchet")));
         trySolve(new CubeConundrumPartOne(List.of("2.1-cube-conundrum")));
@@ -76,11 +75,14 @@ public class Main
         trySolve(new ClumsyCruciblePartTwo(List.of("17.1-clumsy-crucible")));
     }
 
-    private static void trySolve(AocSolution sol) {
-        try {
+    private static void trySolve(AocSolution sol)
+    {
+        try
+        {
             Object result = sol.solve();
             System.out.println(String.format("%s:\t\t%s", sol.getClass(), result));
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e);
         }
     }

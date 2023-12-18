@@ -11,7 +11,7 @@ public class TrebuchetPartOneTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long)142;
+        return (long) 142;
     }
 
     @Override

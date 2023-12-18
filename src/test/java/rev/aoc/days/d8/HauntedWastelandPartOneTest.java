@@ -10,7 +10,7 @@ public class HauntedWastelandPartOneTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long)6;
+        return (long) 6;
     }
 
     @Override

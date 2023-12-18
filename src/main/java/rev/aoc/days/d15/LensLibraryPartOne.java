@@ -19,22 +19,26 @@ public class LensLibraryPartOne extends AocSolution<Long>
 
         long hashTotal = 0;
         int len = inputs.length;
-        for (int i=0; i<len; i++) {
-            hashTotal+=calcHash(inputs[i]);
+        for (int i = 0; i < len; i++)
+        {
+            hashTotal += calcHash(inputs[i]);
         }
         return hashTotal;
     }
 
-    public static long calcHash(String input) {
+    public static long calcHash(String input)
+    {
         return calcHash(input.toCharArray());
     }
+
     public static long calcHash(char[] input)
     {
         long val = 0;
         int hashMultiplier = 17;
         int hashMod = 256;
-        for (int i=0; i<input.length; i++) {
-            val = (hashMultiplier *(val+input[i]))% hashMod;
+        for (int i = 0; i < input.length; i++)
+        {
+            val = (hashMultiplier * (val + input[i])) % hashMod;
         }
         return val;
     }
@@ -44,7 +48,8 @@ public class LensLibraryPartOne extends AocSolution<Long>
         String line = lines.get(0);
         String[] inputsStr = line.split(",");
         char[][] inputs = new char[inputsStr.length][];
-        for (int i=0; i<inputsStr.length;i++) {
+        for (int i = 0; i < inputsStr.length; i++)
+        {
             inputs[i] = inputsStr[i].toCharArray();
         }
         return inputs;

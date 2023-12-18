@@ -8,6 +8,7 @@ import java.util.*;
 public class CosmicExpansion extends AocSolution<Long>
 {
     private final long expansionRate;
+
     public CosmicExpansion(Iterable<String> resources, long expansionRate)
     {
         super(resources);
@@ -36,7 +37,8 @@ public class CosmicExpansion extends AocSolution<Long>
     {
         Set<Vec2> result = new HashSet<>();
         Iterator<Vec2> itGalaxies = galaxyPositions.iterator();
-        while (itGalaxies.hasNext()) {
+        while (itGalaxies.hasNext())
+        {
             Vec2 galaxy = itGalaxies.next();
             result.add(expandGalaxy(galaxy, expansionRows, expansionCols));
         }
@@ -45,44 +47,48 @@ public class CosmicExpansion extends AocSolution<Long>
 
     private Vec2 expandGalaxy(Vec2 galaxy, List<Integer> expansionRows, List<Integer> expansionCols)
     {
-        int x = (int)galaxy.x;
-        int y = (int)galaxy.y;
+        int x = (int) galaxy.x;
+        int y = (int) galaxy.y;
 
         int timesToExpandX = getTimesToExpand(expansionCols, x);
         int timesToExpandY = getTimesToExpand(expansionRows, y);
 
-        long expansionFactor = expansionRate-1;
-        return new Vec2(galaxy.x + timesToExpandX* expansionFactor, galaxy.y + timesToExpandY* expansionFactor);
+        long expansionFactor = expansionRate - 1;
+        return new Vec2(galaxy.x + timesToExpandX * expansionFactor, galaxy.y + timesToExpandY * expansionFactor);
     }
 
     private int getTimesToExpand(List<Integer> expansionRows, int x)
     {
         int index = Collections.binarySearch(expansionRows, x);
-        if (index < 0) {
+        if (index < 0)
+        {
             index = -index - 1; //insertionPoint;
         }
-        return index+1;
+        return index + 1;
     }
 
     private long getSumOfShortestPairwiseDistances(Set<Vec2> galaxyPositions)
     {
         long sumOfShortestDistances = 0;
         Iterator<Vec2> it = galaxyPositions.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             Vec2 galaxy = it.next();
             long distance = getSumOfDistancesToOtherGalaxies(galaxyPositions, galaxy);
             sumOfShortestDistances += distance;
         }
-        return sumOfShortestDistances/2;
+        return sumOfShortestDistances / 2;
     }
 
     private long getSumOfDistancesToOtherGalaxies(Set<Vec2> galaxyPositions, Vec2 galaxy)
     {
         long sumOfDistances = 0;
         Iterator<Vec2> othersIt = galaxyPositions.iterator();
-        while (othersIt.hasNext()) {
+        while (othersIt.hasNext())
+        {
             Vec2 other = othersIt.next();
-            if (galaxy.equals(other)) {
+            if (galaxy.equals(other))
+            {
                 continue;
             }
             sumOfDistances += shortestDistanceBetweenGalaxies(galaxy, other);
@@ -100,10 +106,13 @@ public class CosmicExpansion extends AocSolution<Long>
         Set<Vec2> galaxies = new HashSet<>();
         int height = space.length;
         int width = space[0].length;
-        for (int i=0; i<height; i++) {
-            for (int j=0; j<width; j++) {
-                if (space[i][j] == '#') {
-                    galaxies.add(new Vec2(j,i));
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                if (space[i][j] == '#')
+                {
+                    galaxies.add(new Vec2(j, i));
                 }
             }
         }
@@ -117,15 +126,19 @@ public class CosmicExpansion extends AocSolution<Long>
 
         Set<Integer> expansionRows = new HashSet<>();
 
-        for (int i=0; i<height; i++) {
+        for (int i = 0; i < height; i++)
+        {
             boolean noGalaxies = true;
-            for (int j=0; j<width; j++) {
-                if (space[i][j] == '#') {
+            for (int j = 0; j < width; j++)
+            {
+                if (space[i][j] == '#')
+                {
                     noGalaxies = false;
                     break;
                 }
             }
-            if (noGalaxies) {
+            if (noGalaxies)
+            {
                 expansionRows.add(i);
             }
         }
@@ -140,15 +153,19 @@ public class CosmicExpansion extends AocSolution<Long>
 
         Set<Integer> expansionCols = new HashSet<>();
 
-        for (int j=0; j<width; j++) {
+        for (int j = 0; j < width; j++)
+        {
             boolean noGalaxies = true;
-            for (int i=0; i<height; i++) {
-                if (space[i][j] == '#') {
+            for (int i = 0; i < height; i++)
+            {
+                if (space[i][j] == '#')
+                {
                     noGalaxies = false;
                     break;
                 }
             }
-            if (noGalaxies) {
+            if (noGalaxies)
+            {
                 expansionCols.add(j);
             }
         }
@@ -160,9 +177,11 @@ public class CosmicExpansion extends AocSolution<Long>
         int height = lines.size();
         int width = lines.get(0).length();
         char[][] galaxy = new char[height][width];
-        for (int i=0; i<height; i++) {
+        for (int i = 0; i < height; i++)
+        {
             String line = lines.get(i);
-            for (int j=0; j<width; j++) {
+            for (int j = 0; j < width; j++)
+            {
                 galaxy[i][j] = line.charAt(j);
             }
         }

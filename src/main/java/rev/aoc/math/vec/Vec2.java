@@ -7,17 +7,20 @@ public class Vec2
     public long x;
     public long y;
 
-    public Vec2(long x, long y) {
+    public Vec2(long x, long y)
+    {
         this.x = x;
         this.y = y;
     }
 
-    public Vec2(Vec2 copy) {
+    public Vec2(Vec2 copy)
+    {
         this.x = copy.x;
         this.y = copy.y;
     }
 
-    public Vec2 add(Vec2 other) {
+    public Vec2 add(Vec2 other)
+    {
         return new Vec2(x + other.x, y + other.y);
     }
 
@@ -38,6 +41,6 @@ public class Vec2
 
     public Vec2 mult(long factor)
     {
-        return new Vec2(this.x*factor, this.y*factor);
+        return new Vec2(this.x * factor, this.y * factor);
     }
 }

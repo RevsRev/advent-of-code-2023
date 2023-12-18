@@ -10,7 +10,7 @@ public class CubeConundrumPartTwoTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return (long)2286;
+        return (long) 2286;
     }
 
     @Override

@@ -26,10 +26,13 @@ public abstract class ReflectorDish extends AocSolution<Long>
         int width = dish[0].length;
 
         long totalLoad = 0;
-        for (int i=0; i<height;i++) {
-            int load = height-i;
-            for (int j=0; j<width; j++) {
-                if (dish[i][j] == 'O') {
+        for (int i = 0; i < height; i++)
+        {
+            int load = height - i;
+            for (int j = 0; j < width; j++)
+            {
+                if (dish[i][j] == 'O')
+                {
                     totalLoad += load;
                 }
             }
@@ -39,7 +42,8 @@ public abstract class ReflectorDish extends AocSolution<Long>
 
     protected void slide(char[][] dish, Direction direction)
     {
-        switch (direction) {
+        switch (direction)
+        {
             case NORTH:
                 slideNorth(dish);
                 return;
@@ -55,38 +59,53 @@ public abstract class ReflectorDish extends AocSolution<Long>
         }
     }
 
-    private void slideNorth(char[][] dish) {
+    private void slideNorth(char[][] dish)
+    {
         int height = dish.length;
         int width = dish[0].length;
-        for (int i=0; i<height; i++) {
-            for (int j=0; j<width; j++) {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
                 slideNorth(dish, i, j);
             }
         }
     }
-    private void slideEast(char[][] dish) {
+
+    private void slideEast(char[][] dish)
+    {
         int height = dish.length;
         int width = dish[0].length;
-        for (int j=width-1; j>=0; j--) {
-            for (int i=0; i<height; i++) {
+        for (int j = width - 1; j >= 0; j--)
+        {
+            for (int i = 0; i < height; i++)
+            {
                 slideEast(dish, i, j);
             }
         }
     }
-    private void slideSouth(char[][] dish) {
+
+    private void slideSouth(char[][] dish)
+    {
         int height = dish.length;
         int width = dish[0].length;
-        for (int i=height-1; i>=0; i--) {
-            for (int j=0; j<width; j++) {
+        for (int i = height - 1; i >= 0; i--)
+        {
+            for (int j = 0; j < width; j++)
+            {
                 slideSouth(dish, i, j);
             }
         }
     }
-    private void slideWest(char[][] dish) {
+
+    private void slideWest(char[][] dish)
+    {
         int height = dish.length;
         int width = dish[0].length;
-        for (int j=0; j<width; j++) {
-            for (int i=0; i<height; i++) {
+        for (int j = 0; j < width; j++)
+        {
+            for (int i = 0; i < height; i++)
+            {
                 slideWest(dish, i, j);
             }
         }
@@ -94,81 +113,95 @@ public abstract class ReflectorDish extends AocSolution<Long>
 
     private void slideNorth(char[][] dish, int i, int j)
     {
-        if (dish[i][j] == '.' || dish[i][j] == '#') {
+        if (dish[i][j] == '.' || dish[i][j] == '#')
+        {
             return;
         }
 
         int slideAmount = 0;
-        while (i-slideAmount-1 >=0 && dish[i-slideAmount-1][j] == '.') {
+        while (i - slideAmount - 1 >= 0 && dish[i - slideAmount - 1][j] == '.')
+        {
             slideAmount++;
         }
-        if (slideAmount == 0) {
+        if (slideAmount == 0)
+        {
             return;
         }
 
-        dish[i-slideAmount][j] = dish[i][j];
+        dish[i - slideAmount][j] = dish[i][j];
         dish[i][j] = '.';
     }
 
     private void slideEast(char[][] dish, int i, int j)
     {
-        if (dish[i][j] == '.' || dish[i][j] == '#') {
+        if (dish[i][j] == '.' || dish[i][j] == '#')
+        {
             return;
         }
 
         int width = dish[0].length;
         int slideAmount = 0;
-        while (j+slideAmount+1 < width && dish[i][j+slideAmount+1] == '.') {
+        while (j + slideAmount + 1 < width && dish[i][j + slideAmount + 1] == '.')
+        {
             slideAmount++;
         }
-        if (slideAmount == 0) {
+        if (slideAmount == 0)
+        {
             return;
         }
 
-        dish[i][j+slideAmount] = dish[i][j];
+        dish[i][j + slideAmount] = dish[i][j];
         dish[i][j] = '.';
     }
 
     private void slideSouth(char[][] dish, int i, int j)
     {
-        if (dish[i][j] == '.' || dish[i][j] == '#') {
+        if (dish[i][j] == '.' || dish[i][j] == '#')
+        {
             return;
         }
 
         int height = dish.length;
         int slideAmount = 0;
-        while (i+slideAmount+1 < height && dish[i+slideAmount+1][j] == '.') {
+        while (i + slideAmount + 1 < height && dish[i + slideAmount + 1][j] == '.')
+        {
             slideAmount++;
         }
-        if (slideAmount == 0) {
+        if (slideAmount == 0)
+        {
             return;
         }
 
-        dish[i+slideAmount][j] = dish[i][j];
+        dish[i + slideAmount][j] = dish[i][j];
         dish[i][j] = '.';
     }
 
     private void slideWest(char[][] dish, int i, int j)
     {
-        if (dish[i][j] == '.' || dish[i][j] == '#') {
+        if (dish[i][j] == '.' || dish[i][j] == '#')
+        {
             return;
         }
 
         int slideAmount = 0;
-        while (j-slideAmount-1 >=0 && dish[i][j-slideAmount-1] == '.') {
+        while (j - slideAmount - 1 >= 0 && dish[i][j - slideAmount - 1] == '.')
+        {
             slideAmount++;
         }
-        if (slideAmount == 0) {
+        if (slideAmount == 0)
+        {
             return;
         }
 
-        dish[i][j-slideAmount] = dish[i][j];
+        dish[i][j - slideAmount] = dish[i][j];
         dish[i][j] = '.';
     }
 
-    protected char[][] parse(List<String> lines) {
+    protected char[][] parse(List<String> lines)
+    {
         char[][] dish = new char[lines.size()][lines.get(0).length()];
-        for (int i=0; i<lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++)
+        {
             String line = lines.get(i);
             dish[i] = line.toCharArray();
         }

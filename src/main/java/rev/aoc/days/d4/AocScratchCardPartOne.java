@@ -15,7 +15,8 @@ public class AocScratchCardPartOne extends AocScratchCard
     {
         Iterator<Integer> itGameIds = scratchCards.keySet().iterator();
         long score = 0;
-        while (itGameIds.hasNext()) {
+        while (itGameIds.hasNext())
+        {
             int gameId = itGameIds.next();
             ScratchCard sc = scratchCards.get(gameId);
             score += sc.getScore();
