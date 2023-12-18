@@ -17,6 +17,7 @@ import rev.aoc.days.d16.FloorLava;
 import rev.aoc.days.d16.FloorLavaPartOne;
 import rev.aoc.days.d16.FloorLavaPartTwo;
 import rev.aoc.days.d17.ClumsyCrucible;
+import rev.aoc.days.d17.ClumsyCruciblePartOne;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -70,7 +71,7 @@ public class Main
         trySolve(new LensLibraryPartTwo(List.of("15.1-lens-library")));
         trySolve(new FloorLavaPartOne(List.of("16.1-floor-lava")));
         trySolve(new FloorLavaPartTwo(List.of("16.1-floor-lava")));
-        trySolve(new ClumsyCrucible(List.of("17.1-clumsy-crucible")));
+        trySolve(new ClumsyCruciblePartOne(List.of("17.1-clumsy-crucible")));
     }
 
     private static void trySolve(AocSolution sol) {

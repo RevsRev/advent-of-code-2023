@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class ClumsyCrucibleTest extends AocTest<Long>
+public class ClumsyCruciblePartOneTest extends AocTest<Long>
 {
     @Override
     protected Long getExpected()
@@ -16,6 +16,6 @@ public class ClumsyCrucibleTest extends AocTest<Long>
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new ClumsyCrucible(List.of("17.1-clumsy-crucible-test"));
+        return new ClumsyCruciblePartOne(List.of("17.1-clumsy-crucible-test"));
     }
 }
