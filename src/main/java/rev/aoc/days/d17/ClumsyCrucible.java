@@ -5,12 +5,14 @@ import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import rev.aoc.AocSolution;
+import rev.aoc.math.vec.Vec2;
 import rev.aoc.math.vec.Vec4;
 
 import java.util.*;
 
 public abstract class ClumsyCrucible extends AocSolution<Long>
 {
+    private static final Vec4 end = new Vec4(-1,-1,-1,-1);
 
     public ClumsyCrucible(Iterable<String> resources)
     {
@@ -26,22 +28,8 @@ public abstract class ClumsyCrucible extends AocSolution<Long>
         int width = cityBlock[0].length;
 
         SimpleDirectedWeightedGraph<Vec4, DefaultWeightedEdge> graph = toGraph(cityBlock);
-
-        long result = Long.MAX_VALUE;
-        for (int k = -getMaximumRunLength(); k<= getMaximumRunLength(); k++) {
-            if (k>-getMinimumRunLength() && k<getMinimumRunLength()) {
-                continue;
-            }
-            GraphPath<Vec4, DefaultWeightedEdge> pathBetween = DijkstraShortestPath.findPathBetween(graph, new Vec4(0, 0, 0, 0), new Vec4(height - 1, width - 1, k, 0));
-            if (pathBetween != null) {
-                result = Math.min(result, (long)pathBetween.getWeight());
-            }
-            pathBetween = DijkstraShortestPath.findPathBetween(graph, new Vec4(0, 0, 0, 0), new Vec4(height - 1, width - 1, 0, k));
-            if (pathBetween != null) {
-                result = Math.min(result, (long)pathBetween.getWeight());
-            }
-        }
-        return result;
+        GraphPath<Vec4, DefaultWeightedEdge> pathBetween = DijkstraShortestPath.findPathBetween(graph, new Vec4(0, 0, 0, 0), end);
+        return (long) pathBetween.getWeight();
     }
 
     protected abstract int getMaximumRunLength();
@@ -114,6 +102,18 @@ public abstract class ClumsyCrucible extends AocSolution<Long>
                 }
             }
         }
+
+        graph.addVertex(end);
+        for (int k=-max;k<=max;k++) {
+            if (k>-min && k<min) {
+                continue;
+            }
+            DefaultWeightedEdge edge = graph.addEdge(new Vec4(height-1,width-1,k,0), end);
+            graph.setEdgeWeight(edge, 0);
+            edge = graph.addEdge(new Vec4(height-1,width-1,0,k), end);
+            graph.setEdgeWeight(edge, 0);
+        }
+
         return graph;
     }
     private int[][] parse(List<String> lines)
