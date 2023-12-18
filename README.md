@@ -1,3 +1,5 @@
+[![Super-Linter](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE_NAME>/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 # Advent of Code 2023
 
 Project for this years solutions to the [Advent of Code](https://adventofcode.com/).
