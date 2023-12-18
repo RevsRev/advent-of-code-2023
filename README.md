@@ -1,10 +1,10 @@
 [![Super-Linter](https://github.com/RevsRev/avent-of-code-2023/actions/workflows/main.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
-
+---
 # Advent of Code 2023
 
 Project for this years solutions to the [Advent of Code](https://adventofcode.com/).
 
-### Usage
+## Usage
 This project uses Apache Maven. Install maven, and then clean install the project with:
 ```shell
 mvn clean install
@@ -15,5 +15,5 @@ java -jar <PATH_TO_TARGET_JAR>
 ```
 The solutions to the problems are logged to the console.
 
-### Testing
+## Testing
 Examples provided for each problem are implemented as a test case.
