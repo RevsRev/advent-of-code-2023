@@ -1,4 +1,4 @@
-[![Super-Linter](https://github.com/RevsRev/avent-of-code-2023/actions/workflows/main.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![Super-Linter](https://github.com/RevsRev/advent-of-code-2023/actions/workflows/main.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 ---
 # Advent of Code 2023
 
