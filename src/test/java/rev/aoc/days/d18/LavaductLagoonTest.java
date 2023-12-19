@@ -12,6 +12,6 @@ public class LavaductLagoonTest extends AocTest<Long> {
 
   @Override
   protected AocSolution<Long> getSolution() {
-    return new LavaductLagoon(List.of("18.1-lavaduct-lagoon-test"));
+    return new LavaductLagoonPartOne(List.of("18.1-lavaduct-lagoon-test"));
   }
 }

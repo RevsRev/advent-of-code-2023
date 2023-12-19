@@ -6,7 +6,7 @@ import rev.aoc.AocSolution;
 import rev.aoc.math.topology.Loop;
 import rev.aoc.math.vec.Vec2;
 
-public class LavaductLagoon extends AocSolution<Long> {
+public abstract class LavaductLagoon extends AocSolution<Long> {
   public LavaductLagoon(Iterable<String> resources) {
     super(resources);
   }
@@ -48,11 +48,5 @@ public class LavaductLagoon extends AocSolution<Long> {
     }
   }
 
-  private String[][] parse(List<String> lines) {
-    String[][] instructions = new String[lines.size()][];
-    for (int i = 0; i < lines.size(); i++) {
-      instructions[i] = lines.get(i).split("\\s+");
-    }
-    return instructions;
-  }
+  protected abstract String[][] parse(List<String> lines);
 }
