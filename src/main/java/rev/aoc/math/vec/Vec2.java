@@ -36,4 +36,19 @@ public class Vec2 {
   public Vec2 mult(long factor) {
     return new Vec2(this.x * factor, this.y * factor);
   }
+
+  public Vec2 subtract(Vec2 start) {
+    return this.add(start.mult(-1l));
+  }
+
+  public static boolean parallel(Vec2 a, Vec2 b) {
+    Vec3 a3 = Vec3.fromVec2(a);
+    Vec3 b3 = Vec3.fromVec2(b);
+    Vec3 cross = a3.cross(b3);
+    return cross.x == 0 && cross.y == 0 && cross.z == 0;
+  }
+
+  public Vec2 signum() {
+    return new Vec2(Long.signum(x), Long.signum(y));
+  }
 }

@@ -32,7 +32,7 @@ public class LavaductLagoon extends AocSolution<Long> {
       instrIndex++;
 
     } while (node != start && instrIndex < instructions.length);
-    return (long) loop.size() + Loop.getInterior(loop).size();
+    return Loop.getArea(loop);
   }
 
   private Vec2 getDirection(String direction) {
