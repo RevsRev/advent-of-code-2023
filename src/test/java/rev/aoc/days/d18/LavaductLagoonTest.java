@@ -7,7 +7,7 @@ import rev.aoc.AocTest;
 public class LavaductLagoonTest extends AocTest<Long> {
   @Override
   protected Long getExpected() {
-    return 52l;
+    return 62l;
   }
 
   @Override
