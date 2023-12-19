@@ -18,7 +18,6 @@ import rev.aoc.days.d16.FloorLavaPartOne;
 import rev.aoc.days.d16.FloorLavaPartTwo;
 import rev.aoc.days.d17.ClumsyCruciblePartOne;
 import rev.aoc.days.d17.ClumsyCruciblePartTwo;
-import rev.aoc.days.d18.LavaductLagoon;
 import rev.aoc.days.d18.LavaductLagoonPartOne;
 import rev.aoc.days.d18.LavaductLagoonPartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
