@@ -3,6 +3,8 @@ package rev.aoc.days.d10;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import rev.aoc.math.topology.Loop;
 import rev.aoc.math.vec.Vec2;
 import rev.aoc.math.vec.Vec3;
 
@@ -16,10 +18,7 @@ public class PipeMazePartTwo extends PipeMaze {
     Set<Vec2> loopParts = new HashSet<>();
     loopParts.addAll(loop);
 
-    long windingNumber = getWindingNumber(loop);
-    Vec3 planeNorm = new Vec3(0, 0, 1 * windingNumber);
-
-    Set<Vec2> interior = getPointsBetweenPipes(loop, planeNorm);
+    Set<Vec2> interior = Loop.getInterior(loop);
 
     return interior.size();
   }
