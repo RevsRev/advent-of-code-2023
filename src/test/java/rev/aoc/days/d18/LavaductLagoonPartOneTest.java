@@ -4,7 +4,7 @@ import java.util.List;
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
 
-public class LavaductLagoonTest extends AocTest<Long> {
+public class LavaductLagoonPartOneTest extends AocTest<Long> {
   @Override
   protected Long getExpected() {
     return 62l;
