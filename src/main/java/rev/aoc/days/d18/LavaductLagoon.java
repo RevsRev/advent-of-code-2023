@@ -24,11 +24,7 @@ public abstract class LavaductLagoon extends AocSolution<Long> {
       loop.add(node);
       Vec2 direction = getDirection(instructions[instrIndex][0]);
       int steps = Integer.parseInt(instructions[instrIndex][1]);
-      for (int i = 0; i < steps - 1; i++) {
-        node = node.add(direction);
-        loop.add(node);
-      }
-      node = node.add(direction);
+      node = node.add(direction.mult(steps));
       instrIndex++;
 
     } while (node != start && instrIndex < instructions.length);
