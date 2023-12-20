@@ -20,7 +20,6 @@ import rev.aoc.days.d17.ClumsyCruciblePartOne;
 import rev.aoc.days.d17.ClumsyCruciblePartTwo;
 import rev.aoc.days.d18.LavaductLagoonPartOne;
 import rev.aoc.days.d18.LavaductLagoonPartTwo;
-import rev.aoc.days.d19.Aplenty;
 import rev.aoc.days.d19.AplentyPartOne;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;

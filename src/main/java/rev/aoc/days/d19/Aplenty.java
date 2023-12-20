@@ -19,7 +19,8 @@ public abstract class Aplenty extends AocSolution<Long> {
     return solveWithAplentyEngine(workFlowsAndRatings, ratings);
   }
 
-  protected abstract long solveWithAplentyEngine(Pair<List<String>, List<String>> workFlowsAndRatings, List<String> ratings);
+  protected abstract long solveWithAplentyEngine(
+      Pair<List<String>, List<String>> workFlowsAndRatings, List<String> ratings);
 
   private Pair<List<String>, List<String>> parse(List<String> lines) {
     List<String> workflows = new ArrayList<>();
