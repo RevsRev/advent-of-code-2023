@@ -21,6 +21,7 @@ import rev.aoc.days.d17.ClumsyCruciblePartTwo;
 import rev.aoc.days.d18.LavaductLagoonPartOne;
 import rev.aoc.days.d18.LavaductLagoonPartTwo;
 import rev.aoc.days.d19.Aplenty;
+import rev.aoc.days.d19.AplentyPartOne;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
@@ -75,7 +76,7 @@ public class Main {
     trySolve(new ClumsyCruciblePartTwo(List.of("17.1-clumsy-crucible")));
     trySolve(new LavaductLagoonPartOne(List.of("18.1-lavaduct-lagoon")));
     trySolve(new LavaductLagoonPartTwo(List.of("18.1-lavaduct-lagoon")));
-    trySolve(new Aplenty(List.of("19.1-aplenty")));
+    trySolve(new AplentyPartOne(List.of("19.1-aplenty")));
   }
 
   private static void trySolve(AocSolution sol) {
