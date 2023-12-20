@@ -1,11 +1,9 @@
 package rev.aoc.days.d19;
 
-import org.apache.commons.lang3.tuple.Pair;
-import org.checkerframework.checker.units.qual.A;
-import rev.aoc.AocSolution;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.tuple.Pair;
+import rev.aoc.AocSolution;
 
 public class Aplenty extends AocSolution<Long> {
   public Aplenty(Iterable<String> resources) {
@@ -15,15 +13,15 @@ public class Aplenty extends AocSolution<Long> {
   @Override
   protected Long solveImpl() throws Exception {
     List<String> lines = getOneAndOnlyResourceLines();
-    Pair<List<String>,List<String>> workFlowsAndRatings = parse(lines);
+    Pair<List<String>, List<String>> workFlowsAndRatings = parse(lines);
     AplentyEngine engine = new AplentyEngine(workFlowsAndRatings.getLeft());
     List<String> ratings = workFlowsAndRatings.getRight();
 
     long result = 0;
-    for (int i=0; i<ratings.size(); i++) {
+    for (int i = 0; i < ratings.size(); i++) {
       int[] rating = AplentyEngine.parseRating(ratings.get(i));
       if (engine.apply(rating)) {
-        for (int j=0; j<rating.length;j++) {
+        for (int j = 0; j < rating.length; j++) {
           result += rating[j];
         }
       }
@@ -31,8 +29,7 @@ public class Aplenty extends AocSolution<Long> {
     return result;
   }
 
-  private Pair<List<String>,List<String>> parse(List<String> lines)
-  {
+  private Pair<List<String>, List<String>> parse(List<String> lines) {
     List<String> workflows = new ArrayList<>();
     int lineIndex = 0;
     while (!lines.get(lineIndex).isBlank()) {
@@ -45,9 +42,9 @@ public class Aplenty extends AocSolution<Long> {
     }
 
     List<String> ratings = new ArrayList<>();
-    for (int i=lineIndex; i<lines.size(); i++) {
+    for (int i = lineIndex; i < lines.size(); i++) {
       ratings.add(lines.get(i));
     }
-    return Pair.of(workflows,ratings);
+    return Pair.of(workflows, ratings);
   }
 }

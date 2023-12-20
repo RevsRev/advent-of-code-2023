@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class AplentyEngine implements Function<int[],Boolean> {
+public class AplentyEngine implements Function<int[], Boolean> {
 
   private static final int X = 0;
   private static final int M = 1;
@@ -49,7 +49,7 @@ public class AplentyEngine implements Function<int[],Boolean> {
   }
 
   private Function<int[], Boolean> addRule(String strRule) {
-    String strSteps = ruleStr.get(strRule).replace("{","").replace("}", "");
+    String strSteps = ruleStr.get(strRule).replace("{", "").replace("}", "");
     String[] steps = strSteps.split(",");
     List<Pair<Optional<Function<int[], Boolean>>, Function<int[], Boolean>>> stepWithPredicate =
         new ArrayList<>();
@@ -116,11 +116,11 @@ public class AplentyEngine implements Function<int[],Boolean> {
     ratingStr = ratingStr.replace("{", "").replace("}", "");
     String[] ratings = ratingStr.split(",");
     int[] rating = new int[4];
-    for (int i=0;i<ratings.length; i++) {
+    for (int i = 0; i < ratings.length; i++) {
       String[] symAndVal = ratings[i].split("=");
       int sym = parseSymbol(symAndVal[0]);
       int val = Integer.parseInt(symAndVal[1]);
-      rating[sym]=val;
+      rating[sym] = val;
     }
     return rating;
   }
@@ -139,8 +139,7 @@ public class AplentyEngine implements Function<int[],Boolean> {
   }
 
   @Override
-  public Boolean apply(int[] ints)
-  {
+  public Boolean apply(int[] ints) {
     return rules.get("in").apply(ints);
   }
 }
