@@ -1,9 +1,8 @@
 package rev.aoc.days.d19;
 
+import java.util.List;
 import rev.aoc.AocSolution;
 import rev.aoc.AocTest;
-
-import java.util.List;
 
 public class AplentyTest extends AocTest<Long> {
   @Override
