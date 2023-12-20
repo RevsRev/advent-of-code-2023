@@ -12,18 +12,17 @@ public class LavaductLagoonPartTwo extends LavaductLagoon {
     String[][] instructions = new String[lines.size()][];
     for (int i = 0; i < lines.size(); i++) {
       String[] rawInstruction = lines.get(i).split("\\s+");
-      String hexAndInstruction = rawInstruction[2].replace("(", "").replace(")","");
-      String hex = hexAndInstruction.substring(0, hexAndInstruction.length()-1);
-      String code = hexAndInstruction.substring(hexAndInstruction.length()-1);
-      instructions[i] =new String[]{toLetter(code), ""+ Long.decode(hex)};
+      String hexAndInstruction = rawInstruction[2].replace("(", "").replace(")", "");
+      String hex = hexAndInstruction.substring(0, hexAndInstruction.length() - 1);
+      String code = hexAndInstruction.substring(hexAndInstruction.length() - 1);
+      instructions[i] = new String[] {toLetter(code), "" + Long.decode(hex)};
     }
     return instructions;
   }
 
-  private String toLetter(String code)
-  {
+  private String toLetter(String code) {
     int i = Integer.parseInt(code);
-    switch(i) {
+    switch (i) {
       case 0:
         return "R";
       case 1:
