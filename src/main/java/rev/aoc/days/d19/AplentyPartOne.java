@@ -1,7 +1,6 @@
 package rev.aoc.days.d19;
 
 import java.util.List;
-import org.apache.commons.lang3.tuple.Pair;
 
 public class AplentyPartOne extends Aplenty {
   public AplentyPartOne(Iterable<String> resources) {
@@ -9,9 +8,8 @@ public class AplentyPartOne extends Aplenty {
   }
 
   @Override
-  protected long solveWithAplentyEngine(
-      Pair<List<String>, List<String>> workFlowsAndRatings, List<String> ratings) {
-    AplentyEngine engine = new AplentyEngine(workFlowsAndRatings.getLeft());
+  protected long solveWithAplentyEngine(List<String> rules, List<String> ratings) {
+    AplentyEngine engine = new AplentyEngine(rules);
     long result = 0;
     for (int i = 0; i < ratings.size(); i++) {
       int[] rating = AplentyEngine.parseRating(ratings.get(i));

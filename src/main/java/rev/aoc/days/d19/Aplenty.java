@@ -16,11 +16,10 @@ public abstract class Aplenty extends AocSolution<Long> {
     Pair<List<String>, List<String>> workFlowsAndRatings = parse(lines);
     List<String> ratings = workFlowsAndRatings.getRight();
 
-    return solveWithAplentyEngine(workFlowsAndRatings, ratings);
+    return solveWithAplentyEngine(workFlowsAndRatings.getLeft(), ratings);
   }
 
-  protected abstract long solveWithAplentyEngine(
-      Pair<List<String>, List<String>> workFlowsAndRatings, List<String> ratings);
+  protected abstract long solveWithAplentyEngine(List<String> rules, List<String> ratings);
 
   private Pair<List<String>, List<String>> parse(List<String> lines) {
     List<String> workflows = new ArrayList<>();
