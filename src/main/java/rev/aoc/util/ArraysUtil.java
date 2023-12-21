@@ -50,14 +50,14 @@ public class ArraysUtil {
       }
 
       if (insertionPoint % 2 == 0) { // we are after an end and before a start
-        while (insertionPoint <= second.length - 2
+        while (insertionPoint < second.length - 2
             && comparator.compare(end, second[insertionPoint]) >= 0) {
-          end = second[insertionPoint];
+          end = second[insertionPoint + 2];
           insertionPoint += 2;
         }
       } else { // we are after a start and before an end
         start = second[insertionPoint - 1];
-        while (insertionPoint <= second.length - 2
+        while (insertionPoint < second.length - 1
             && comparator.compare(end, second[insertionPoint + 1]) >= 0) {
           end = second[insertionPoint + 1];
           insertionPoint += 2;

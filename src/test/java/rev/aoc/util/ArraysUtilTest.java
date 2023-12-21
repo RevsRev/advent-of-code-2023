@@ -32,6 +32,12 @@ public class ArraysUtilTest {
         new Integer[] {10, 12},
         Comparator.naturalOrder(),
         Integer.class);
+    testUnionRanges(
+        new Integer[] {0, 4000},
+        new Integer[] {0, 4000},
+        new Integer[] {0, 4000},
+        Comparator.naturalOrder(),
+        Integer.class);
   }
 
   private <T extends Comparable<? super T>> void testUnionRanges(
