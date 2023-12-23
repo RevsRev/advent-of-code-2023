@@ -10,12 +10,12 @@ public class StepCounterTest extends AocTest<Long>
     @Override
     protected Long getExpected()
     {
-        return 16l
+        return 16l;
     }
 
     @Override
     protected AocSolution<Long> getSolution()
     {
-        return new StepCounter(List.of("21.1-step-counter-test"));
+        return new StepCounter(List.of("21.1-step-counter-test"), 6);
     }
 }
