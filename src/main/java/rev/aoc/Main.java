@@ -37,6 +37,7 @@ import rev.aoc.days.d8.HauntedWastelandPartOne;
 import rev.aoc.days.d8.HauntedWastelandPartTwo;
 import rev.aoc.days.d9.MirageMaintenancePartOne;
 import rev.aoc.days.d9.MirageMaintenancePartTwo;
+import rev.aoc.days.day21.StepCounter;
 
 public class Main {
   public static final void main(String[] args) {
@@ -80,6 +81,7 @@ public class Main {
     trySolve(new AplentyPartOne(List.of("19.1-aplenty")));
     trySolve(new AplentyPartTwo(List.of("19.1-aplenty")));
     trySolve(new PulsePropagation(List.of("20.1-pulse-propagation")));
+    trySolve(new StepCounter(List.of("21.1-step-counter"), 64));
   }
 
   private static void trySolve(AocSolution sol) {
