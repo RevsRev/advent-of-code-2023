@@ -24,6 +24,7 @@ import rev.aoc.days.d19.AplentyPartOne;
 import rev.aoc.days.d19.AplentyPartTwo;
 import rev.aoc.days.d2.CubeConundrumPartOne;
 import rev.aoc.days.d2.CubeConundrumPartTwo;
+import rev.aoc.days.d20.PulsePropagation;
 import rev.aoc.days.d3.GearRatiosPartOne;
 import rev.aoc.days.d3.GearRatiosPartTwo;
 import rev.aoc.days.d4.AocScratchCardPartOne;
@@ -78,6 +79,7 @@ public class Main {
     trySolve(new LavaductLagoonPartTwo(List.of("18.1-lavaduct-lagoon")));
     trySolve(new AplentyPartOne(List.of("19.1-aplenty")));
     trySolve(new AplentyPartTwo(List.of("19.1-aplenty")));
+    trySolve(new PulsePropagation(List.of("20.1-pulse-propagation")));
   }
 
   private static void trySolve(AocSolution sol) {

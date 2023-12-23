@@ -1,10 +1,11 @@
-package rev.aoc.days.d20.module;
+package rev.aoc.days.d20.broken.module;
 
 import java.util.Objects;
-import rev.aoc.days.d20.module.impl.Conjunction;
-import rev.aoc.days.d20.module.impl.FlipFlop;
-import rev.aoc.days.d20.module.impl.Relay;
-import rev.aoc.days.d20.module.impl.Sink;
+import org.apache.commons.lang3.tuple.Pair;
+import rev.aoc.days.d20.broken.module.impl.Conjunction;
+import rev.aoc.days.d20.broken.module.impl.FlipFlop;
+import rev.aoc.days.d20.broken.module.impl.Relay;
+import rev.aoc.days.d20.broken.module.impl.Sink;
 
 public abstract class Module {
 
@@ -20,7 +21,7 @@ public abstract class Module {
     this.name = name;
   }
 
-  public abstract void compute(int[] inputRegister, int[] outputRegister);
+  public abstract Pair<Integer, Integer> compute(int[] inputRegister, int[] outputRegister);
 
   public abstract int getState();
 
@@ -30,13 +31,13 @@ public abstract class Module {
   }
 
   public static Module from(String name, String type, int[] inputs, int out) {
-    if (SINK.equals(name) || inputs == null || inputs.length == 0) {
+    if (SINK.equals(type) || inputs == null || inputs.length == 0) {
       return new Sink(name, out);
     }
 
-    if (CONJUNCTION.equals(type)) {
-      return new FlipFlop(name, inputs[0], out);
-    } else if (FLIP_FLOP.equals(type)) {
+    if (FLIP_FLOP.equals(type)) {
+      return new FlipFlop(name, inputs, out);
+    } else if (CONJUNCTION.equals(type)) {
       return new Conjunction(name, inputs, out);
     }
     return new Relay(name, inputs[0], out);

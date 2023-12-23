@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 import rev.aoc.AocSolution;
-import rev.aoc.days.d20.module.Module;
+import rev.aoc.days.d20.broken.Machine;
+import rev.aoc.days.d20.broken.module.Module;
 
 public class PulsePropagation extends AocSolution<Long> {
   public PulsePropagation(Iterable<String> resources) {
@@ -22,11 +23,11 @@ public class PulsePropagation extends AocSolution<Long> {
     Pair<Map<String, String>, Map<String, Set<String>>> moduleTypesAndOutputs = parse(lines);
     Machine m =
         Machine.fromModules(moduleTypesAndOutputs.getLeft(), moduleTypesAndOutputs.getRight());
-    m.cycle("broadcaster", Machine.LOW);
-
     int buttonPresses = 1000;
-    long highCount = m.getHighCount() * buttonPresses;
-    long lowCount = m.getLowCount() * buttonPresses;
+    m.cycle("broadcaster", Machine.LOW, buttonPresses);
+
+    long highCount = m.getHighCount();
+    long lowCount = m.getLowCount();
     return highCount * lowCount;
   }
 
@@ -43,15 +44,11 @@ public class PulsePropagation extends AocSolution<Long> {
       Iterator<String> itOuts = outputs.iterator();
       while (itOuts.hasNext()) {
         String outName = itOuts.next();
-        moduleTypes.putIfAbsent(outName, Module.SINK);
+        moduleTypes.putIfAbsent(outName, Module.RELAY);
       }
 
       String moduleName = nameAndType.getLeft();
       String type = nameAndType.getRight();
-      if (outputs.isEmpty()) {
-        type = Module.SINK;
-      }
-
       moduleTypes.put(moduleName, type);
       moduleOutputs.put(moduleName, outputs);
     }

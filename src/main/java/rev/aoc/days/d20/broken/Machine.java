@@ -1,4 +1,4 @@
-package rev.aoc.days.d20;
+package rev.aoc.days.d20.broken;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,8 +9,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import lombok.Getter;
-import rev.aoc.days.d20.module.Module;
+import org.apache.commons.lang3.tuple.Pair;
+import rev.aoc.days.d20.broken.module.Module;
 
+/**
+ * Tried to solve this problem by implementing some sort of "machine" like how a computer works.
+ * Unfortunately, the ordering of the circuits matters so this doesn't actually work:(
+ */
 public class Machine {
 
   public static final int OFF = -1;
@@ -41,12 +46,13 @@ public class Machine {
     }
   }
 
-  public void cycle(String startModule, int startVal) {
-    int startState = getState();
+  public void cycle(String startModule, int startVal, int buttonPresses) {
+    int presses = 0;
     do {
       modifyVal(startModule, startVal);
       pulse();
-    } while (startState != getState());
+      presses++;
+    } while (presses < buttonPresses);
   }
 
   private void pulse() {
@@ -56,36 +62,30 @@ public class Machine {
   }
 
   public void pulseStep() {
-    count();
     int[] output = getEmptyRegister(register.length);
     for (int i = 0; i < modules.length; i++) {
       Module module = modules[i];
-      module.compute(register, output);
+      count(module.compute(register, output));
     }
     copyToRegister(output);
   }
 
-  private void count() {
-    int l = 0;
-    int h = 0;
-    for (int i = 0; i < register.length; i++) {
-      if (register[i] == LOW) {
-        l++;
-      } else if (register[i] == HIGH) {
-        h++;
-      }
-    }
-    highCount += h;
-    lowCount += l;
+  private void count(Pair<Integer, Integer> val) {
+    lowCount += val.getLeft();
+    highCount += val.getRight();
   }
 
   private int getState() {
     return Objects.hash(modules);
   }
 
-  private int[] getEmptyRegister(int len) {
+  public static int[] getEmptyRegister(int len) {
+    return getFilledRegister(len, OFF);
+  }
+
+  public static int[] getFilledRegister(int len, int val) {
     int[] reg = new int[len];
-    Arrays.fill(reg, OFF);
+    Arrays.fill(reg, val);
     return reg;
   }
 
