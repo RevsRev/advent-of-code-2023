@@ -1,4 +1,4 @@
-package rev.aoc.days.day21;
+package rev.aoc.days.d21;
 
 import java.util.List;
 import rev.aoc.AocSolution;

@@ -1,8 +1,8 @@
-package rev.aoc.days.day21;
+package rev.aoc.days.d21;
 
 import java.util.Arrays;
 import java.util.List;
-import lombok.val;
+
 import org.apache.commons.lang3.tuple.Pair;
 import rev.aoc.AocSolution;
 import rev.aoc.util.ParseUtil;

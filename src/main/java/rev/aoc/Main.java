@@ -37,7 +37,7 @@ import rev.aoc.days.d8.HauntedWastelandPartOne;
 import rev.aoc.days.d8.HauntedWastelandPartTwo;
 import rev.aoc.days.d9.MirageMaintenancePartOne;
 import rev.aoc.days.d9.MirageMaintenancePartTwo;
-import rev.aoc.days.day21.StepCounter;
+import rev.aoc.days.d21.StepCounter;
 
 public class Main {
   public static final void main(String[] args) {
