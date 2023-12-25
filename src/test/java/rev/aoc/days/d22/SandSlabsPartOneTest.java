@@ -5,7 +5,7 @@ import rev.aoc.AocTest;
 
 import java.util.List;
 
-public class SandSlabsTest extends AocTest<Long> {
+public class SandSlabsPartOneTest extends AocTest<Long> {
     @Override
     protected Long getExpected() {
         return 5l;
@@ -13,6 +13,6 @@ public class SandSlabsTest extends AocTest<Long> {
 
     @Override
     protected AocSolution<Long> getSolution() {
-        return new SandSlabs(List.of("22.1-sand-slabs-test"));
+        return new SandSlabsPartOne(List.of("22.1-sand-slabs-test"));
     }
 }

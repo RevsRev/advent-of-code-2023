@@ -6,25 +6,14 @@ import rev.aoc.math.vec.Vec3;
 
 import java.util.*;
 
-public class SandSlabs extends AocSolution<Long> {
+public abstract class SandSlabs extends AocSolution<Long> {
     private static final int EMPTY = 0;
 
     public SandSlabs(Iterable<String> resources) {
         super(resources);
     }
 
-    @Override
-    protected Long solveImpl() throws Exception {
-        List<String> lines = getOneAndOnlyResourceLines();
-        Pair<int[][][],Map<Integer,Set<Vec3>>> slabsAndCoords = parse(lines);
-        int[][][] slabs = slabsAndCoords.getLeft();
-        Map<Integer,Set<Vec3>> slabCoords = slabsAndCoords.getRight();
-
-        drop(slabs,slabCoords);
-        return calculateDisintegratable(slabs,slabCoords);
-    }
-
-    private long calculateDisintegratable(int[][][] slabs, Map<Integer, Set<Vec3>> slabCoords) {
+    protected long calculateDisintegratable(int[][][] slabs, Map<Integer, Set<Vec3>> slabCoords) {
         Set<Integer> considered = new HashSet<>();
 
         int width = slabs.length;
@@ -88,7 +77,7 @@ public class SandSlabs extends AocSolution<Long> {
         return neighbours;
     }
 
-    private void drop(int[][][] slabs, Map<Integer, Set<Vec3>> slabCoords) {
+    protected void drop(int[][][] slabs, Map<Integer, Set<Vec3>> slabCoords) {
         Set<Integer> considered = new HashSet<>();
 
         int width = slabs.length;
@@ -157,7 +146,7 @@ public class SandSlabs extends AocSolution<Long> {
         return sorted;
     }
 
-    private Pair<int[][][],Map<Integer,Set<Vec3>>> parse(List<String> lines) {
+    protected Pair<int[][][],Map<Integer,Set<Vec3>>> parse(List<String> lines) {
         int[][][] slabs = initialiseEmpty(lines);
         Map<Integer, Set<Vec3>> slabCoordinates = new HashMap<>();
 
