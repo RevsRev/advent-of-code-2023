@@ -27,6 +27,7 @@ import rev.aoc.days.d2.CubeConundrumPartTwo;
 import rev.aoc.days.d20.PulsePropagation;
 import rev.aoc.days.d22.SandSlabs;
 import rev.aoc.days.d22.SandSlabsPartOne;
+import rev.aoc.days.d22.SandSlabsPartTwo;
 import rev.aoc.days.d3.GearRatiosPartOne;
 import rev.aoc.days.d3.GearRatiosPartTwo;
 import rev.aoc.days.d4.AocScratchCardPartOne;
@@ -85,6 +86,7 @@ public class Main {
     trySolve(new PulsePropagation(List.of("20.1-pulse-propagation")));
     trySolve(new StepCounter(List.of("21.1-step-counter"), 64));
     trySolve(new SandSlabsPartOne(List.of("22.1-sand-slabs")));
+    trySolve(new SandSlabsPartTwo(List.of("22.1-sand-slabs")));
   }
 
   private static void trySolve(AocSolution sol) {
