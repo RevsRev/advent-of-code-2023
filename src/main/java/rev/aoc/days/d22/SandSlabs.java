@@ -13,6 +13,52 @@ public abstract class SandSlabs extends AocSolution<Long> {
         super(resources);
     }
 
+    protected long calculateDisintegrationChainReaction(int[][][] slabs, Map<Integer,Set<Vec3>> slabCoords) {
+        Set<Integer> considered = new HashSet<>();
+
+        int width = slabs.length;
+        int length = slabs[0].length;
+        int height = slabs[0][0].length;
+
+        long count = 0;
+        for (int z=1;z<height;z++) {
+            for (int x=0;x<width;x++) {
+                for (int y=0;y<length;y++) {
+                    int slabIndex = slabs[x][y][z];
+                    if (slabIndex == EMPTY || considered.contains(slabIndex)) {
+                        continue;
+                    }
+                    count += getFallingNumber(slabs,slabCoords,slabIndex);
+                    considered.add(slabIndex);
+                }
+            }
+        }
+        return count;
+    }
+
+    private long getFallingNumber(int[][][] slabs, Map<Integer, Set<Vec3>> slabCoords, int slabIndex) {
+        Set<Integer> fallen = new HashSet<>();
+        return getFallingNumber(slabs, slabCoords, slabIndex, fallen);
+    }
+
+    private long getFallingNumber(int[][][] slabs, Map<Integer, Set<Vec3>> slabCoords, int slabIndex, Set<Integer> fallen) {
+        fallen.add(slabIndex);
+        Set<Integer> topNeighbours = getTopNeighbours(slabs, slabCoords.get(slabIndex), slabIndex);
+        Iterator<Integer> itTopNeighbours = topNeighbours.iterator();
+
+        long fallingNumber = 0;
+        while (itTopNeighbours.hasNext()) {
+            Integer topSlabIndex = itTopNeighbours.next();
+            Set<Integer> supports = getBottomNeighbours(slabs, slabCoords.get(topSlabIndex), topSlabIndex);
+            supports.removeAll(fallen);
+            if (supports.size() == 0) {
+                fallingNumber++;
+                fallingNumber+=getFallingNumber(slabs, slabCoords,topSlabIndex, fallen);
+            }
+        }
+        return fallingNumber;
+    }
+
     protected long calculateDisintegratable(int[][][] slabs, Map<Integer, Set<Vec3>> slabCoords) {
         Set<Integer> considered = new HashSet<>();
 
